@@ -58,5 +58,21 @@
 		android:label="fragment_setting"
 		tools:layout="@layout/fragment_setting"/>
 
+	<fragment
+		android:id="@+id/deeplink_dest"
+		android:name="com.joe.jetpackdemo.ui.fragment.DeepLinkFragment"
+		android:label="@string/deeplink"
+		tools:layout="@layout/deeplink_fragment">
+
+		<argument
+			android:name="myarg"
+			android:defaultValue="Android!"/>
+		<!-- TODO STEP 12.1 - Add a deep link to www.example.com/{myarg}/ -->
+
+		<!--<deepLink app:uri="www.example.com/{myarg}" />-->
+
+		<!-- TODO END STEP 12.1 -->
+	</fragment>
+
 
 </navigation>

@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools"
-			  xmlns:app="http://schemas.android.com/apk/res-auto"
-			  android:layout_width="match_parent"
-			  android:layout_height="match_parent"
-			  android:orientation="vertical"
-			  tools:context=".SecondActivity">
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:id="@+id/drawer_layout"
+	tools:context=".SecondActivity">
+
 
 	<androidx.appcompat.widget.Toolbar
-		android:id="@+id/mToolbar"
+		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
 		android:background="@color/colorPrimary"
-		android:layout_height="52dp"
-		app:title="Home"/>
+		android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
 	<fragment
 		android:id="@+id/my_nav_host_fragment"
-		android:layout_weight="1"
+		android:name="androidx.navigation.fragment.NavHostFragment"
 		android:layout_width="match_parent"
 		android:layout_height="0dp"
-		android:name="androidx.navigation.fragment.NavHostFragment"
-		app:navGraph="@navigation/mobile_navigation"
+		android:layout_weight="1"
 		app:defaultNavHost="true"
-		/>
+		app:navGraph="@navigation/mobile_navigation"/>
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
 		android:id="@+id/navigation_view"
 		android:layout_width="match_parent"
-		android:layout_height="?attr/actionBarSize"
+		android:layout_height="wrap_content"
 		android:background="@android:color/white"
 		app:itemIconTint="@color/colorAccent"
 		app:itemTextColor="@color/colorPrimary"
