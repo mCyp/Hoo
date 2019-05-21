@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/login_navigation"
+	app:startDestination="@id/welcome">
+
+
+	<fragment
+		android:id="@+id/login"
+		android:name="com.joe.jetpackdemo.ui.fragment.login.LoginFragment"
+		android:label="LoginFragment"
+		tools:layout="@layout/fragment_login"
+		/>
+
+	<fragment
+		android:id="@+id/welcome"
+		android:name="com.joe.jetpackdemo.ui.fragment.login.WelcomeFragment"
+		android:label="LoginFragment"
+		tools:layout="@layout/fragment_welcome">
+		<action
+			android:id="@+id/action_welcome_to_login"
+			app:destination="@id/login"/>
+		<action
+			android:id="@+id/action_welcome_to_register"
+			app:enterAnim="@anim/slide_in_right"
+			app:exitAnim="@anim/slide_out_left"
+			app:popEnterAnim="@anim/slide_in_left"
+			app:popExitAnim="@anim/slide_out_right"
+			app:destination="@id/register"/>
+	</fragment>
+
+	<fragment
+		android:id="@+id/register"
+		android:name="com.joe.jetpackdemo.ui.fragment.login.RegisterFragment"
+		android:label="LoginFragment"
+		tools:layout="@layout/fragment_register"
+		>
+
+		<argument
+			android:name="EMAIL"
+			android:defaultValue="2005@qq.com"
+			app:argType="string"/>
+	</fragment>
+</navigation>

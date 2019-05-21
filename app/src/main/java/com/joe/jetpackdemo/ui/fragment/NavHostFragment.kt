@@ -32,14 +32,14 @@ class NavHostFragment : Fragment() {
 
         val btnStart: Button = view.findViewById(R.id.btn_next)
         btnStart.setOnClickListener {
-            findNavController(this).navigate(R.id.firstFragment, null)
+            //findNavController(this).navigate(R.id.firstFragment, null)
         }
 
 
-        view.findViewById<Button>(R.id.btn_change)?.setOnClickListener {
+        /*view.findViewById<Button>(R.id.btn_change)?.setOnClickListener {
             val action = NavHostFragmentDirections.nextAction().setFlowStepNum(5)
             findNavController().navigate(action)
-        }
+        }*/
 
 
         /*view.findViewById<Button>(R.id.btn_change)?.setOnClickListener(

@@ -9,24 +9,26 @@
 		android:roundIcon="@mipmap/ic_launcher_round"
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme">
-		<activity android:name=".SecondActivity">
+		<activity android:name=".ui.activity.LoginActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
+		<activity android:name=".SecondActivity">
+		</activity>
 		<activity android:name=".MainActivity">
 		</activity>
 
 		<receiver android:name=".ui.provider.DeepLinkAppWidgetProvider">
 			<intent-filter>
-				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
 			</intent-filter>
 
 			<meta-data
 				android:name="android.appwidget.provider"
-				android:resource="@xml/deep_link_appwidget_info" />
+				android:resource="@xml/deep_link_appwidget_info"/>
 		</receiver>
 	</application>
 

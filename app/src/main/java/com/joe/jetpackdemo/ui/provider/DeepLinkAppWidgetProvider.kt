@@ -18,13 +18,13 @@ class DeepLinkAppWidgetProvider: AppWidgetProvider() {
         val args = Bundle()
         args.putString("myarg","from widget")
 
-        val pendIntent = NavDeepLinkBuilder(context)
+        /*val pendIntent = NavDeepLinkBuilder(context)
             .setGraph(R.navigation.mobile_navigation)
             .setDestination(R.id.deeplink_dest)
             .setArguments(args)
-            .createPendingIntent()
+            .createPendingIntent()*/
 
-        remoteView.setOnClickPendingIntent(R.id.deep_link_button,pendIntent)
-        appWidgetManager.updateAppWidget(appWidgetIds,remoteView)
+       /* remoteView.setOnClickPendingIntent(R.id.deep_link_button,pendIntent)
+        appWidgetManager.updateAppWidget(appWidgetIds,remoteView)*/
     }
 }
