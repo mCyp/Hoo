@@ -10,12 +10,17 @@
 			type="com.joe.jetpackdemo.viewmodel.LoginModel"
 			/>
 
+		<variable
+			name="activity"
+			type="androidx.fragment.app.FragmentActivity"/>
+
 		<import type="android.view.View"/>
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent">
+		android:layout_height="match_parent"
+		>
 
 		<TextView
 			android:id="@+id/txt_cancel"
@@ -31,6 +36,7 @@
 			android:paddingEnd="10dp"
 			android:drawablePadding="10dp"
 			android:text="Cancel"
+			android:onClick="@{()-> activity.onBackPressed()}"
 			android:textColor="@color/colorPrimary"/>
 
 		<TextView

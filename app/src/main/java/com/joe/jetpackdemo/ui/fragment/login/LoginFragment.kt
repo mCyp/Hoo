@@ -32,15 +32,21 @@ class LoginFragment : androidx.fragment.app.Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentLoginBinding = DataBindingUtil.inflate(
+        // TODO 研究DataBindComponent
+        /*val binding: FragmentLoginBinding = DataBindingUtil.inflate(
             inflater
             , R.layout.fragment_login
+            , container
+            , false
+        )*/
+        val binding = FragmentLoginBinding.inflate(
+            inflater
             , container
             , false
         )
         loginModel = LoginModel("","",context!!)
         binding.model = loginModel
-        // TODO 设置参数
+        binding.activity = activity
         return binding.root
     }
 
