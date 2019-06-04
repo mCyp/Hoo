@@ -7,13 +7,20 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.joe.jetpackdemo.MainActivity
 import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.common.listener.SimpleWatcher
+import com.joe.jetpackdemo.db.data.User
 
-class LoginModel constructor(name: String, pwd: String, context: Context) {
+class LoginModel constructor(name: String, pwd: String, context: Context):ViewModel() {
+    // TODO Data Binding 中的例子
     val n = ObservableField<String>(name)
     val p = ObservableField<String>(pwd)
+
+    //val u = MutableLiveData<User>(use)
+
     var context: Context = context
 
     /**

@@ -71,7 +71,7 @@
 			app:layout_constraintWidth_default="percent"
 			app:layout_constraintWidth_percent="0.8"
 			android:hint="account"
-			android:text="@{model.n.get()}"
+			android:text="@={model.n.get()}"
 			android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
 			app:addTextChangedListener="@{model.nameWatcher}"
 			android:drawableStart="@drawable/ic_account"
