@@ -1,7 +1,6 @@
 package com.joe.jetpackdemo.ui.fragment.login
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,52 +9,87 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.navArgs
-import com.joe.jetpackdemo.MainActivity
-
 import com.joe.jetpackdemo.R
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.joe.jetpackdemo.databinding.FragmentRegisterBinding
+import com.joe.jetpackdemo.viewmodel.LoginModel
 
 /**
- * A simple [Fragment] subclass.
+ * 注册的Fragment
  *
+ * A simple [Fragment] subclass.
  */
-class RegisterFragment : androidx.fragment.app.Fragment() {
+class RegisterFragment : Fragment() {
 
-    lateinit var mCancel: TextView
+    /*lateinit var mCancel: TextView
     lateinit var mRegister: Button
-    lateinit var mEmailEt:EditText
+    lateinit var mEmailEt:EditText*/
+    lateinit var loginModel: LoginModel
+    var isEnable:Boolean = false
+    lateinit var binding: FragmentRegisterBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
+        val binding: FragmentRegisterBinding = DataBindingUtil.inflate(
+            inflater
+            , R.layout.fragment_register
+            , container
+            , false
+        )
+        loginModel = ViewModelProviders.of(this).get(LoginModel::class.java)
+        loginModel.context = context!!
+        binding.model = loginModel
+        binding.isEnable = isEnable
+        binding.activity = activity
+        this.binding = binding
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mCancel = view.findViewById(R.id.txt_cancel)
+        /*mCancel = view.findViewById(R.id.txt_cancel)
         mRegister = view.findViewById(R.id.btn_register)
-        mEmailEt = view.findViewById(R.id.et_email)
+        mEmailEt = view.findViewById(R.id.et_email)*/
 
-        mRegister.setOnClickListener {
+        /*mRegister.setOnClickListener {
             Toast.makeText(context,"Register",Toast.LENGTH_SHORT).show()
         }
 
         mCancel.setOnClickListener {
             activity?.onBackPressed()
-        }
+        }*/
 
         val safeArgs:RegisterFragmentArgs by navArgs()
         val email = safeArgs.email
-        mEmailEt.setText(email)
+        binding.model?.mail?.value = email
+
+        loginModel.p.observe(viewLifecycleOwner, Observer {
+            binding.isEnable = it.isNotEmpty()
+                    && loginModel.n.value!!.isNotEmpty()
+                    && loginModel.mail.value!!.isNotEmpty()
+        })
+
+        loginModel.n.observe(viewLifecycleOwner, Observer {
+            binding.isEnable = it.isNotEmpty()
+                    && loginModel.p.value!!.isNotEmpty()
+                    && loginModel.mail.value!!.isNotEmpty()
+        })
+
+        loginModel.mail.observe(viewLifecycleOwner, Observer {
+            binding.isEnable = it.isNotEmpty()
+                    && loginModel.n.value!!.isNotEmpty()
+                    && loginModel.p.value!!.isNotEmpty()
+        })
+
+        //mEmailEt.setText(email)
 
     }
 

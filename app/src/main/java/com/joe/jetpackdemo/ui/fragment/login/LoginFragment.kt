@@ -7,46 +7,50 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.databinding.FragmentLoginBinding
 import com.joe.jetpackdemo.viewmodel.LoginModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 /**
- * A simple [Fragment] subclass.
+ * 登录的Fragment
  *
+ * A simple [Fragment] subclass.
  */
-class LoginFragment : androidx.fragment.app.Fragment() {
+class LoginFragment : Fragment() {
 
     /*lateinit var mCancel: TextView
     lateinit var mLogin: Button
     lateinit var mAccount: EditText*/
     lateinit var loginModel:LoginModel
+    var isEnable:Boolean = false
+    lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // TODO 研究DataBindComponent
-        /*val binding: FragmentLoginBinding = DataBindingUtil.inflate(
+        val binding: FragmentLoginBinding = DataBindingUtil.inflate(
             inflater
             , R.layout.fragment_login
             , container
             , false
-        )*/
-        val binding = FragmentLoginBinding.inflate(
+        )
+        /*val binding = FragmentLoginBinding.inflate(
             inflater
             , container
             , false
-        )
-        loginModel = LoginModel("","",context!!)
+        )*/
+        loginModel = ViewModelProviders.of(this).get(LoginModel::class.java)
+        loginModel.context = context!!
         binding.model = loginModel
+        binding.isEnable = isEnable
         binding.activity = activity
+        this.binding = binding
         return binding.root
     }
 
@@ -66,9 +70,13 @@ class LoginFragment : androidx.fragment.app.Fragment() {
             activity?.onBackPressed()
         }*/
 
+        loginModel.p.observe(viewLifecycleOwner, Observer {
+            binding.isEnable = it.isNotEmpty() && loginModel.n.value!!.isNotEmpty()
+        })
+
         val name = arguments?.getString("name")
         if(!TextUtils.isEmpty(name))
-            loginModel.n.set(name!!)
+            loginModel.n.value = name!!
         //mAccount.setText(name)
     }
 

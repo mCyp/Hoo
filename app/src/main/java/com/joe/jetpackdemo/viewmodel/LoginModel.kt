@@ -14,32 +14,44 @@ import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.common.listener.SimpleWatcher
 import com.joe.jetpackdemo.db.data.User
 
-class LoginModel constructor(name: String, pwd: String, context: Context):ViewModel() {
+class LoginModel constructor():ViewModel() {
     // TODO Data Binding 中的例子
-    val n = ObservableField<String>(name)
-    val p = ObservableField<String>(pwd)
+    //val n = ObservableField<String>(name)
+    //val p = ObservableField<String>(pwd)
 
-    //val u = MutableLiveData<User>(use)
+    companion object{
+        @JvmStatic
+        @BindingAdapter("addTextChangedListener")
+        fun addTextChangedListener(editText: EditText, simpleWatcher: SimpleWatcher) {
+            editText.addTextChangedListener(simpleWatcher)
+        }
+    }
 
-    var context: Context = context
+    val n = MutableLiveData<String>("")
+    val p = MutableLiveData<String>("")
+    val mail = MutableLiveData<String>("")
+
+    lateinit var context: Context
 
     /**
      * 用户名改变回调的函数
      */
     fun onNameChanged(s: CharSequence) {
-        n.set(s.toString())
+        //n.set(s.toString())
+        n.value = s.toString()
     }
 
     /**
      * 密码改变的回调函数
      */
     fun onPwdChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-        p.set(s.toString())
+        //p.set(s.toString())
+        p.value = s.toString()
     }
 
     fun login() {
-        if (n.get().equals(BaseConstant.USER_NAME)
-            && p.get().equals(BaseConstant.USER_PWD)
+        if (n.value.equals(BaseConstant.USER_NAME)
+            && p.value.equals(BaseConstant.USER_PWD)
         ) {
             Toast.makeText(context, "账号密码正确", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, MainActivity::class.java)
@@ -52,19 +64,18 @@ class LoginModel constructor(name: String, pwd: String, context: Context):ViewMo
         override fun afterTextChanged(s: Editable) {
             super.afterTextChanged(s)
 
-            n.set(s.toString())
+            n.value = s.toString()
         }
     }
+
     val pwdWatcher = object : SimpleWatcher() {
         override fun afterTextChanged(s: Editable) {
             super.afterTextChanged(s)
 
-            p.set(s.toString())
+            //p.set(s.toString())
+            p.value = s.toString()
         }
     }
 
-    @BindingAdapter("addTextChangedListener")
-    fun addTextChangedListener(editText: EditText, simpleWatcher: SimpleWatcher) {
-        editText.addTextChangedListener(simpleWatcher)
-    }
+
 }
