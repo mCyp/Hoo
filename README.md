@@ -8,7 +8,7 @@
 
 > [即学即用Android Jetpack - Navigation](https://www.jianshu.com/p/66b93df4b7a6)
 
-如果你仅仅想使用这篇文章的代码，记得将代码库回退到`Tag`为`navigation`的版本。
+代码若与Blog中不同，记得将代码库回退到`Tag`为`navigation`的版本。
 
 ### Data Binding 19-5-29
 
@@ -16,6 +16,12 @@
 
 > [即学即用Android Jetpack - Data Binding](https://www.jianshu.com/p/e3b881d80c6d)
 
-如果你想上面这篇Blog的代码，记得将代码会退到`Tag`为`DataBinding`的版本。
+代码若与Blog中不同，记得将代码会退到`Tag`为`DataBinding`的版本。
 
-### 
+### ViewModel & LiveData 19-6-18
+
+文章地址：
+
+> [即学即用Android Jetpack - ViewModel & LiveData](https://www.jianshu.com/p/81a284969f03)
+
+代码若与Blog中不同，记得将代码会退到`Tag`为`ViewModel`的版本。
