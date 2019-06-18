@@ -8,7 +8,7 @@
 		<!--需要的viewModel,通过mBinding.vm=mViewMode注入-->
 		<variable
 			name="model"
-			type="com.joe.jetpackdemo.viewmodel.LoginModel"
+			type="com.joe.jetpackdemo.viewmodel.RegisterModel"
 			/>
 
 		<variable
@@ -72,6 +72,7 @@
 			app:layout_constraintWidth_default="percent"
 			app:layout_constraintWidth_percent="0.8"
 			android:hint="email address"
+			android:onTextChanged="@{(text, start, before, count)->model.onEmailChanged(text)}"
 			android:layout_marginBottom="20dp"
 			android:drawableStart="@drawable/ic_email"
 			app:layout_constraintVertical_chainStyle="packed"
@@ -96,6 +97,7 @@
 			app:layout_constraintWidth_percent="0.8"
 			app:layout_constraintTop_toBottomOf="@+id/et_email"
 			app:layout_constraintBottom_toTopOf="@+id/et_pwd"
+			android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
 			android:hint="account"
 			android:drawableStart="@drawable/ic_account"
 			android:drawablePadding="10dp"
@@ -115,6 +117,7 @@
 			app:layout_constraintRight_toRightOf="parent"
 			android:layout_marginTop="20dp"
 			android:hint="password"
+			android:onTextChanged="@{(text, start, before, count)->model.onPwdChanged(text)}"
 			app:layout_constraintHeight_default="percent"
 			app:layout_constraintHeight_percent="0.1"
 			app:layout_constraintWidth_default="percent"
@@ -144,6 +147,7 @@
 			app:layout_constraintVertical_bias="0.8"
 			android:enabled="@{isEnable}"
 			android:text="Sign UP"
+			android:onClick="@{() -> model.register()}"
 			android:textSize="@dimen/txt_big_size"
 			app:layout_constraintBottom_toBottomOf="parent"
 			android:background="@drawable/shape_main_recycle_item_primary"/>

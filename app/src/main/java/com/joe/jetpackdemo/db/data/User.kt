@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * 用户表
+ */
 @Entity(tableName = "user")
 data class User(
     @ColumnInfo(name ="user_account") val account: String

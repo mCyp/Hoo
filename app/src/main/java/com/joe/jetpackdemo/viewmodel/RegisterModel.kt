@@ -1,29 +1,24 @@
 package com.joe.jetpackdemo.viewmodel
 
-import android.content.Context
-import android.content.Intent
-import android.text.Editable
-import android.widget.EditText
-import android.widget.Toast
-import androidx.databinding.BindingAdapter
-import androidx.databinding.ObservableField
+import android.os.Bundle
+import android.text.TextUtils
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.joe.jetpackdemo.MainActivity
-import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.common.listener.SimpleWatcher
-import com.joe.jetpackdemo.db.AppDataBase
-import com.joe.jetpackdemo.db.UserRepository
-import com.joe.jetpackdemo.db.dao.UserDao_Impl
-import com.joe.jetpackdemo.db.data.User
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.joe.jetpackdemo.R
+import com.joe.jetpackdemo.db.repository.UserRepository
+import kotlinx.coroutines.launch
 
-class RegisterModel constructor():ViewModel() {
+class RegisterModel constructor(
+    private val navController: NavController
+    , private val repository: UserRepository
+) : ViewModel() {
 
     val n = MutableLiveData<String>("")
     val p = MutableLiveData<String>("")
     val mail = MutableLiveData<String>("")
-
-    lateinit var context: Context
 
     /**
      * 用户名改变回调的函数
@@ -34,16 +29,36 @@ class RegisterModel constructor():ViewModel() {
     }
 
     /**
+     * 邮箱改变的时候
+     */
+    fun onEmailChanged(s: CharSequence) {
+        //n.set(s.toString())
+        mail.value = s.toString()
+    }
+
+    /**
      * 密码改变的回调函数
      */
-    fun onPwdChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+    fun onPwdChanged(s: CharSequence) {
         //p.set(s.toString())
         p.value = s.toString()
     }
 
     fun register() {
-        UserRepository.getInstance(AppDataBase.getInstance(context).userDao())
-            .register(n.value!!,p.value!!, mail.value!!)
-        // TODO 跳转到登录界面
+        if (TextUtils.isEmpty(n.value)
+            || TextUtils.isEmpty(p.value)
+            || TextUtils.isEmpty(mail.value)
+        ) {
+            return
+        }
+        viewModelScope.launch {
+            val id = repository.register(mail.value!!,n.value!!, p.value!!)
+            val user= repository.findUserById(id)
+            val u = user.value
+            Log.e("123",user.toString())
+            val bundle = Bundle()
+            bundle.putString("name", n.value)
+            navController.navigate(R.id.login, bundle, null)
+        }
     }
 }

@@ -8,9 +8,9 @@
 
 	<fragment
 		android:id="@+id/infoFragment"
-		android:name="com.joe.jetpackdemo.ui.fragment.main.InfoFragment"
+		android:name="com.joe.jetpackdemo.ui.fragment.main.ShoeFragment"
 		android:label="fragment_info"
-		tools:layout="@layout/fragment_info">
+		tools:layout="@layout/fragment_shoe">
 
 	</fragment>
 
@@ -26,7 +26,7 @@
 		android:id="@+id/meFragment"
 		android:name="com.joe.jetpackdemo.ui.fragment.main.MeFragment"
 		android:label="fragment_second"
-		tools:layout="@layout/fragment_second">
+		tools:layout="@layout/fragment_me">
 
 	</fragment>
 

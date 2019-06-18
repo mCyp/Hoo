@@ -5,6 +5,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:orientation="vertical"
 	android:layout_width="match_parent"
+	android:background="@color/norm_grey"
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
@@ -15,6 +16,7 @@
 		app:navGraph="@navigation/main_navigation"
 		app:defaultNavHost="true"
 		android:layout_height="0dp"
+		android:layout_marginBottom="10dp"
 		android:layout_weight="1"/>
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
@@ -22,8 +24,8 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@android:color/white"
-		app:itemIconTint="@color/colorAccent"
-		app:itemTextColor="@color/colorPrimary"
+		app:itemIconTint="@drawable/bottom_color_selector"
+		app:itemTextColor="@drawable/bottom_color_selector"
 		app:menu="@menu/menu_main"/>
 
 </LinearLayout>

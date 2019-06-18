@@ -5,18 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.databinding.FragmentRegisterBinding
-import com.joe.jetpackdemo.viewmodel.LoginModel
+import com.joe.jetpackdemo.viewmodel.RegisterModel
+import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 
 /**
  * 注册的Fragment
@@ -28,9 +26,12 @@ class RegisterFragment : Fragment() {
     /*lateinit var mCancel: TextView
     lateinit var mRegister: Button
     lateinit var mEmailEt:EditText*/
-    lateinit var loginModel: LoginModel
     var isEnable:Boolean = false
     lateinit var binding: FragmentRegisterBinding
+
+    private val registerModel:RegisterModel by viewModels{
+        CustomViewModelProvider.providerRegisterModel(requireContext(),findNavController())
+    }
 
 
     override fun onCreateView(
@@ -43,9 +44,7 @@ class RegisterFragment : Fragment() {
             , container
             , false
         )
-        loginModel = ViewModelProviders.of(this).get(LoginModel::class.java)
-        loginModel.context = context!!
-        binding.model = loginModel
+        binding.model = registerModel
         binding.isEnable = isEnable
         binding.activity = activity
         this.binding = binding
@@ -55,41 +54,27 @@ class RegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        /*mCancel = view.findViewById(R.id.txt_cancel)
-        mRegister = view.findViewById(R.id.btn_register)
-        mEmailEt = view.findViewById(R.id.et_email)*/
-
-        /*mRegister.setOnClickListener {
-            Toast.makeText(context,"Register",Toast.LENGTH_SHORT).show()
-        }
-
-        mCancel.setOnClickListener {
-            activity?.onBackPressed()
-        }*/
-
         val safeArgs:RegisterFragmentArgs by navArgs()
         val email = safeArgs.email
         binding.model?.mail?.value = email
 
-        loginModel.p.observe(viewLifecycleOwner, Observer {
+        registerModel.p.observe(viewLifecycleOwner, Observer {
             binding.isEnable = it.isNotEmpty()
-                    && loginModel.n.value!!.isNotEmpty()
-                    && loginModel.mail.value!!.isNotEmpty()
+                    && registerModel.n.value!!.isNotEmpty()
+                    && registerModel.mail.value!!.isNotEmpty()
         })
 
-        loginModel.n.observe(viewLifecycleOwner, Observer {
+        registerModel.n.observe(viewLifecycleOwner, Observer {
             binding.isEnable = it.isNotEmpty()
-                    && loginModel.p.value!!.isNotEmpty()
-                    && loginModel.mail.value!!.isNotEmpty()
+                    && registerModel.p.value!!.isNotEmpty()
+                    && registerModel.mail.value!!.isNotEmpty()
         })
 
-        loginModel.mail.observe(viewLifecycleOwner, Observer {
+        registerModel.mail.observe(viewLifecycleOwner, Observer {
             binding.isEnable = it.isNotEmpty()
-                    && loginModel.n.value!!.isNotEmpty()
-                    && loginModel.p.value!!.isNotEmpty()
+                    && registerModel.n.value!!.isNotEmpty()
+                    && registerModel.p.value!!.isNotEmpty()
         })
-
-        //mEmailEt.setText(email)
 
     }
 
