@@ -33,7 +33,7 @@ class ShoeFragment : Fragment() {
     ): View? {
         val binding: FragmentShoeBinding = FragmentShoeBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        ViewModelProviders.of(this).get(ShoeModel::class.java)
+        //ViewModelProviders.of(this).get(ShoeModel::class.java)
         // RecyclerView 的适配器 ShoeAdapter
         val adapter = ShoeAdapter()
         binding.recycler.adapter = adapter
