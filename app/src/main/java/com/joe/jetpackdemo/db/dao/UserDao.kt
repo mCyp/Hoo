@@ -24,9 +24,6 @@ interface UserDao {
     fun getAllUsers():List<User>
 
 
-
-
-
     @Insert
     fun insertUser(user:User):Long
 

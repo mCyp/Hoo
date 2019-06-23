@@ -7,8 +7,10 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.joe.jetpackdemo.db.dao.FavouriteShoeDao
 import com.joe.jetpackdemo.db.dao.ShoeDao
 import com.joe.jetpackdemo.db.dao.UserDao
+import com.joe.jetpackdemo.db.data.FavouriteShoe
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.db.data.User
 import com.joe.jetpackdemo.utils.ShoeWorker
@@ -16,11 +18,14 @@ import com.joe.jetpackdemo.utils.ShoeWorker
 /**
  * 数据库文件
  */
-@Database(entities = [User::class,Shoe::class],version = 1,exportSchema = false)
+@Database(entities = [User::class,Shoe::class,FavouriteShoe::class],version = 1,exportSchema = false)
 abstract class AppDataBase:RoomDatabase() {
+    // 返回UserDao
     abstract fun userDao():UserDao
-
+    // 返回ShoeDao
     abstract fun shoeDao():ShoeDao
+    // 返回FavouriteShoeDao
+    abstract fun favouriteShoeDao():FavouriteShoeDao
 
     companion object{
         @Volatile
