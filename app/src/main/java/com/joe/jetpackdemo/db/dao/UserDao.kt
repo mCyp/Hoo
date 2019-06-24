@@ -13,7 +13,6 @@ import com.joe.jetpackdemo.db.data.User
  */
 @Dao
 interface UserDao {
-    //
     @Query("SELECT * FROM user WHERE user_account = :account AND user_pwd = :pwd")
     fun login(account:String,pwd:String):LiveData<User?>
 

@@ -3,6 +3,7 @@ package com.joe.jetpackdemo.db.data
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
 
 /**
  * 鞋表

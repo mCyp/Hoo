@@ -20,11 +20,11 @@ import com.joe.jetpackdemo.utils.ShoeWorker
  */
 @Database(entities = [User::class,Shoe::class,FavouriteShoe::class],version = 1,exportSchema = false)
 abstract class AppDataBase:RoomDatabase() {
-    // 返回UserDao
+    // 得到UserDao
     abstract fun userDao():UserDao
-    // 返回ShoeDao
+    // 得到ShoeDao
     abstract fun shoeDao():ShoeDao
-    // 返回FavouriteShoeDao
+    // 得到FavouriteShoeDao
     abstract fun favouriteShoeDao():FavouriteShoeDao
 
     companion object{
@@ -55,5 +55,4 @@ abstract class AppDataBase:RoomDatabase() {
                 .build()
         }
     }
-
 }

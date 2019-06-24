@@ -12,22 +12,38 @@ import com.joe.jetpackdemo.db.data.User
 @Dao
 interface ShoeDao {
 
-    // 选择所有的鞋
-    @Query("SELECT * FROM shoe")
-    fun getAllShoes(): LiveData<List<Shoe>>
-
+   /* // 查询一个
     @Query("SELECT * FROM shoe WHERE id=:id")
-    fun findShoeById(id: Long): LiveData<Shoe>
+    fun findShoeById(id: Long): Shoe?
+
+    // 查询多个 通过品牌查询多款鞋
+    @Query("SELECT * FROM shoe WHERE shoe_brand=:brand")
+    fun findShoesByBrand(brand: String): List<Shoe>
+
+    // 模糊查询 排序 同名鞋名查询鞋
+    @Query("SELECT * FROM shoe WHERE shoe_name LIKE :name ORDER BY shoe_brand ASC")
+    fun findShoesByName(name:String):List<Shoe>
+
+    // 配合RxJava 通过Id查询单款鞋子
+    @Query("SELECT * FROM shoe WHERE id=:id")
+    fun findShoeByIdRx(id: Long): Flowable<Shoe>*/
+
+    // 配合LiveData 返回所有的鞋子
+    @Query("SELECT * FROM shoe")
+    fun getAllShoesLD(): LiveData<List<Shoe>>
+
+    // 配合LiveData 通过Id查询单款鞋子
+    @Query("SELECT * FROM shoe WHERE id=:id")
+    fun findShoeByIdLD(id: Long): LiveData<Shoe>
+
 
     /**
      * 通过品牌查询鞋子
      */
     @Query("SELECT * FROM shoe WHERE shoe_brand=:brand")
-    fun findShoeByBrand(brand: String): LiveData<List<Shoe>>
+    fun findShoesByBrandLD(brand: String): LiveData<List<Shoe>>
 
-    /**
-     * 查询用户喜欢的鞋
-     */
+    // 根据收藏结合 查询用户喜欢的鞋的集合
     @Query(
         "SELECT * FROM shoe " +
                 "INNER JOIN fav_shoe ON fav_shoe.shoe_id = shoe.id " +

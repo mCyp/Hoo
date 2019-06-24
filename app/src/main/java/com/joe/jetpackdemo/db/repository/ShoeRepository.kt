@@ -1,17 +1,16 @@
 package com.joe.jetpackdemo.db.repository
 
 import com.joe.jetpackdemo.db.dao.ShoeDao
-import com.joe.jetpackdemo.db.dao.UserDao
 import com.joe.jetpackdemo.db.data.Shoe
 
 class ShoeRepository private constructor(private val shoeDao: ShoeDao) {
 
-    fun getAllShoes() = shoeDao.getAllShoes()
+    fun getAllShoes() = shoeDao.getAllShoesLD()
 
     /**
      * 通过品牌查询鞋子
      */
-    fun getShoesByBrand(brand:String) = shoeDao.findShoeByBrand(brand)
+    fun getShoesByBrand(brand:String) = shoeDao.findShoesByBrandLD(brand)
 
     /**
      * 插入鞋子的集合
