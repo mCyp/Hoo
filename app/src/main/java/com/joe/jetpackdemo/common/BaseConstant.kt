@@ -8,4 +8,10 @@ object BaseConstant {
     const val TABLE_PREFS = "jetpack"
 
     const val IS_FIRST_LAUNCH = "IS_FIRST_LAUNCH"
+
+    const val SP_USER_ID = "SP_USER_ID"
+
+
+    // DetailActivity 传输的数据
+    const val DETAIL_SHOE_ID = "DETAIL_SHOE_ID"
 }

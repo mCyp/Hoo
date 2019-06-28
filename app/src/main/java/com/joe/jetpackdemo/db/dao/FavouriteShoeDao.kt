@@ -3,6 +3,7 @@ package com.joe.jetpackdemo.db.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.joe.jetpackdemo.db.data.FavouriteShoe
+import com.joe.jetpackdemo.db.data.Shoe
 
 /**
  * 喜欢的鞋子的Dao
@@ -16,7 +17,7 @@ interface FavouriteShoeDao {
 
     // 查询单个FavouriteShoe
     @Query("SELECT * FROM fav_shoe WHERE user_id = :userId AND shoe_id =:shoeId")
-    fun findFavouriteShoeByUserIdAndShoeId(userId: String, shoeId: String)
+    fun findFavouriteShoeByUserIdAndShoeId(userId: Long, shoeId: Long):LiveData<FavouriteShoe?>
 
     // 插入单个FavouriteShoe
     @Insert(onConflict = OnConflictStrategy.REPLACE)

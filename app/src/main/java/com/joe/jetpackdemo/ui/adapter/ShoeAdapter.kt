@@ -1,5 +1,7 @@
 package com.joe.jetpackdemo.ui.adapter
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +10,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.databinding.RecyclerItemShoeBinding
 import com.joe.jetpackdemo.db.data.Shoe
+import com.joe.jetpackdemo.ui.activity.DetailActivity
 
 /**
  * 鞋子的适配器
  */
-class ShoeAdapter : ListAdapter<Shoe, ShoeAdapter.ViewHolder>(ShoeDiffCallback()) {
+class ShoeAdapter constructor(val context: Context) : ListAdapter<Shoe, ShoeAdapter.ViewHolder>(ShoeDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -38,9 +42,10 @@ class ShoeAdapter : ListAdapter<Shoe, ShoeAdapter.ViewHolder>(ShoeDiffCallback()
      * Holder的点击事件
      */
     private fun onCreateListener(id: Long): View.OnClickListener {
-        // TODO 点击事件
         return View.OnClickListener {
-            Log.e("TAG","点击了："+id)
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(BaseConstant.DETAIL_SHOE_ID, id)
+            context.startActivity(intent)
         }
     }
 

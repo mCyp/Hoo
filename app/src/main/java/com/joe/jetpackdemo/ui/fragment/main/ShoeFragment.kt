@@ -35,7 +35,7 @@ class ShoeFragment : Fragment() {
         context ?: return binding.root
         //ViewModelProviders.of(this).get(ShoeModel::class.java)
         // RecyclerView 的适配器 ShoeAdapter
-        val adapter = ShoeAdapter()
+        val adapter = ShoeAdapter(context!!)
         binding.recycler.adapter = adapter
         onSubscribeUi(adapter)
         return binding.root

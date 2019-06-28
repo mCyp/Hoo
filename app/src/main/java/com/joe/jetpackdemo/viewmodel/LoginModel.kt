@@ -9,8 +9,10 @@ import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.joe.jetpackdemo.MainActivity
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.common.listener.SimpleWatcher
 import com.joe.jetpackdemo.db.repository.UserRepository
+import com.joe.jetpackdemo.utils.AppPrefsUtils
 
 class LoginModel constructor(
     private val repository: UserRepository
@@ -53,6 +55,7 @@ class LoginModel constructor(
             val account = n.value!!
             repository.login(account, pwd).observe(lifecycleOwner, Observer {
                 if (it != null) {
+                    AppPrefsUtils.putLong(BaseConstant.SP_USER_ID, it.id)
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                     Toast.makeText(context, "登录成功！", Toast.LENGTH_SHORT).show()

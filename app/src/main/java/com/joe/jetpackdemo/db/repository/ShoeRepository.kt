@@ -13,6 +13,11 @@ class ShoeRepository private constructor(private val shoeDao: ShoeDao) {
     fun getShoesByBrand(brand:String) = shoeDao.findShoesByBrandLD(brand)
 
     /**
+     * 通过Id查询一双鞋
+     */
+    fun getShoeById(id:Long) = shoeDao.findShoeByIdLD(id)
+
+    /**
      * 插入鞋子的集合
      */
     fun insertShoes(shoes: List<Shoe>) = shoeDao.insertShoes(shoes)

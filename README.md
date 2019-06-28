@@ -25,3 +25,11 @@
 > [即学即用Android Jetpack - ViewModel & LiveData](https://www.jianshu.com/p/81a284969f03)
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`ViewModel`的版本。
+
+### Room 19-6-25
+
+文章地址：
+
+>[即学即用Android Jetpack - Room](https://www.jianshu.com/p/815c7db24b6d)
+
+代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。
