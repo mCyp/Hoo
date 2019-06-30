@@ -2,6 +2,7 @@ package com.joe.jetpackdemo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -10,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class MainActivity : AppCompatActivity() {
 
     lateinit var bottomNavigationView: BottomNavigationView
+    lateinit var mToolbar:Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initWidget() {
         bottomNavigationView = findViewById(R.id.navigation_view)
+        mToolbar = findViewById(R.id.toolbar)
     }
 
 

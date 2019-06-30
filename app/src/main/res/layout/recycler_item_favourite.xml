@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+
+	<data>
+		<variable
+			name="shoe"
+			type="com.joe.jetpackdemo.db.data.Shoe"/>
+
+		<variable
+			name="listener"
+			type="android.view.View.OnClickListener"/>
+
+		<variable
+			name="price"
+			type="String"/>
+	</data>
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:onClick="@{listener}"
+		android:padding="10dp"
+		>
+
+		<ImageView
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			app:imageFromUrl="@{shoe.imageUrl}"
+			tools:src="@drawable/shoe_97"
+			android:scaleType="centerCrop"
+			app:layout_constraintDimensionRatio="3:2"/>
+
+		<TextView
+			android:id="@+id/tv_name"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			android:textColor="@color/textPrimary"
+			android:layout_marginStart="10dp"
+			android:textSize="22sp"
+			tools:text="Air Max 97"
+			android:textStyle="bold"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="10dp"
+			android:padding="4dp"
+			android:text="@{shoe.name}"
+			/>
+
+		<TextView
+			android:id="@+id/tv_price"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:layout_constraintTop_toBottomOf="@+id/tv_name"
+			app:layout_constraintLeft_toLeftOf="parent"
+			android:textColor="@color/textSecond"
+			tools:text="1299"
+			android:padding="4dp"
+			android:layout_marginStart="10dp"
+			android:textSize="16sp"
+			android:background="@drawable/shape_favourite_text"
+			android:text="@{price}"
+			/>
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

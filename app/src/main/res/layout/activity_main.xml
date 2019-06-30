@@ -9,6 +9,15 @@
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
+
+	<androidx.appcompat.widget.Toolbar
+		android:id="@+id/toolbar"
+		android:layout_width="match_parent"
+		android:layout_height="52dp"
+		app:title="Hoo"
+		android:background="@color/colorPrimary"
+		app:titleTextColor="#ffffff"/>
+
 	<fragment
 		android:id="@+id/my_nav_host_fragment"
 		android:name="androidx.navigation.fragment.NavHostFragment"

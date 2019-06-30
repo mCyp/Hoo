@@ -7,24 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.joe.jetpackdemo.common.BaseConstant
+import com.joe.jetpackdemo.databinding.RecyclerItemFavouriteBinding
 import com.joe.jetpackdemo.databinding.RecyclerItemShoeBinding
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.activity.DetailActivity
 
 /**
- * 鞋子的适配器 配合Data Binding使用
+ * 鞋子的适配器
  */
-class ShoeAdapter constructor(val context: Context) :
-    PagedListAdapter<Shoe, ShoeAdapter.ViewHolder>(ShoeDiffCallback()) {
+class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, FavouriteAdapter.FavouriteViewHolder>(ShoeDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            RecyclerItemShoeBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
+        return FavouriteViewHolder(
+            RecyclerItemFavouriteBinding.inflate(
                 LayoutInflater.from(parent.context)
                 , parent
                 , false
@@ -32,10 +31,10 @@ class ShoeAdapter constructor(val context: Context) :
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavouriteViewHolder, position: Int) {
         val shoe = getItem(position)
         holder.apply {
-            bind(onCreateListener(shoe!!.id), shoe)
+            bind(onCreateListener(shoe.id), shoe)
             itemView.tag = shoe
         }
     }
@@ -52,12 +51,13 @@ class ShoeAdapter constructor(val context: Context) :
     }
 
 
-    class ViewHolder(private val binding: RecyclerItemShoeBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavouriteViewHolder(private val binding: RecyclerItemFavouriteBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Shoe) {
             binding.apply {
                 this.listener = listener
                 this.shoe = item
+                this.price = item.price.toString()
                 executePendingBindings()
             }
         }

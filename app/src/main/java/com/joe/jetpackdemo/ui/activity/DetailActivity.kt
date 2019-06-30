@@ -1,5 +1,6 @@
 package com.joe.jetpackdemo.ui.activity
 
+import android.animation.Animator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,7 +30,40 @@ class DetailActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_detail)
 
         val binding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
+
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
         observer(binding)
+        initListener(binding)
+    }
+
+    private fun initListener(binding: ActivityDetailBinding) {
+        binding.fbFavourite.setOnClickListener {
+            binding.fbFavourite.animate()
+                .rotation(360.0f)
+                .scaleX(0.0f)
+                .scaleY(0.0f)
+                .setListener(object : Animator.AnimatorListener {
+                    override fun onAnimationRepeat(animation: Animator?) {
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {
+                    }
+
+                    override fun onAnimationStart(animation: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        detailModel.favourite()
+                    }
+
+                }).setDuration(200)
+                .start()
+        }
+
+
     }
 
     private fun observer(binding: ActivityDetailBinding) {

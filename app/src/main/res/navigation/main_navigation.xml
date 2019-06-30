@@ -16,9 +16,9 @@
 
 	<fragment
 		android:id="@+id/marketFragment"
-		android:name="com.joe.jetpackdemo.ui.fragment.main.MarketFragment"
+		android:name="com.joe.jetpackdemo.ui.fragment.main.FavouriteFragment"
 		android:label="fragment_first"
-		tools:layout="@layout/fragment_market">
+		tools:layout="@layout/fragment_favourite">
 
 	</fragment>
 

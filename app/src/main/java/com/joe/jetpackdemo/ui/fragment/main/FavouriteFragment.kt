@@ -8,31 +8,32 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 
 import com.joe.jetpackdemo.R
-import com.joe.jetpackdemo.databinding.FragmentShoeBinding
+import com.joe.jetpackdemo.databinding.FragmentFavouriteBinding
+import com.joe.jetpackdemo.ui.adapter.FavouriteAdapter
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
-import com.joe.jetpackdemo.viewmodel.ShoeModel
+import com.joe.jetpackdemo.viewmodel.FavouriteModel
+
 
 /**
- * 鞋子页面
+ * 收藏页面
  */
-class ShoeFragment : Fragment() {
+class FavouriteFragment : Fragment() {
 
-    // by viewModels 需要依赖 "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
-    private val viewModel: ShoeModel by viewModels {
-        CustomViewModelProvider.providerShoeModel(requireContext())
+    private val viewModel: FavouriteModel by viewModels {
+        CustomViewModelProvider.providerFavouriteModel(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentShoeBinding = FragmentShoeBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        val binding: FragmentFavouriteBinding = FragmentFavouriteBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        val adapter = ShoeAdapter(context!!)
+        val adapter = FavouriteAdapter(context!!)
         binding.recycler.adapter = adapter
         onSubscribeUi(adapter)
         return binding.root
@@ -41,11 +42,13 @@ class ShoeFragment : Fragment() {
     /**
      * 鞋子数据更新的通知
      */
-    private fun onSubscribeUi(adapter: ShoeAdapter) {
+    private fun onSubscribeUi(adapter: FavouriteAdapter) {
         viewModel.shoes.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.submitList(it)
             }
         })
     }
+
+
 }

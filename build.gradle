@@ -10,6 +10,7 @@ buildscript {
     ext.navigationVersion = "2.0.0"
     ext.roomVersion = '2.1.0-beta01'
     ext.workVersion = '2.1.0-alpha02'
+    ext.pagingVersion = '2.1.0-alpha01'
     repositories {
         google()
         jcenter()
