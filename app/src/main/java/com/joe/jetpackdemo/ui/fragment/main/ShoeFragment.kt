@@ -2,15 +2,12 @@ package com.joe.jetpackdemo.ui.fragment.main
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-
-import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.databinding.FragmentShoeBinding
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider

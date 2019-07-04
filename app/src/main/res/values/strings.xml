@@ -17,4 +17,8 @@
 	<string name="next_step_button">Navigate next step</string>
 	<string name="finish_button">Finish Flow</string>
 	<string name="send_deep_link_notification_button">Send deep link notification</string>
+
+	<!-- Messages -->
+	<string name="set_permissions_in_settings">Go to Settings -> Apps and Notifications ->
+        WorkManager Demo -> App Permissions and grant access to Storage.</string>
 </resources>

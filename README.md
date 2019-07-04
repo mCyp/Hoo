@@ -33,3 +33,11 @@
 >[即学即用Android Jetpack - Room](https://www.jianshu.com/p/815c7db24b6d)
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。
+
+### Paging 19-7-1
+
+文章地址：
+
+> [即学即用Android Jetpack - Paging](https://www.jianshu.com/p/0b7c82a5c27f)
+
+代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。

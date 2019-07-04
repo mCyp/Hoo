@@ -14,9 +14,39 @@
 		android:id="@+id/toolbar"
 		android:layout_width="match_parent"
 		android:layout_height="52dp"
-		app:title="Hoo"
 		android:background="@color/colorPrimary"
-		app:titleTextColor="#ffffff"/>
+		app:titleTextColor="#ffffff">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="52dp"
+			android:orientation="horizontal">
+
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:textSize="24sp"
+				android:padding="4dp"
+				android:gravity="center"
+				android:textColor="#ffffff"
+				android:textStyle="bold"
+				android:text="Hoo"/>
+
+			<Space
+				android:layout_width="0dp"
+				android:layout_height="match_parent"
+				android:layout_weight="1"/>
+
+			<ImageView
+				android:id="@+id/iv_camera"
+				android:layout_width="52dp"
+				android:layout_height="52dp"
+				android:padding="14dp"
+				android:src="@drawable/ic_add_a_photo_black_24dp"/>
+
+		</LinearLayout>
+
+	</androidx.appcompat.widget.Toolbar>
 
 	<fragment
 		android:id="@+id/my_nav_host_fragment"

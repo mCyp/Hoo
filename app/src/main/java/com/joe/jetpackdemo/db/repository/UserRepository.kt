@@ -29,11 +29,20 @@ class UserRepository private constructor(private val userDao: UserDao) {
             = userDao.login(account,pwd)
 
     /**
+     * 更新用户
+     */
+    suspend fun updateUser(user:User) {
+        withContext(IO){
+            userDao.updateUser(user)
+        }
+    }
+
+    /**
      * 注册一个用户
      */
     suspend fun register(email: String, account: String, pwd: String):Long {
         return withContext(IO) {
-             userDao.insertUser(User(account, pwd, email))
+             userDao.insertUser(User(account, pwd, email,"https://raw.githubusercontent.com/mCyp/Photo/master/1560651318109.jpeg"))
         }
     }
 
