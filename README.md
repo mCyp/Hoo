@@ -40,4 +40,4 @@
 
 > [即学即用Android Jetpack - Paging](https://www.jianshu.com/p/0b7c82a5c27f)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。
+代码若与Blog中不同，记得将代码会退到`Tag`为`Paging`的版本。
