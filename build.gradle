@@ -13,6 +13,7 @@ buildscript {
     ext.pagingVersion = '2.1.0-alpha01'
     ext.workVersion = "2.0.1"
     ext.trasnVersion = "4.0.1"
+    ext.sweetVersion = "1.5.1"
     repositories {
         google()
         jcenter()

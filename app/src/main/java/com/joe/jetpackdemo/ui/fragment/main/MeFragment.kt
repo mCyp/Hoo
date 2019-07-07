@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.joe.jetpackdemo.common.BaseConstant.KEY_IMAGE_URI
 import com.joe.jetpackdemo.databinding.FragmentMeBinding
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
@@ -24,10 +25,22 @@ import com.joe.jetpackdemo.viewmodel.MeModel
  *
  */
 class MeFragment : Fragment() {
-    private val REQUEST_CODE_IMAGE = 100
-
     private val TAG by lazy { MeFragment::class.java.simpleName }
+    // 选择图片的标识
+    private val REQUEST_CODE_IMAGE = 100
+    // 加载框
+    private val sweetAlertDialog: SweetAlertDialog by lazy {
+        SweetAlertDialog(requireContext(), SweetAlertDialog.PROGRESS_TYPE)
+            .setTitleText("头像")
+            .setContentText("更新中...")
+            /*
+            .setCancelButton("取消") {
+                model.cancelWork()
+                sweetAlertDialog.dismiss()
+            }*/
+    }
 
+    // MeModel懒加载
     private val model: MeModel by viewModels {
         CustomViewModelProvider.providerMeModel(requireContext())
     }
@@ -36,7 +49,7 @@ class MeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Data Binding
         val binding: FragmentMeBinding = FragmentMeBinding.inflate(inflater, container, false)
         initListener(binding)
         onSubscribeUi(binding)
@@ -46,8 +59,9 @@ class MeFragment : Fragment() {
     /**
      * 初始化监听器
      */
-    private fun initListener(binding: FragmentMeBinding){
+    private fun initListener(binding: FragmentMeBinding) {
         binding.ivHead.setOnClickListener {
+            // 选择处理的图片
             val chooseIntent = Intent(
                 Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
@@ -64,6 +78,7 @@ class MeFragment : Fragment() {
             binding.user = it
         })
 
+        // 任务状态的观测
         model.outPutWorkInfos.observe(this, Observer {
             if (it.isNullOrEmpty())
                 return@Observer
@@ -72,16 +87,17 @@ class MeFragment : Fragment() {
             if (state.state.isFinished) {
                 // 更新头像
                 val outputImageUri = state.outputData.getString(KEY_IMAGE_URI)
-                if(!outputImageUri.isNullOrEmpty()){
+                if (!outputImageUri.isNullOrEmpty()) {
                     model.setOutputUri(outputImageUri)
                 }
-            } else {
-                // TODO 为完成情况
+                sweetAlertDialog.dismiss()
             }
         })
     }
 
-    /** Image Selection  */
+    /**
+     * 图片选择完成的回调
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
@@ -93,6 +109,9 @@ class MeFragment : Fragment() {
         }
     }
 
+    /**
+     * 图片选择完成的处理
+     */
     private fun handleImageRequestResult(intent: Intent) {
         // If clipdata is available, we use it, otherwise we use data
         val imageUri: Uri? = intent.clipData?.let {
@@ -104,9 +123,9 @@ class MeFragment : Fragment() {
             return
         }
 
+        sweetAlertDialog.show()
+        // 图片模糊处理
         model.setImageUri(imageUri.toString())
         model.applyBlur(3)
     }
-
-
 }

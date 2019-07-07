@@ -32,6 +32,17 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
         // 清除缓存的照片
         /*var continuation = workManager
             .beginWith(OneTimeWorkRequest.from(CleanUpWorker::class.java))*/
+        // 多任务按顺序执行
+        /*workManager.beginUniqueWork(
+            IMAGE_MANIPULATION_WORK_NAME, // 任务名称
+            ExistingWorkPolicy.REPLACE, // 任务相同的执行策略 分为REPLACE，KEEP，APPEND
+            mutableListOf(
+                OneTimeWorkRequest.from(CleanUpWorker::class.java)
+            ))
+            .then(OneTimeWorkRequestBuilder<BlurWorker>().setInputData(createInputDataForUri()).build())
+            .then(OneTimeWorkRequestBuilder<SaveImageToFileWorker>().build())
+            .enqueue()*/
+
         var continuation = workManager
             .beginUniqueWork(
                 IMAGE_MANIPULATION_WORK_NAME,
@@ -47,8 +58,11 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
             continuation = continuation.then(builder.build())
         }
 
+        // 构建约束条件
         val constraints = Constraints.Builder()
-            .setRequiresBatteryNotLow(true)
+            .setRequiresBatteryNotLow(true) // 非电池低电量
+            .setRequiredNetworkType(NetworkType.CONNECTED) // 网络连接的情况
+            .setRequiresStorageNotLow(true) // 存储空间足
             .build()
 
         // 储存照片
@@ -77,6 +91,10 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
             null
     }
 
+    fun cancelWork() {
+        workManager.cancelUniqueWork(IMAGE_MANIPULATION_WORK_NAME)
+    }
+
     /**
      * setter函数
      */
@@ -94,6 +112,4 @@ class MeModel(val userRepository: UserRepository) : ViewModel() {
             }
         }
     }
-
-
 }

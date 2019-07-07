@@ -24,6 +24,7 @@ class CleanUpWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params
         //sleep()
 
         return try {
+            // 删除逻辑
             val outputDirectory = File(applicationContext.filesDir, OUTPUT_PATH)
             if (outputDirectory.exists()) {
                 val entries = outputDirectory.listFiles()
@@ -37,11 +38,12 @@ class CleanUpWorker(ctx: Context, params: WorkerParameters) : Worker(ctx, params
                     }
                 }
             }
+            // 成功时返回
             Result.success()
         } catch (exception: Exception) {
             Log.e(TAG, "Error cleaning up", exception)
+            // 失败时返回
             Result.failure()
         }
     }
-
 }

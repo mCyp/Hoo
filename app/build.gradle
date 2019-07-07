@@ -62,10 +62,14 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"*/
 
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 
     implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
     implementation "jp.wasabeef:glide-transformations:$rootProject.trasnVersion"
 
-    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    // SweetDialog
+    implementation "com.github.f0ris.sweetalert:library:$rootProject.sweetVersion"
+
+
 }

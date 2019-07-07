@@ -14,6 +14,9 @@ import com.joe.jetpackdemo.utils.blurBitmap
 import com.joe.jetpackdemo.utils.makeStatusNotification
 import com.joe.jetpackdemo.utils.writeBitmapToFile
 
+/**
+ * 模糊处理的Worker
+ */
 class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, params) {
     private var TAG:String = this::class.java.simpleName
 
@@ -25,8 +28,7 @@ class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, p
         makeStatusNotification("Blurring image", context)
 
         return try {
-            //val picture = BitmapFactory.decodeResource(context.resources, R.drawable.shoe_97)
-
+            // 图片处理逻辑
             if (TextUtils.isEmpty(resourceUri)) {
                 Log.e(TAG, "Invalid input uri")
                 throw IllegalArgumentException("Invalid input uri")
@@ -39,6 +41,7 @@ class BlurWorker(context: Context, params: WorkerParameters) : Worker(context, p
             // 存入路径
             val outputUri = writeBitmapToFile(context, output)
 
+            // 输出路径
             val outPutData = workDataOf(KEY_IMAGE_URI to outputUri.toString())
             makeStatusNotification("Output is $outputUri", context)
             Result.success(outPutData)
