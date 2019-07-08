@@ -48,5 +48,5 @@
 
 >[即学即用Android Jetpack - WorkManger](https://www.jianshu.com/p/68e720b8a939)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`Paging`的版本。
+代码若与Blog中不同，记得将代码会退到`Tag`为`WorkManager`的版本。
 
