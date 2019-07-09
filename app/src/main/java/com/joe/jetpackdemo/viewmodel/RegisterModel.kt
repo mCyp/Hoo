@@ -12,8 +12,7 @@ import com.joe.jetpackdemo.db.repository.UserRepository
 import kotlinx.coroutines.launch
 
 class RegisterModel constructor(
-    private val navController: NavController
-    , private val repository: UserRepository
+    private val repository: UserRepository
 ) : ViewModel() {
 
     val n = MutableLiveData<String>("")
@@ -45,20 +44,8 @@ class RegisterModel constructor(
     }
 
     fun register() {
-        if (TextUtils.isEmpty(n.value)
-            || TextUtils.isEmpty(p.value)
-            || TextUtils.isEmpty(mail.value)
-        ) {
-            return
-        }
         viewModelScope.launch {
-            val id = repository.register(mail.value!!,n.value!!, p.value!!)
-            val user= repository.findUserById(id)
-            val u = user.value
-            Log.e("123",user.toString())
-            val bundle = Bundle()
-            bundle.putString("name", n.value)
-            navController.navigate(R.id.login, bundle, null)
+            repository.register(mail.value!!, n.value!!, p.value!!)
         }
     }
 }

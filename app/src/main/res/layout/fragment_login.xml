@@ -17,6 +17,7 @@
 		<variable
 			name="isEnable"
 			type="Boolean"/>
+
 		<import type="android.view.View"/>
 	</data>
 
@@ -27,8 +28,7 @@
 
 		<TextView
 			android:id="@+id/txt_cancel"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
+			style="@style/WrapWrap"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			android:layout_marginTop="20dp"
@@ -44,91 +44,53 @@
 
 		<TextView
 			android:id="@+id/txt_title"
-			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintLeft_toLeftOf="parent"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintRight_toRightOf="parent"
+			style="@style/WrapWrap.ConstraintCenter"
 			app:layout_constraintHorizontal_bias="0.1"
 			app:layout_constraintVertical_bias="0.1"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
 			android:text="Welcome back"
 			android:textColor="@color/textPrimary"
 			android:padding="20dp"
 			android:textSize="28sp"
-			android:textStyle="bold"/>
+			android:textStyle="bold"
+			tools:ignore="MissingConstraints"/>
 
 		<EditText
 			android:id="@+id/et_account"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
+			style="@style/CommonEditStyle"
 			app:layout_constraintTop_toBottomOf="@+id/txt_title"
 			app:layout_constraintBottom_toTopOf="@+id/et_pwd"
 			app:layout_constraintVertical_chainStyle="packed"
-			app:layout_constraintLeft_toLeftOf="parent"
-			app:layout_constraintBottom_toBottomOf="parent"
-			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintVertical_bias="0.3"
-			app:layout_constraintHeight_default="percent"
-			app:layout_constraintHeight_percent="0.1"
-			app:layout_constraintWidth_default="percent"
-			app:layout_constraintWidth_percent="0.8"
 			android:hint="account"
-			android:text="@={model.n}"
-			android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
 			app:addTextChangedListener="@{model.nameWatcher}"
+			android:text="@={model.n}"
 			android:drawableStart="@drawable/ic_account"
-			android:drawablePadding="10dp"
-			android:paddingStart="10dp"
-			android:paddingEnd="10dp"
-			android:background="@drawable/shape_table_item_edit"
-			/>
+			tools:ignore="MissingConstraints"/>
+		<!-- TODO android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"  -->
 
 		<EditText
 			android:id="@+id/et_pwd"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
+			style="@style/CommonEditStyle"
 			app:layout_constraintTop_toBottomOf="@+id/et_account"
 			app:layout_constraintBottom_toTopOf="@+id/btn_register"
-			app:layout_constraintLeft_toLeftOf="parent"
-			app:layout_constraintRight_toRightOf="parent"
 			android:layout_marginTop="20dp"
 			android:hint="password"
 			android:text="@{model.p}"
 			android:onTextChanged="@{model::onPwdChanged}"
-			app:layout_constraintHeight_default="percent"
-			app:layout_constraintHeight_percent="0.1"
-			app:layout_constraintWidth_default="percent"
-			app:layout_constraintWidth_percent="0.8"
 			android:drawableStart="@drawable/ic_pwd"
-			android:drawablePadding="10dp"
-			android:paddingStart="10dp"
-			android:paddingEnd="10dp"
-			android:background="@drawable/shape_table_item_edit"
-			/>
+			tools:ignore="MissingConstraints"/>
 		<!-- TODO BindingAdapter app:addTextChangedListener="@{model.pwdWatcher}" -->
 
 
 		<Button
 			android:id="@+id/btn_login"
-			android:layout_width="0dp"
-			android:layout_height="0dp"
-			android:layout_marginStart="20dp"
-			android:layout_marginEnd="20dp"
+			style="@style/CommonButtonStyle"
 			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintLeft_toLeftOf="parent"
-			app:layout_constraintRight_toRightOf="parent"
-			app:layout_constraintHeight_default="percent"
-			app:layout_constraintHeight_percent="0.1"
-			app:layout_constraintWidth_default="percent"
-			app:layout_constraintWidth_percent="0.8"
 			app:layout_constraintVertical_bias="0.8"
 			android:text="Sign in"
-			android:onClick="@{() -> model.login()}"
 			android:enabled="@{isEnable}"
-			android:textSize="@dimen/txt_big_size"
 			app:layout_constraintBottom_toBottomOf="parent"
-			android:background="@drawable/shape_main_recycle_item_primary"/>
+			tools:ignore="MissingConstraints"/>
 		<!-- android:enabled="@{(model.p.isEmpty()||model.n.isEmpty()) ? false : true}" -->
 
 

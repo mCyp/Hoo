@@ -30,15 +30,16 @@ class DetailActivity : AppCompatActivity() {
         //setContentView(R.layout.activity_detail)
 
         val binding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
-
-        binding.ivBack.setOnClickListener {
-            onBackPressed()
-        }
-        observer(binding)
+        onSubscribeUi(binding)
         initListener(binding)
     }
 
     private fun initListener(binding: ActivityDetailBinding) {
+        binding.ivBack.setOnClickListener {
+            onBackPressed()
+        }
+
+        // 设置点击动画
         binding.fbFavourite.setOnClickListener {
             binding.fbFavourite.animate()
                 .rotation(360.0f)
@@ -62,11 +63,9 @@ class DetailActivity : AppCompatActivity() {
                 }).setDuration(200)
                 .start()
         }
-
-
     }
 
-    private fun observer(binding: ActivityDetailBinding) {
+    private fun onSubscribeUi(binding: ActivityDetailBinding) {
         detailModel.shoe.observe(this, Observer {
             binding.shoe = it
             binding.price = it.price.toString()

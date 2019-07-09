@@ -21,11 +21,15 @@ import com.joe.jetpackdemo.viewmodel.MeModel
 
 
 /**
- * A simple [Fragment] subclass.
- *
+ * 我的界面
  */
 class MeFragment : Fragment() {
     private val TAG by lazy { MeFragment::class.java.simpleName }
+    // MeModel懒加载
+    private val model: MeModel by viewModels {
+        CustomViewModelProvider.providerMeModel(requireContext())
+    }
+
     // 选择图片的标识
     private val REQUEST_CODE_IMAGE = 100
     // 加载框
@@ -38,11 +42,6 @@ class MeFragment : Fragment() {
                 model.cancelWork()
                 sweetAlertDialog.dismiss()
             }*/
-    }
-
-    // MeModel懒加载
-    private val model: MeModel by viewModels {
-        CustomViewModelProvider.providerMeModel(requireContext())
     }
 
     override fun onCreateView(

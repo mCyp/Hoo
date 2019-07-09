@@ -7,14 +7,8 @@ open class BaseApplication :Application(){
 
     override fun onCreate() {
         super.onCreate()
-
-        //initAppInjection()
-
-
         context = this
     }
-
-
 
     companion object {
         lateinit var context: Context

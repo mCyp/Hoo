@@ -1,6 +1,7 @@
 package com.joe.jetpackdemo.ui.fragment.login
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -10,11 +11,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.R
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.databinding.FragmentLoginBinding
+import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.LoginModel
 
@@ -25,11 +27,10 @@ import com.joe.jetpackdemo.viewmodel.LoginModel
  */
 class LoginFragment : Fragment() {
 
-    private val loginModel: LoginModel by viewModels{
+    private val loginModel: LoginModel by viewModels {
         CustomViewModelProvider.providerLoginModel(requireContext())
     }
-    var isEnable: Boolean = false
-    lateinit var binding: FragmentLoginBinding
+    private var isEnable: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,32 +43,40 @@ class LoginFragment : Fragment() {
             , container
             , false
         )
+        // 生成Binding的另外一种方式
         /*val binding = FragmentLoginBinding.inflate(
             inflater
             , container
             , false
         )*/
-        loginModel.lifecycleOwner = viewLifecycleOwner
-        binding.model = loginModel
-        binding.isEnable = isEnable
-        binding.activity = activity
-        this.binding = binding
+        onSubscribeUi(binding)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun onSubscribeUi(binding: FragmentLoginBinding) {
+        binding.model = loginModel
+        binding.isEnable = isEnable
+        binding.activity = activity
+
+        binding.btnLogin.setOnClickListener {
+            loginModel.login()?.observe(this, Observer { user ->
+                user?.let {
+                    AppPrefsUtils.putLong(BaseConstant.SP_USER_ID, it.id)
+                    AppPrefsUtils.putString(BaseConstant.SP_USER_NAME, it.name)
+                    val intent = Intent(context, MainActivity::class.java)
+                    context!!.startActivity(intent)
+                    Toast.makeText(context, "登录成功！", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
 
         loginModel.p.observe(viewLifecycleOwner, Observer {
+            // 保证账号和密码不为空的时候才可以登录
             binding.isEnable = it.isNotEmpty() && loginModel.n.value!!.isNotEmpty()
         })
 
-        val name = arguments?.getString("name")
+        val name = arguments?.getString(BaseConstant.ARGS_NAME)
         if (!TextUtils.isEmpty(name))
             loginModel.n.value = name!!
-
-        //mAccount.setText(name)
     }
-
-
 }

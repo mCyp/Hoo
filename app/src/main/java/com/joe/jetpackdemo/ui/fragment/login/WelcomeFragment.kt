@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.joe.jetpackdemo.R
+import com.joe.jetpackdemo.common.BaseConstant
+import com.joe.jetpackdemo.utils.AppPrefsUtils
 
 /**
- * A simple [Fragment] subclass.
- *
+ *  欢迎界面
  */
 class WelcomeFragment : Fragment() {
 
@@ -44,13 +45,16 @@ class WelcomeFragment : Fragment() {
                     popExit = R.anim.slide_out_right
                 }
             }
-            // 参数设置
+
+            val name = AppPrefsUtils.getString(BaseConstant.SP_USER_NAME)
+            // Navigation 传递参数
             val bundle = Bundle()
-            bundle.putString("name","TeaOf")
+            bundle.putString(BaseConstant.ARGS_NAME,name)
             findNavController().navigate(R.id.login, bundle,navOption)
         }
 
         btnRegister.setOnClickListener {
+            // 利用SafeArgs传递参数
             val action = WelcomeFragmentDirections
                 .actionWelcomeToRegister()
                 .setEMAIL("TeaOf1995@Gamil.com")

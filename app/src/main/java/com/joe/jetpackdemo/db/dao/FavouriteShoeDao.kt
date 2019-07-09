@@ -6,7 +6,7 @@ import com.joe.jetpackdemo.db.data.FavouriteShoe
 import com.joe.jetpackdemo.db.data.Shoe
 
 /**
- * 喜欢的鞋子的Dao
+ * 收藏记录的Dao
  */
 @Dao
 interface FavouriteShoeDao {

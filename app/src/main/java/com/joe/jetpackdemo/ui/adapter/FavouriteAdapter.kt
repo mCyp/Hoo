@@ -17,7 +17,7 @@ import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.activity.DetailActivity
 
 /**
- * 鞋子的适配器
+ * 收藏记录的适配器
  */
 class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, FavouriteAdapter.FavouriteViewHolder>(ShoeDiffCallback()) {
 
@@ -40,7 +40,7 @@ class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, Fav
     }
 
     /**
-     * Holder的点击事件
+     * FavouriteViewHolder的点击事件
      */
     private fun onCreateListener(id: Long): View.OnClickListener {
         return View.OnClickListener {

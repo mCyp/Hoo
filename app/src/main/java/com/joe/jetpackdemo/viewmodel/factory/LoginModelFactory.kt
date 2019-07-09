@@ -11,6 +11,6 @@ class LoginModelFactory(
     , private val context: Context
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return LoginModel(repository, context) as T
+        return LoginModel(repository) as T
     }
 }

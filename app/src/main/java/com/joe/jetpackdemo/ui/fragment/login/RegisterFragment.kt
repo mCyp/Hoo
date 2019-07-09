@@ -12,9 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.joe.jetpackdemo.R
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.databinding.FragmentRegisterBinding
-import com.joe.jetpackdemo.viewmodel.RegisterModel
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
+import com.joe.jetpackdemo.viewmodel.RegisterModel
 
 /**
  * 注册的Fragment
@@ -23,16 +24,10 @@ import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
  */
 class RegisterFragment : Fragment() {
 
-    /*lateinit var mCancel: TextView
-    lateinit var mRegister: Button
-    lateinit var mEmailEt:EditText*/
-    var isEnable:Boolean = false
-    lateinit var binding: FragmentRegisterBinding
-
+    private var isEnable:Boolean = false
     private val registerModel:RegisterModel by viewModels{
-        CustomViewModelProvider.providerRegisterModel(requireContext(),findNavController())
+        CustomViewModelProvider.providerRegisterModel(requireContext())
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,19 +39,30 @@ class RegisterFragment : Fragment() {
             , container
             , false
         )
-        binding.model = registerModel
-        binding.isEnable = isEnable
-        binding.activity = activity
-        this.binding = binding
+
+        initData(binding)
+        onSubscribeUi(binding)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    private fun initData(binding: FragmentRegisterBinding) {
+        // SafeArgs的使用
         val safeArgs:RegisterFragmentArgs by navArgs()
         val email = safeArgs.email
         binding.model?.mail?.value = email
+
+        binding.model = registerModel
+        binding.isEnable = isEnable
+        binding.activity = activity
+    }
+
+    private fun onSubscribeUi(binding: FragmentRegisterBinding) {
+        binding.btnRegister.setOnClickListener {
+            registerModel.register()
+            val bundle = Bundle()
+            bundle.putString(BaseConstant.ARGS_NAME, registerModel.n.value)
+            findNavController().navigate(R.id.login, bundle, null)
+        }
 
         registerModel.p.observe(viewLifecycleOwner, Observer {
             binding.isEnable = it.isNotEmpty()
@@ -75,8 +81,5 @@ class RegisterFragment : Fragment() {
                     && registerModel.n.value!!.isNotEmpty()
                     && registerModel.p.value!!.isNotEmpty()
         })
-
     }
-
-
 }

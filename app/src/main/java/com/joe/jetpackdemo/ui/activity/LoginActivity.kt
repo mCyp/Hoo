@@ -23,7 +23,8 @@ class LoginActivity : AppCompatActivity() {
 
     private val permissions = Arrays.asList(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CAMERA
     )
 
     private var permissionRequestCount: Int = 0
@@ -39,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
             permissionRequestCount = it.getInt(KEY_PERMISSIONS_REQUEST_COUNT, 0)
         }
 
-        // Make sure the app has correct permissions to run
+        // 获取权限
         requestPermissionsIfNecessary()
 
     }

@@ -8,7 +8,7 @@ import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.db.data.User
 
 /**
- * 鞋子的方法
+ * 鞋子的Dao
  */
 @Dao
 interface ShoeDao {

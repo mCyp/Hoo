@@ -7,8 +7,7 @@ import com.joe.jetpackdemo.db.repository.ShoeRepository
 /**
  * 构建CustomPageDataSource的工厂
  */
-class CustomPageDataSourceFactory(val shoeRepository: ShoeRepository):DataSource.Factory<Int,Shoe>() {
-
+class CustomPageDataSourceFactory(private val shoeRepository: ShoeRepository):DataSource.Factory<Int,Shoe>() {
     override fun create(): DataSource<Int, Shoe> {
         return CustomPageDataSource(shoeRepository)
     }

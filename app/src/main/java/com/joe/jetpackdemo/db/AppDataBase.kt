@@ -11,7 +11,7 @@ import com.joe.jetpackdemo.db.dao.UserDao
 import com.joe.jetpackdemo.db.data.FavouriteShoe
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.db.data.User
-import com.joe.jetpackdemo.utils.ShoeWorker
+import com.joe.jetpackdemo.worker.ShoeWorker
 
 /**
  * 数据库文件

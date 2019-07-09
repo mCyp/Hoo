@@ -1,6 +1,5 @@
-package com.joe.jetpackdemo
+package com.joe.jetpackdemo.ui.activity
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -10,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.joe.jetpackdemo.R
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,12 +24,13 @@ class MainActivity : AppCompatActivity() {
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
         val navController = host.navController
 
-
         initWidget()
-
         initBottomNavigationView(bottomNavigationView,navController)
     }
 
+    /**
+     * Navigation绑定bottomNavigationView
+     */
     private fun initBottomNavigationView(bottomNavigationView: BottomNavigationView, navController: NavController) {
         bottomNavigationView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
@@ -44,6 +45,10 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.navigation_view)
         mToolbar = findViewById(R.id.toolbar)
         mCamera = findViewById(R.id.iv_camera)
+
+        mCamera.setOnClickListener {
+            // TODO CameraX 学习
+        }
     }
 
 

@@ -6,7 +6,7 @@ import androidx.room.*
 import com.joe.jetpackdemo.db.data.User
 
 /**
- * 用户的方法
+ * 用户的Dao
  */
 @Dao
 interface UserDao {
