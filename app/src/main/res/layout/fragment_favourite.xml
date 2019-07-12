@@ -13,12 +13,18 @@
 		android:layout_height="match_parent"
 		>
 
+		<com.joe.jetpackdemo.widget.EmptyView
+			android:id="@+id/empty"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"/>
+
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/recycler"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
+			android:visibility="gone"
 			app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

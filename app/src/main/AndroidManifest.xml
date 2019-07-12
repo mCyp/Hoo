@@ -5,11 +5,10 @@
 
 	<uses-permission android:name="android.permission.INTERNET"/>
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/> <!-- Declare features -->
+	<uses-feature android:name="android.hardware.camera"/>
 
-	<!-- Declare features -->
-	<uses-feature android:name="android.hardware.camera" />
-	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.CAMERA"/>
 
 	<application
 		android:name=".common.BaseApplication"
@@ -20,6 +19,8 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:replace="android:icon">
+		<activity android:name=".ui.activity.SearchActivity">
+		</activity>
 		<activity android:name=".ui.activity.CameraActivity">
 		</activity>
 		<activity android:name=".ui.activity.DetailActivity">

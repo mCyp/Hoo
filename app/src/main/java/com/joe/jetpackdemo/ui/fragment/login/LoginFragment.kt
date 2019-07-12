@@ -62,7 +62,7 @@ class LoginFragment : Fragment() {
             loginModel.login()?.observe(this, Observer { user ->
                 user?.let {
                     AppPrefsUtils.putLong(BaseConstant.SP_USER_ID, it.id)
-                    AppPrefsUtils.putString(BaseConstant.SP_USER_NAME, it.name)
+                    AppPrefsUtils.putString(BaseConstant.SP_USER_NAME, it.account)
                     val intent = Intent(context, MainActivity::class.java)
                     context!!.startActivity(intent)
                     Toast.makeText(context, "登录成功！", Toast.LENGTH_SHORT).show()

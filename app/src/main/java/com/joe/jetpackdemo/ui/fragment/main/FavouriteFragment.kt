@@ -35,20 +35,25 @@ class FavouriteFragment : Fragment() {
         context ?: return binding.root
         val adapter = FavouriteAdapter(context!!)
         binding.recycler.adapter = adapter
-        onSubscribeUi(adapter)
+        onSubscribeUi(adapter, binding)
         return binding.root
     }
 
     /**
      * 鞋子数据更新的通知
      */
-    private fun onSubscribeUi(adapter: FavouriteAdapter) {
+    private fun onSubscribeUi(adapter: FavouriteAdapter, binding: FragmentFavouriteBinding) {
+        binding.empty.bind(arrayOf(binding.recycler))
+        binding.empty.triggerLoading()
+
         viewModel.shoes.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
+            if (it != null && it.isNotEmpty()) {
                 adapter.submitList(it)
             }
+            binding.empty.triggerOkOrEmpty(adapter.itemCount > 0)
         })
     }
+
 
 
 }

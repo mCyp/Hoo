@@ -18,6 +18,11 @@
 	<string name="finish_button">Finish Flow</string>
 	<string name="send_deep_link_notification_button">Send deep link notification</string>
 
+
+	<string name="prompt_empty">暂时还没有收藏记录～</string>
+	<string name="prompt_error">这边有错误发生了!</string>
+	<string name="prompt_loading">加载中…</string>
+
 	<!-- Messages -->
 	<string name="set_permissions_in_settings">Go to Settings -> Apps and Notifications ->
         WorkManager Demo -> App Permissions and grant access to Storage.</string>

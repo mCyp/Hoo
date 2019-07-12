@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
+import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.listener.SimpleWatcher
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 
@@ -13,8 +14,10 @@ import jp.wasabeef.glide.transformations.RoundedCornersTransformation
 fun bindImageFromUrl(view:ImageView,imageUrl:String?){
     if(!imageUrl.isNullOrEmpty()){
         Glide.with(view.context)
+            .asBitmap()
             .load(imageUrl)
-            .transition(DrawableTransitionOptions.withCrossFade())
+            .placeholder(R.drawable.preview)
+            .centerCrop()
             .into(view)
     }
 }

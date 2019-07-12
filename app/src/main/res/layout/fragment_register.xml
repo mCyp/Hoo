@@ -91,6 +91,7 @@
 			app:layout_constraintTop_toBottomOf="@+id/et_account"
 			app:layout_constraintBottom_toTopOf="@+id/btn_register"
 			android:layout_marginTop="20dp"
+			android:inputType="textPassword"
 			android:hint="password"
 			android:onTextChanged="@{(text, start, before, count)->model.onPwdChanged(text)}"
 			android:drawableStart="@drawable/ic_pwd"

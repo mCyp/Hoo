@@ -1,0 +1,9 @@
+<resources>
+    <declare-styleable name="EmptyView">
+        <attr name="comEmptyText" format="integer" />
+        <attr name="comErrorText" format="integer" />
+        <attr name="comLoadingText" format="integer" />
+        <attr name="comEmptyDrawable" format="integer" />
+        <attr name="comErrorDrawable" format="integer" />
+    </declare-styleable>
+</resources>

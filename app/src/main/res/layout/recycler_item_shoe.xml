@@ -29,7 +29,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="0dp"
 			app:imageFromUrl="@{shoe.imageUrl}"
-			tools:src="@drawable/shoe_97"
+			android:src="@drawable/preview"
 			android:scaleType="centerCrop"
 			app:layout_constraintDimensionRatio="1:1"/>
 

@@ -15,6 +15,7 @@ buildscript {
     ext.trasnVersion = "4.0.1"
     ext.sweetVersion = "1.5.1"
     ext.camerax_version = "1.0.0-alpha03"
+    ext.lottieVersion = '2.7.0'
     repositories {
         google()
         jcenter()

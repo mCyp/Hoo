@@ -78,6 +78,7 @@
 			android:text="@{model.p}"
 			android:onTextChanged="@{model::onPwdChanged}"
 			android:drawableStart="@drawable/ic_pwd"
+			android:inputType="textPassword"
 			tools:ignore="MissingConstraints"/>
 		<!-- TODO BindingAdapter app:addTextChangedListener="@{model.pwdWatcher}" -->
 
