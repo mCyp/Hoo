@@ -77,7 +77,7 @@ fun makeStatusNotification(message: String, context: Context) {
 
     // Create the notification
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_account)
+            .setSmallIcon(R.drawable.common_ic_account)
             .setContentTitle(NOTIFICATION_TITLE)
             .setContentText(message)
             .setPriority(NotificationCompat.PRIORITY_HIGH)

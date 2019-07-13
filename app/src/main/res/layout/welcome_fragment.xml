@@ -14,7 +14,7 @@
 		app:layout_constraintDimensionRatio="1:1"
 		app:layout_constraintHeight_default="percent"
 		app:layout_constraintHeight_percent="0.45"
-		android:src="@drawable/bg_welcome"
+		android:src="@drawable/welcome_bg"
 		android:layout_marginEnd="8dp"
 		android:layout_marginStart="8dp"
 		tools:ignore="MissingConstraints"/>
@@ -41,7 +41,7 @@
 		app:layout_constraintTop_toBottomOf="@+id/txt_content"
 		app:layout_constraintBottom_toTopOf="@+id/btn_register"
 		android:text="Have a account ? Login"
-		android:background="@drawable/shape_main_recycle_item_primary"
+		android:background="@drawable/common_btn_bg_blue"
 		tools:ignore="MissingConstraints"/>
 
 	<Button
@@ -50,7 +50,7 @@
 		app:layout_constraintTop_toBottomOf="@+id/btn_login"
 		android:text="Join us"
 		app:layout_constraintBottom_toBottomOf="parent"
-		android:background="@drawable/shape_main_recycle_item_primary"
+		android:background="@drawable/common_btn_bg_blue"
 		tools:ignore="MissingConstraints"/>
 
 

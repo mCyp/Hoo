@@ -10,7 +10,7 @@
 		android:id="@+id/infoFragment"
 		android:name="com.joe.jetpackdemo.ui.fragment.main.ShoeFragment"
 		android:label="fragment_info"
-		tools:layout="@layout/fragment_shoe">
+		tools:layout="@layout/shoe_fragment">
 
 	</fragment>
 
@@ -18,7 +18,7 @@
 		android:id="@+id/marketFragment"
 		android:name="com.joe.jetpackdemo.ui.fragment.main.FavouriteFragment"
 		android:label="fragment_first"
-		tools:layout="@layout/fragment_favourite">
+		tools:layout="@layout/favourite_fragment">
 
 	</fragment>
 
@@ -26,7 +26,7 @@
 		android:id="@+id/meFragment"
 		android:name="com.joe.jetpackdemo.ui.fragment.main.MeFragment"
 		android:label="fragment_second"
-		tools:layout="@layout/fragment_me">
+		tools:layout="@layout/me_fragment">
 
 	</fragment>
 

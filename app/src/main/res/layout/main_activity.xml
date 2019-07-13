@@ -42,7 +42,7 @@
 				android:layout_width="52dp"
 				android:layout_height="52dp"
 				android:padding="14dp"
-				android:src="@drawable/ic_add_a_photo_black_24dp"/>
+				android:src="@drawable/me_ic_camera"/>
 
 		</LinearLayout>
 
@@ -59,12 +59,12 @@
 		android:layout_weight="1"/>
 
 	<com.google.android.material.bottomnavigation.BottomNavigationView
-		android:id="@+id/navigation_view"
+		android:id="@+id/bnv_view"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@android:color/white"
-		app:itemIconTint="@drawable/bottom_color_selector"
-		app:itemTextColor="@drawable/bottom_color_selector"
+		app:itemIconTint="@drawable/main_bottom_color_selector"
+		app:itemTextColor="@drawable/main_bottom_color_selector"
 		app:menu="@menu/menu_main"/>
 
 </LinearLayout>

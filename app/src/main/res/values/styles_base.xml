@@ -45,7 +45,7 @@
         <item name="layout_constraintHeight_percent">0.1</item>
         <item name="layout_constraintWidth_default">percent</item>
         <item name="layout_constraintWidth_percent">0.8</item>
-        <item name="android:background">@drawable/shape_table_item_edit</item>
+        <item name="android:background">@drawable/common_et_bg_grey</item>
     </style>
 
     <style name="CommonButtonStyle" parent="ZeroZero.CenterHorizontal">
@@ -53,7 +53,7 @@
         <item name="layout_constraintHeight_percent">0.1</item>
         <item name="layout_constraintWidth_default">percent</item>
         <item name="layout_constraintWidth_percent">0.8</item>
-        <item name="android:background">@drawable/shape_main_recycle_item_primary</item>
+        <item name="android:background">@drawable/common_btn_bg_blue</item>
         <item name="android:textSize">@dimen/txt_big_size</item>
         <item name="android:layout_marginStart">20dp</item>
         <item name="android:layout_marginEnd">20dp</item>

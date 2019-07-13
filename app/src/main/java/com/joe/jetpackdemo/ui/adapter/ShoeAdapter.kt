@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.databinding.RecyclerItemShoeBinding
+import com.joe.jetpackdemo.databinding.ShoeRecyclerItemBinding
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.activity.DetailActivity
 
@@ -24,7 +24,7 @@ class ShoeAdapter constructor(val context: Context) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            RecyclerItemShoeBinding.inflate(
+            ShoeRecyclerItemBinding.inflate(
                 LayoutInflater.from(parent.context)
                 , parent
                 , false
@@ -52,7 +52,7 @@ class ShoeAdapter constructor(val context: Context) :
     }
 
 
-    class ViewHolder(private val binding: RecyclerItemShoeBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: ShoeRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Shoe) {
             binding.apply {

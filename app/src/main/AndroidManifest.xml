@@ -19,10 +19,6 @@
 		android:supportsRtl="true"
 		android:theme="@style/AppTheme"
 		tools:replace="android:icon">
-		<activity android:name=".ui.activity.SearchActivity">
-		</activity>
-		<activity android:name=".ui.activity.CameraActivity">
-		</activity>
 		<activity android:name=".ui.activity.DetailActivity">
 		</activity>
 		<activity android:name=".ui.activity.LoginActivity">

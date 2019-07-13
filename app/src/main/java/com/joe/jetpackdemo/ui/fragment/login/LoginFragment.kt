@@ -15,7 +15,7 @@ import androidx.lifecycle.Observer
 import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.databinding.FragmentLoginBinding
+import com.joe.jetpackdemo.databinding.LoginFragmentBinding
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.LoginModel
@@ -37,9 +37,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // TODO 研究DataBindComponent
-        val binding: FragmentLoginBinding = DataBindingUtil.inflate(
+        val binding: LoginFragmentBinding = DataBindingUtil.inflate(
             inflater
-            , R.layout.fragment_login
+            , R.layout.login_fragment
             , container
             , false
         )
@@ -53,7 +53,7 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    private fun onSubscribeUi(binding: FragmentLoginBinding) {
+    private fun onSubscribeUi(binding: LoginFragmentBinding) {
         binding.model = loginModel
         binding.isEnable = isEnable
         binding.activity = activity

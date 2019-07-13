@@ -4,7 +4,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.listener.SimpleWatcher
@@ -16,7 +15,7 @@ fun bindImageFromUrl(view:ImageView,imageUrl:String?){
         Glide.with(view.context)
             .asBitmap()
             .load(imageUrl)
-            .placeholder(R.drawable.preview)
+            .placeholder(R.drawable.glide_placeholder)
             .centerCrop()
             .into(view)
     }

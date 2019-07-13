@@ -15,7 +15,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.joe.jetpackdemo.common.BaseConstant.KEY_IMAGE_URI
-import com.joe.jetpackdemo.databinding.FragmentMeBinding
+import com.joe.jetpackdemo.databinding.MeFragmentBinding
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.MeModel
 
@@ -49,7 +49,7 @@ class MeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Data Binding
-        val binding: FragmentMeBinding = FragmentMeBinding.inflate(inflater, container, false)
+        val binding: MeFragmentBinding = MeFragmentBinding.inflate(inflater, container, false)
         initListener(binding)
         onSubscribeUi(binding)
         return binding.root
@@ -58,7 +58,7 @@ class MeFragment : Fragment() {
     /**
      * 初始化监听器
      */
-    private fun initListener(binding: FragmentMeBinding) {
+    private fun initListener(binding: MeFragmentBinding) {
         binding.ivHead.setOnClickListener {
             // 选择处理的图片
             val chooseIntent = Intent(
@@ -72,7 +72,7 @@ class MeFragment : Fragment() {
     /**
      * Binding绑定
      */
-    private fun onSubscribeUi(binding: FragmentMeBinding) {
+    private fun onSubscribeUi(binding: MeFragmentBinding) {
         model.user.observe(this, Observer {
             binding.user = it
         })

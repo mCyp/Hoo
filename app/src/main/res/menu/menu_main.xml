@@ -3,17 +3,17 @@
 
 	<item
 		android:id="@+id/infoFragment"
-		android:icon="@drawable/ic_market"
+		android:icon="@drawable/main_ic_market"
 		android:title="主页"/>
 
 	<item
 		android:id="@+id/marketFragment"
-		android:icon="@drawable/ic_favorite"
+		android:icon="@drawable/main_ic_favorite"
 		android:title="喜欢"/>
 
 	<item
 		android:id="@+id/meFragment"
-		android:icon="@drawable/ic_me"
+		android:icon="@drawable/main_ic_me"
 		android:title="我"/>
 
 

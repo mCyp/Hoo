@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.databinding.FragmentRegisterBinding
+import com.joe.jetpackdemo.databinding.RegisterFragmentBinding
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.RegisterModel
 
@@ -33,9 +33,9 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentRegisterBinding = DataBindingUtil.inflate(
+        val binding: RegisterFragmentBinding = DataBindingUtil.inflate(
             inflater
-            , R.layout.fragment_register
+            , R.layout.register_fragment
             , container
             , false
         )
@@ -45,7 +45,7 @@ class RegisterFragment : Fragment() {
         return binding.root
     }
 
-    private fun initData(binding: FragmentRegisterBinding) {
+    private fun initData(binding: RegisterFragmentBinding) {
         // SafeArgs的使用
         val safeArgs:RegisterFragmentArgs by navArgs()
         val email = safeArgs.email
@@ -56,7 +56,7 @@ class RegisterFragment : Fragment() {
         binding.activity = activity
     }
 
-    private fun onSubscribeUi(binding: FragmentRegisterBinding) {
+    private fun onSubscribeUi(binding: RegisterFragmentBinding) {
         binding.btnRegister.setOnClickListener {
             registerModel.register()
             val bundle = Bundle()

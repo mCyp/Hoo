@@ -9,11 +9,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.databinding.ActivityDetailBinding
+import com.joe.jetpackdemo.databinding.DetailActivityBinding
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.DetailModel
-import com.joe.jetpackdemo.viewmodel.factory.FavouriteShoeModelFactory
 
 class DetailActivity : AppCompatActivity() {
 
@@ -27,14 +26,14 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_detail)
+        //setContentView(R.layout.detail_activity)
 
-        val binding = DataBindingUtil.setContentView<ActivityDetailBinding>(this, R.layout.activity_detail)
+        val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         onSubscribeUi(binding)
         initListener(binding)
     }
 
-    private fun initListener(binding: ActivityDetailBinding) {
+    private fun initListener(binding: DetailActivityBinding) {
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
@@ -65,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun onSubscribeUi(binding: ActivityDetailBinding) {
+    private fun onSubscribeUi(binding: DetailActivityBinding) {
         detailModel.shoe.observe(this, Observer {
             binding.shoe = it
             binding.price = it.price.toString()

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools">
@@ -7,7 +8,7 @@
 		<!--需要的viewModel,通过mBinding.vm=mViewMode注入-->
 		<variable
 			name="model"
-			type="com.joe.jetpackdemo.viewmodel.LoginModel"
+			type="com.joe.jetpackdemo.viewmodel.RegisterModel"
 			/>
 
 		<variable
@@ -24,49 +25,65 @@
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		>
+		tools:context=".ui.fragment.login.WelcomeFragment">
 
 		<TextView
-			android:id="@+id/txt_cancel"
-			style="@style/WrapWrap"
+			android:id="@+id/tv_cancel"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintTop_toTopOf="parent"
 			android:layout_marginTop="20dp"
 			android:layout_marginStart="20dp"
 			android:textSize="@dimen/txt_big_size"
-			android:drawableStart="@drawable/ic_back"
+			android:drawableStart="@drawable/common_ic_back"
 			android:paddingStart="10dp"
 			android:paddingEnd="10dp"
 			android:drawablePadding="10dp"
 			android:text="Cancel"
-			android:onClick="@{()-> activity.onBackPressed()}"
+			android:onClick="@{()->activity.onBackPressed()}"
 			android:textColor="@color/colorPrimary"/>
 
 		<TextView
-			android:id="@+id/txt_title"
-			style="@style/WrapWrap.ConstraintCenter"
+			android:id="@+id/tv_title"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintHorizontal_bias="0.1"
 			app:layout_constraintVertical_bias="0.1"
-			android:text="Welcome back"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hey, Join us!"
 			android:textColor="@color/textPrimary"
 			android:padding="20dp"
 			android:textSize="28sp"
-			android:textStyle="bold"
+			android:textStyle="bold"/>
+
+		<EditText
+			android:id="@+id/et_email"
+			style="@style/CommonEditStyle"
+			app:layout_constraintTop_toBottomOf="@+id/tv_title"
+			android:hint="email address"
+			android:onTextChanged="@{(text, start, before, count)->model.onEmailChanged(text)}"
+			android:layout_marginBottom="20dp"
+			android:drawableStart="@drawable/register_ic_email"
+			app:layout_constraintVertical_chainStyle="packed"
+			app:layout_constraintBottom_toTopOf="@+id/et_account"
+			android:text="@{model.mail}"
 			tools:ignore="MissingConstraints"/>
 
 		<EditText
 			android:id="@+id/et_account"
 			style="@style/CommonEditStyle"
-			app:layout_constraintTop_toBottomOf="@+id/txt_title"
-			app:layout_constraintBottom_toTopOf="@+id/et_pwd"
-			app:layout_constraintVertical_chainStyle="packed"
 			app:layout_constraintVertical_bias="0.3"
+			app:layout_constraintTop_toBottomOf="@+id/et_email"
+			app:layout_constraintBottom_toTopOf="@+id/et_pwd"
+			android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"
 			android:hint="account"
-			app:addTextChangedListener="@{model.nameWatcher}"
-			android:text="@={model.n}"
-			android:drawableStart="@drawable/ic_account"
+			android:drawableStart="@drawable/common_ic_account"
+			android:text="@{model.n}"
 			tools:ignore="MissingConstraints"/>
-		<!-- TODO android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"  -->
 
 		<EditText
 			android:id="@+id/et_pwd"
@@ -74,25 +91,23 @@
 			app:layout_constraintTop_toBottomOf="@+id/et_account"
 			app:layout_constraintBottom_toTopOf="@+id/btn_register"
 			android:layout_marginTop="20dp"
-			android:hint="password"
-			android:text="@{model.p}"
-			android:onTextChanged="@{model::onPwdChanged}"
-			android:drawableStart="@drawable/ic_pwd"
 			android:inputType="textPassword"
+			android:hint="password"
+			android:onTextChanged="@{(text, start, before, count)->model.onPwdChanged(text)}"
+			android:drawableStart="@drawable/common_ic_pwd"
+			android:text="@{model.p}"
 			tools:ignore="MissingConstraints"/>
-		<!-- TODO BindingAdapter app:addTextChangedListener="@{model.pwdWatcher}" -->
 
 
 		<Button
-			android:id="@+id/btn_login"
+			android:id="@+id/btn_register"
 			style="@style/CommonButtonStyle"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_bias="0.8"
-			android:text="Sign in"
 			android:enabled="@{isEnable}"
+			android:text="Sign UP"
 			app:layout_constraintBottom_toBottomOf="parent"
 			tools:ignore="MissingConstraints"/>
-		<!-- android:enabled="@{(model.p.isEmpty()||model.n.isEmpty()) ? false : true}" -->
 
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

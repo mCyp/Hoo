@@ -18,7 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.joe.jetpackdemo.common.listener.SimpleAnimation
-import com.joe.jetpackdemo.databinding.FragmentShoeBinding
+import com.joe.jetpackdemo.databinding.ShoeFragmentBinding
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.utils.UiUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
@@ -58,7 +58,7 @@ class ShoeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: FragmentShoeBinding = FragmentShoeBinding.inflate(inflater, container, false)
+        val binding: ShoeFragmentBinding = ShoeFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
         val adapter = ShoeAdapter(context!!)
         binding.recycler.adapter = adapter
@@ -69,7 +69,7 @@ class ShoeFragment : Fragment() {
     /**
      * 鞋子数据更新的通知
      */
-    private fun onSubscribeUi(adapter: ShoeAdapter, binding: FragmentShoeBinding) {
+    private fun onSubscribeUi(adapter: ShoeAdapter, binding: ShoeFragmentBinding) {
         viewModel.shoes.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.submitList(it)

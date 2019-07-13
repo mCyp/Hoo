@@ -23,7 +23,7 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome, container, false)
+        return inflater.inflate(R.layout.welcome_fragment, container, false)
     }
 
     lateinit var btnLogin: Button
@@ -39,10 +39,10 @@ class WelcomeFragment : Fragment() {
             // 设置动画参数
             val navOption = navOptions {
                 anim {
-                    enter = R.anim.slide_in_right
-                    exit = R.anim.slide_out_left
-                    popEnter = R.anim.slide_in_left
-                    popExit = R.anim.slide_out_right
+                    enter = R.anim.common_slide_in_right
+                    exit = R.anim.common_slide_out_left
+                    popEnter = R.anim.common_slide_in_left
+                    popExit = R.anim.common_slide_out_right
                 }
             }
 

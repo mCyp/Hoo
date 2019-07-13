@@ -2,11 +2,8 @@ package com.joe.jetpackdemo.widget
 
 import androidx.annotation.StringRes
 import android.content.Context
-import com.joe.jetpackdemo.widget.EmptyView
-import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
-import android.view.View.inflate
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -30,19 +27,18 @@ class EmptyView(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
     private lateinit var mBindViews: Array<View>
 
     init {
-        inflate(getContext(), R.layout.lay_empty, this)
-        mEmptyImg = findViewById(R.id.im_empty) as ImageView
-        mStatusText = findViewById(R.id.txt_empty) as TextView
-        //mLoading = (Loading) findViewById(R.id.loading);
-        mLottieAnimationView = findViewById(R.id.loading)
+        inflate(getContext(), R.layout.empty_layout, this)
+        mEmptyImg = findViewById(R.id.iv_empty) as ImageView
+        mStatusText = findViewById(R.id.tv_empty) as TextView
+        mLottieAnimationView = findViewById(R.id.lav_loading)
 
         // Load attributes
         val a = getContext().obtainStyledAttributes(
             attrs, R.styleable.EmptyView, 0, 0
         )
 
-        mDrawableIds[0] = a.getInt(R.styleable.EmptyView_comEmptyDrawable, R.drawable.status_empty)
-        mDrawableIds[1] = a.getInt(R.styleable.EmptyView_comErrorDrawable, R.drawable.status_empty)
+        mDrawableIds[0] = a.getInt(R.styleable.EmptyView_comEmptyDrawable, R.drawable.empty_bg)
+        mDrawableIds[1] = a.getInt(R.styleable.EmptyView_comErrorDrawable, R.drawable.empty_bg)
         mTextIds[0] = a.getInt(R.styleable.EmptyView_comEmptyText, R.string.prompt_empty)
         mTextIds[1] = a.getInt(R.styleable.EmptyView_comErrorText, R.string.prompt_error)
         mTextIds[2] = a.getInt(R.styleable.EmptyView_comLoadingText, R.string.prompt_loading)

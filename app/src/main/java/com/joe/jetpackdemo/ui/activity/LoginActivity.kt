@@ -8,8 +8,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.joe.jetpackdemo.R
-import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.utils.AppPrefsUtils
 import java.util.*
 
 class LoginActivity : AppCompatActivity() {
@@ -31,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.login_activity)
 
         /*val host:NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
         navController = host.navController*/

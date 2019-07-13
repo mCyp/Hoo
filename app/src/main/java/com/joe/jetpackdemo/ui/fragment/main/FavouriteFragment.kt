@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 
 import com.joe.jetpackdemo.R
-import com.joe.jetpackdemo.databinding.FragmentFavouriteBinding
+import com.joe.jetpackdemo.databinding.FavouriteFragmentBinding
 import com.joe.jetpackdemo.ui.adapter.FavouriteAdapter
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
@@ -31,7 +31,7 @@ class FavouriteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentFavouriteBinding = FragmentFavouriteBinding.inflate(inflater, container, false)
+        val binding: FavouriteFragmentBinding = FavouriteFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
         val adapter = FavouriteAdapter(context!!)
         binding.recycler.adapter = adapter
@@ -42,7 +42,7 @@ class FavouriteFragment : Fragment() {
     /**
      * 鞋子数据更新的通知
      */
-    private fun onSubscribeUi(adapter: FavouriteAdapter, binding: FragmentFavouriteBinding) {
+    private fun onSubscribeUi(adapter: FavouriteAdapter, binding: FavouriteFragmentBinding) {
         binding.empty.bind(arrayOf(binding.recycler))
         binding.empty.triggerLoading()
 

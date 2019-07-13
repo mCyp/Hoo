@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_activity)
 
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment
         val navController = host.navController
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initWidget() {
-        bottomNavigationView = findViewById(R.id.navigation_view)
+        bottomNavigationView = findViewById(R.id.bnv_view)
         mToolbar = findViewById(R.id.toolbar)
         mCamera = findViewById(R.id.iv_camera)
 

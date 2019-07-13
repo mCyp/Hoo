@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.databinding.RecyclerItemFavouriteBinding
-import com.joe.jetpackdemo.databinding.RecyclerItemShoeBinding
+import com.joe.jetpackdemo.databinding.FavouriteRecyclerItemBinding
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.activity.DetailActivity
 
@@ -23,7 +22,7 @@ class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, Fav
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavouriteViewHolder {
         return FavouriteViewHolder(
-            RecyclerItemFavouriteBinding.inflate(
+            FavouriteRecyclerItemBinding.inflate(
                 LayoutInflater.from(parent.context)
                 , parent
                 , false
@@ -51,7 +50,7 @@ class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, Fav
     }
 
 
-    class FavouriteViewHolder(private val binding: RecyclerItemFavouriteBinding) : RecyclerView.ViewHolder(binding.root) {
+    class FavouriteViewHolder(private val binding: FavouriteRecyclerItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(listener: View.OnClickListener, item: Shoe) {
             binding.apply {
