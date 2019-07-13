@@ -78,18 +78,18 @@
 
 或多或少参考或者使用了以下的库：
 
-[**android-sunflower**](https://github.com/googlesamples/android-sunflower)
+- [**android-sunflower**](https://github.com/googlesamples/android-sunflower)
 
-[**Glide**](https://github.com/bumptech/glide)
+- [**Glide**](https://github.com/bumptech/glide)
 
-[**glide-transformations**](https://github.com/wasabeef/glide-transformations)
+- [**glide-transformations**](https://github.com/wasabeef/glide-transformations)
 
-[**SweetAlertDialog**](https://github.com/pedant/sweet-alert-dialog)
+- [**SweetAlertDialog**](https://github.com/pedant/sweet-alert-dialog)
 
-[**Lottie-Android**](https://github.com/airbnb/lottie-android)
+- [**Lottie-Android**](https://github.com/airbnb/lottie-android)
 
 ## 三、写在最后
 
-分享不易，如果本项目对您有帮助，麻烦点个⭐️，您的⭐️将是我继续创作和写博客的动力！
+分享不易，如果本项目对您有帮助，麻烦点个**Star**，您的**Star**将是我继续创作和写博客的动力！
 
 感谢您的阅读~
