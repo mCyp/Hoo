@@ -4,8 +4,8 @@
 
 |                             图片                             |                             图片                             |
 | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![登录注册](https://github.com/mCyp/Hoo/tree/master/pic/register.gif) | ![选择](https://github.com/mCyp/Hoo/tree/master/pic/select.gif) |
-| ![收藏鞋子](https://github.com/mCyp/Hoo/tree/master/pic/favourite.gif) | ![选择头像](https://github.com/mCyp/Hoo/tree/master/pic/header.gif) |
+| ![登录注册](https://github.com/mCyp/Hoo/blob/master/pic/register.gif) | ![选择](https://github.com/mCyp/Hoo/blob/master/pic/select.gif) |
+| ![收藏鞋子](https://github.com/mCyp/Hoo/blob/master/pic/favourite.gif) | ![选择头像](https://github.com/mCyp/Hoo/blob/master/pic/header.gif) |
 
 ## 一、 学习须知
 
@@ -63,7 +63,7 @@
 
 ### 1. 项目架构
 
-![系统架构设计](https://github.com/mCyp/Hoo/tree/master/pic/系统架构设计.png)
+![系统架构设计](https://github.com/mCyp/Hoo/blob/master/pic/系统架构设计.png)
 
 ### 2. 除了Android Jetpack
 
