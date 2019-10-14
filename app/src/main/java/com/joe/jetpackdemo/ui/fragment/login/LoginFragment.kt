@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
@@ -30,6 +31,11 @@ class LoginFragment : Fragment() {
     private val loginModel: LoginModel by viewModels {
         CustomViewModelProvider.providerLoginModel(requireContext())
     }
+
+    /*private val loginModel: LoginModel by lazy {
+        ViewModelProviders.of(this).get(LoginModel::class.java)
+    }*/
+
     private var isEnable: Boolean = false
 
     override fun onCreateView(
