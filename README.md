@@ -17,7 +17,7 @@
 
 > [《即学即用Android Jetpack - Navigation》](https://www.jianshu.com/p/66b93df4b7a6)
 
-代码若与Blog中不同，记得将代码库回退到`Tag`为`navigation`的版本。
+代码若与Blog中不同，记得将代码库回退到`commit id`为`df15f74`、`提交内容`为**navigation完成**的版本。
 
 ### Data Binding 19-5-29
 
@@ -25,7 +25,7 @@
 
 > [《即学即用Android Jetpack - Data Binding》](https://www.jianshu.com/p/e3b881d80c6d)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`DataBinding`的版本。
+代码若与Blog中不同，记得将代码会退到`commit id`为`0966ee8`、`提交内容`为**Data Binding 使用**的版本。
 
 ### ViewModel & LiveData 19-6-18
 
@@ -33,7 +33,7 @@
 
 > [《即学即用Android Jetpack - ViewModel & LiveData》](https://www.jianshu.com/p/81a284969f03)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`ViewModel`的版本。
+代码若与Blog中不同，记得将代码会退到`commit id`为`b5e08eb`、`提交内容`为**ViewModel和LiveData**的版本。
 
 ### Room 19-6-25
 
@@ -41,7 +41,7 @@
 
 >[《即学即用Android Jetpack - Room》](https://www.jianshu.com/p/815c7db24b6d)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。
+代码若与Blog中不同，记得将代码会退到`commit id`为`eba30a6`、`提交内容`为**Room博客完成**的版本。
 
 ### Paging 19-7-1
 
@@ -49,7 +49,7 @@
 
 > [《即学即用Android Jetpack - Paging》](https://www.jianshu.com/p/0b7c82a5c27f)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`Paging`的版本。
+代码若与Blog中不同，记得将代码会退到`commit id`为`5be1a34`、`提交内容`为**Paging博客更新**的版本。
 
 ### WorkManager 19-7-8
 
@@ -57,7 +57,7 @@
 
 >[《即学即用Android Jetpack - WorkManger》](https://www.jianshu.com/p/68e720b8a939)
 
-代码若与Blog中不同，记得将代码会退到`Tag`为`WorkManager`的版本。
+代码若与Blog中不同，记得将代码会退到`commit id`为`d359esf`、`提交内容`为**WorkManager博客更新**的版本。
 
 ## 二、关于Hoo
 
