@@ -57,9 +57,9 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$pagingVersion"
 
 
-    /*implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"*/
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
 
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"

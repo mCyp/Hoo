@@ -20,6 +20,7 @@ import com.joe.jetpackdemo.databinding.LoginFragmentBinding
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.LoginModel
+import kotlinx.coroutines.*
 
 /**
  * 登录的Fragment
@@ -43,19 +44,28 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // TODO 研究DataBindComponent
+        // 1.Binding生成的方式一
         val binding: LoginFragmentBinding = DataBindingUtil.inflate(
             inflater
             , R.layout.login_fragment
             , container
             , false
         )
-        // 生成Binding的另外一种方式
+        // 2.Binding生成的方式二
         /*val binding = FragmentLoginBinding.inflate(
             inflater
             , container
             , false
         )*/
+
         onSubscribeUi(binding)
+
+        // 判断当前是否是第一次登陆
+        var isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
+        if(isFirstLaunch){
+            onFirstLaunch();
+        }
+
         return binding.root
     }
 
@@ -84,5 +94,16 @@ class LoginFragment : Fragment() {
         val name = arguments?.getString(BaseConstant.ARGS_NAME)
         if (!TextUtils.isEmpty(name))
             loginModel.n.value = name!!
+    }
+
+    // 第一次启动的时候调用
+    private fun onFirstLaunch(){
+        GlobalScope.launch(Dispatchers.Main) {
+            val str = withContext(Dispatchers.IO) {
+                loginModel.onFirstLaunch()
+            }
+            Toast.makeText(context!!,str,Toast.LENGTH_SHORT).show()
+            AppPrefsUtils.putBoolean(BaseConstant.IS_FIRST_LAUNCH,false)
+        }
     }
 }

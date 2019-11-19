@@ -47,8 +47,8 @@ abstract class AppDataBase:RoomDatabase() {
                         super.onCreate(db)
 
                         // 读取鞋的集合
-                        val request = OneTimeWorkRequestBuilder<ShoeWorker>().build()
-                        WorkManager.getInstance().enqueue(request)
+                        /*val request = OneTimeWorkRequestBuilder<ShoeWorker>().build()
+                        WorkManager.getInstance().enqueue(request)*/
                     }
                 })
                 .build()
