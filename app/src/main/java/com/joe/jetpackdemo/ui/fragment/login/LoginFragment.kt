@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.viewModelScope
 import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
@@ -98,7 +99,7 @@ class LoginFragment : Fragment() {
 
     // 第一次启动的时候调用
     private fun onFirstLaunch(){
-        GlobalScope.launch(Dispatchers.Main) {
+        loginModel.viewModelScope.launch(Dispatchers.Main) {
             val str = withContext(Dispatchers.IO) {
                 loginModel.onFirstLaunch()
             }
