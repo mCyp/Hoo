@@ -15,10 +15,6 @@
 			name="activity"
 			type="androidx.fragment.app.FragmentActivity"/>
 
-		<variable
-			name="isEnable"
-			type="Boolean"/>
-
 		<import type="android.view.View"/>
 	</data>
 
@@ -104,7 +100,7 @@
 			style="@style/CommonButtonStyle"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_bias="0.8"
-			android:enabled="@{isEnable}"
+			android:enabled="@{model.enable}"
 			android:text="Sign UP"
 			app:layout_constraintBottom_toBottomOf="parent"
 			tools:ignore="MissingConstraints"/>

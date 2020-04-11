@@ -63,6 +63,7 @@ class ShoeFragment : Fragment() {
         val adapter = ShoeAdapter(context!!)
         binding.recycler.adapter = adapter
         onSubscribeUi(adapter, binding)
+
         return binding.root
     }
 
@@ -70,6 +71,7 @@ class ShoeFragment : Fragment() {
      * 鞋子数据更新的通知
      */
     private fun onSubscribeUi(adapter: ShoeAdapter, binding: ShoeFragmentBinding) {
+        binding.lifecycleOwner = this
         viewModel.shoes.observe(viewLifecycleOwner, Observer {
             if (it != null) {
                 adapter.submitList(it)
@@ -121,7 +123,7 @@ class ShoeFragment : Fragment() {
         }
     }
 
-    private fun shoeAnimation(){
+    private fun shoeAnimation() {
         // 播放动画的时候不可以点击
         if (animatorSet != null && animatorSet!!.isRunning)
             return
@@ -171,7 +173,10 @@ class ShoeFragment : Fragment() {
             button.layoutParams = params
 
             if (group == nikeGroup) {
-                Log.e(TAG, "cirRadius:${params.circleRadius},angle:${params.circleAngle},width:${params.width}")
+                Log.e(
+                    TAG,
+                    "cirRadius:${params.circleRadius},angle:${params.circleAngle},width:${params.width}"
+                )
             }
         }
         animator.addListener(object : SimpleAnimation() {

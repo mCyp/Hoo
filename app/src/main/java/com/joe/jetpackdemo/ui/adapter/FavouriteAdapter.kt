@@ -56,7 +56,6 @@ class FavouriteAdapter constructor(val context: Context) : ListAdapter<Shoe, Fav
             binding.apply {
                 this.listener = listener
                 this.shoe = item
-                this.price = item.price.toString()
                 executePendingBindings()
             }
         }

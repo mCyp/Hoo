@@ -14,9 +14,12 @@ import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.DetailModel
 
+/**
+ * 展示鞋子细节的界面
+ */
 class DetailActivity : AppCompatActivity() {
 
-    private val detailModel: DetailModel by viewModels<DetailModel> {
+    private val detailModel: DetailModel by viewModels {
         CustomViewModelProvider.providerDetailModel(
             this
             , intent.getLongExtra(BaseConstant.DETAIL_SHOE_ID, 1L)
@@ -29,11 +32,13 @@ class DetailActivity : AppCompatActivity() {
         //setContentView(R.layout.detail_activity)
 
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
-        onSubscribeUi(binding)
+        binding.model = detailModel
         initListener(binding)
     }
 
     private fun initListener(binding: DetailActivityBinding) {
+        binding.lifecycleOwner = this
+
         binding.ivBack.setOnClickListener {
             onBackPressed()
         }
@@ -59,19 +64,9 @@ class DetailActivity : AppCompatActivity() {
                         detailModel.favourite()
                     }
 
-                }).setDuration(200)
+                })
+                .setDuration(200)
                 .start()
         }
-    }
-
-    private fun onSubscribeUi(binding: DetailActivityBinding) {
-        detailModel.shoe.observe(this, Observer {
-            binding.shoe = it
-            binding.price = it.price.toString()
-        })
-
-        detailModel.favouriteShoe.observe(this, Observer {
-            binding.v = if (it == null) View.VISIBLE else View.GONE
-        })
     }
 }

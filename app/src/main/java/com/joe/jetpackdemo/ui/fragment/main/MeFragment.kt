@@ -73,9 +73,8 @@ class MeFragment : Fragment() {
      * Binding绑定
      */
     private fun onSubscribeUi(binding: MeFragmentBinding) {
-        model.user.observe(this, Observer {
-            binding.user = it
-        })
+        binding.lifecycleOwner = this
+        binding.model = model
 
         // 任务状态的观测
         model.outPutWorkInfos.observe(this, Observer {

@@ -3,8 +3,8 @@
 
 	<data>
 		<variable
-			name="user"
-			type="com.joe.jetpackdemo.db.data.User"/>
+			name="model"
+			type="com.joe.jetpackdemo.viewmodel.MeModel" />
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,7 @@
 			app:layout_constraintTop_toTopOf="@+id/guide2"
 			app:layout_constraintBottom_toBottomOf="@+id/guide1"
 			android:layout_marginStart="10dp"
-			app:imageTransFromUrl="@{user.headImage}"
+			app:imageTransFromUrl="@{model.user.headImage}"
 			app:layout_constraintVertical_bias="0.3"
 			/>
 
@@ -45,7 +45,7 @@
 			android:layout_marginStart="10dp"
 			android:textStyle="bold"
 			android:textColor="#ffffff"
-			android:text="@{user.name}"
+			android:text="@{model.user.name}"
 			android:textSize="20sp"
 			tools:text="IAmMyHero"/>
 
@@ -58,7 +58,7 @@
 			app:layout_constraintLeft_toRightOf="@+id/iv_head"
 			android:layout_marginStart="10dp"
 			android:textColor="@color/textSecond"
-			android:text="@{user.account}"
+			android:text="@{model.user.account}"
 			android:textSize="16sp"
 			tools:text="IAmMyHero"/>
 

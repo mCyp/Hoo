@@ -11,10 +11,6 @@
 		<variable
 			name="listener"
 			type="android.view.View.OnClickListener"/>
-
-		<variable
-			name="price"
-			type="String"/>
 	</data>
 
 	<androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +61,7 @@
 			android:layout_marginStart="10dp"
 			android:textSize="16sp"
 			android:background="@drawable/favourite_rv_item_tv_bg"
-			android:text="@{price}"
+			android:text="@{Float.toString(shoe.price)}"
 			/>
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

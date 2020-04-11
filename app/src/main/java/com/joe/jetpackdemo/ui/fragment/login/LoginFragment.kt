@@ -3,7 +3,6 @@ package com.joe.jetpackdemo.ui.fragment.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,17 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.viewModelScope
-import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.databinding.LoginFragmentBinding
+import com.joe.jetpackdemo.ui.activity.MainActivity
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.LoginModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * 登录的Fragment
@@ -38,8 +38,6 @@ class LoginFragment : Fragment() {
         ViewModelProviders.of(this).get(LoginModel::class.java)
     }*/
 
-    private var isEnable: Boolean = false
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +50,7 @@ class LoginFragment : Fragment() {
             , container
             , false
         )
+
         // 2.Binding生成的方式二
         /*val binding = FragmentLoginBinding.inflate(
             inflater
@@ -62,9 +61,9 @@ class LoginFragment : Fragment() {
         onSubscribeUi(binding)
 
         // 判断当前是否是第一次登陆
-        var isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
+        val isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
         if(isFirstLaunch){
-            onFirstLaunch();
+            onFirstLaunch()
         }
 
         return binding.root
@@ -72,8 +71,10 @@ class LoginFragment : Fragment() {
 
     private fun onSubscribeUi(binding: LoginFragmentBinding) {
         binding.model = loginModel
-        binding.isEnable = isEnable
         binding.activity = activity
+
+        // 如果使用LiveData下面这句必须加上 ！！！
+        binding.lifecycleOwner = this
 
         binding.btnLogin.setOnClickListener {
             loginModel.login()?.observe(this, Observer { user ->
@@ -87,14 +88,9 @@ class LoginFragment : Fragment() {
             })
         }
 
-        loginModel.p.observe(viewLifecycleOwner, Observer {
-            // 保证账号和密码不为空的时候才可以登录
-            binding.isEnable = it.isNotEmpty() && loginModel.n.value!!.isNotEmpty()
-        })
-
-        val name = arguments?.getString(BaseConstant.ARGS_NAME)
-        if (!TextUtils.isEmpty(name))
-            loginModel.n.value = name!!
+        arguments?.getString(BaseConstant.ARGS_NAME)?.apply {
+            loginModel.n.value = this
+        }
     }
 
     // 第一次启动的时候调用

@@ -14,10 +14,6 @@
 			name="activity"
 			type="androidx.fragment.app.FragmentActivity"/>
 
-		<variable
-			name="isEnable"
-			type="Boolean"/>
-
 		<import type="android.view.View"/>
 	</data>
 
@@ -63,9 +59,10 @@
 			app:layout_constraintVertical_bias="0.3"
 			android:hint="account"
 			app:addTextChangedListener="@{model.nameWatcher}"
-			android:text="@={model.n}"
+			android:text="@{model.n}"
 			android:drawableStart="@drawable/common_ic_account"
 			tools:ignore="MissingConstraints"/>
+
 		<!-- TODO android:onTextChanged="@{(text, start, before, count)->model.onNameChanged(text)}"  -->
 
 		<EditText
@@ -89,7 +86,7 @@
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintVertical_bias="0.8"
 			android:text="Sign in"
-			android:enabled="@{isEnable}"
+			android:enabled="@{model.enable}"
 			app:layout_constraintBottom_toBottomOf="parent"
 			tools:ignore="MissingConstraints"/>
 		<!-- android:enabled="@{(model.p.isEmpty()||model.n.isEmpty()) ? false : true}" -->

@@ -24,7 +24,6 @@ import com.joe.jetpackdemo.viewmodel.RegisterModel
  */
 class RegisterFragment : Fragment() {
 
-    private var isEnable:Boolean = false
     private val registerModel:RegisterModel by viewModels{
         CustomViewModelProvider.providerRegisterModel(requireContext())
     }
@@ -51,8 +50,8 @@ class RegisterFragment : Fragment() {
         val email = safeArgs.email
         binding.model?.mail?.value = email
 
+        binding.lifecycleOwner = this
         binding.model = registerModel
-        binding.isEnable = isEnable
         binding.activity = activity
     }
 
@@ -63,23 +62,5 @@ class RegisterFragment : Fragment() {
             bundle.putString(BaseConstant.ARGS_NAME, registerModel.n.value)
             findNavController().navigate(R.id.login, bundle, null)
         }
-
-        registerModel.p.observe(viewLifecycleOwner, Observer {
-            binding.isEnable = it.isNotEmpty()
-                    && registerModel.n.value!!.isNotEmpty()
-                    && registerModel.mail.value!!.isNotEmpty()
-        })
-
-        registerModel.n.observe(viewLifecycleOwner, Observer {
-            binding.isEnable = it.isNotEmpty()
-                    && registerModel.p.value!!.isNotEmpty()
-                    && registerModel.mail.value!!.isNotEmpty()
-        })
-
-        registerModel.mail.observe(viewLifecycleOwner, Observer {
-            binding.isEnable = it.isNotEmpty()
-                    && registerModel.n.value!!.isNotEmpty()
-                    && registerModel.p.value!!.isNotEmpty()
-        })
     }
 }

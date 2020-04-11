@@ -3,17 +3,13 @@
 
 	<data>
 
-		<variable
-			name="shoe"
-			type="com.joe.jetpackdemo.db.data.Shoe"/>
 
 		<variable
-			name="price"
-			type="String"/>
+			name="model"
+			type="com.joe.jetpackdemo.viewmodel.DetailModel" />
 
-		<variable
-			name="v"
-			type="Integer"/>
+		<import
+			type="android.view.View"/>
 
 	</data>
 
@@ -34,7 +30,7 @@
 			android:scaleType="centerCrop"
 			android:adjustViewBounds="true"
 			android:background="@drawable/detail_img_bg"
-			app:imageFromUrl="@{shoe.imageUrl}"
+			app:imageFromUrl="@{model.shoe.imageUrl}"
 			app:layout_constraintTop_toTopOf="parent"
 			app:layout_constraintBottom_toTopOf="@+id/guide"
 
@@ -63,7 +59,7 @@
 				android:textColor="#ffffff"
 				android:textStyle="bold"
 				android:textSize="18sp"
-				android:text="@{shoe.name}"
+				android:text="@{model.shoe.name}"
 				android:gravity="center"/>
 
 
@@ -72,7 +68,7 @@
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
 				android:layout_weight="1"
-				android:text="@{shoe.brand}"
+				android:text="@{model.shoe.brand}"
 				android:textColor="@color/textSecond"
 				android:textSize="16sp"
 				android:gravity="center"/>
@@ -82,7 +78,7 @@
 				android:layout_width="0dp"
 				android:layout_height="match_parent"
 				android:layout_weight="1"
-				android:text="@{price}"
+				android:text="@{Float.toString(model.shoe.price)}"
 				android:textColor="@color/textSecond"
 				android:textSize="16sp"
 				android:gravity="center"/>
@@ -103,7 +99,7 @@
 			android:layout_height="0dp"
 			android:gravity="start"
 			android:textColor="@color/textPrimary"
-			android:text="@{shoe.description}"
+			android:text="@{model.shoe.description}"
 			app:layout_constraintTop_toBottomOf="@+id/guide1"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintLeft_toLeftOf="parent"
@@ -124,7 +120,7 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			android:layout_marginEnd="30dp"
 			app:tint="#ffffff"
-			android:visibility="@{v}"
+			android:visibility="@{model.favouriteShoe == null?View.VISIBLE:View.GONE}"
 			/>
 
 		<ImageView
