@@ -5,12 +5,14 @@ import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteDatabase
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.db.dao.FavouriteShoeDao
 import com.joe.jetpackdemo.db.dao.ShoeDao
 import com.joe.jetpackdemo.db.dao.UserDao
 import com.joe.jetpackdemo.db.data.FavouriteShoe
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.db.data.User
+import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.worker.ShoeWorker
 
 /**
@@ -46,9 +48,13 @@ abstract class AppDataBase:RoomDatabase() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         super.onCreate(db)
 
-                        // 读取鞋的集合
-                        /*val request = OneTimeWorkRequestBuilder<ShoeWorker>().build()
-                        WorkManager.getInstance().enqueue(request)*/
+                        val isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
+                        if(isFirstLaunch){
+                            // 读取鞋的集合
+                            val request = OneTimeWorkRequestBuilder<ShoeWorker>().build()
+                            WorkManager.getInstance().enqueue(request)
+                        }
+
                     }
                 })
                 .build()

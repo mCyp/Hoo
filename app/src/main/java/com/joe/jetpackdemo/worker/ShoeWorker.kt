@@ -7,8 +7,10 @@ import androidx.work.WorkerParameters
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
+import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.db.RepositoryProvider
 import com.joe.jetpackdemo.db.data.Shoe
+import com.joe.jetpackdemo.utils.AppPrefsUtils
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -42,6 +44,7 @@ class ShoeWorker(
                         }
                         shoeDao.insertShoes(shoeList)
                     }
+                    AppPrefsUtils.putBoolean(BaseConstant.IS_FIRST_LAUNCH,false)
                     Result.success()
                 }
 

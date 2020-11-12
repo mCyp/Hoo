@@ -6,7 +6,7 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.joe.jetpackdemo.db.data.Shoe
 
-fun <T> DataSource.Factory<Int, T>.createPagerList(pageSize:Int,defaultSize:Int): LiveData<PagedList<T>> {
+fun <T : Any> DataSource.Factory<Int, T>.createPagerList(pageSize:Int, defaultSize:Int): LiveData<PagedList<T>> {
     return LivePagedListBuilder<Int, T>(
         this, PagedList.Config.Builder()
             .setPageSize(2)

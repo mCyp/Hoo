@@ -25,6 +25,15 @@ android {
         enabled true
     }
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
 }
 
 dependencies {
@@ -54,12 +63,13 @@ dependencies {
     androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
 
     // paging
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
+    // implementation "androidx.paging:paging-runtime:$pagingVersion"
+    implementation ("androidx.paging:paging-runtime:$pagingVersion")
 
-
-    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    implementation "androidx.startup:startup-runtime:$startupVersion"
 
     implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"

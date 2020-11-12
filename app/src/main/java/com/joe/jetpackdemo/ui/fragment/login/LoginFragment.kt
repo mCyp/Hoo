@@ -61,10 +61,10 @@ class LoginFragment : Fragment() {
         onSubscribeUi(binding)
 
         // 判断当前是否是第一次登陆
-        val isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
+        /*val isFirstLaunch = AppPrefsUtils.getBoolean(BaseConstant.IS_FIRST_LAUNCH)
         if(isFirstLaunch){
             onFirstLaunch()
-        }
+        }*/
 
         return binding.root
     }
