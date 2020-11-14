@@ -15,14 +15,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.joe.jetpackdemo.common.listener.SimpleAnimation
 import com.joe.jetpackdemo.databinding.ShoeFragmentBinding
+import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.utils.UiUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.ShoeModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * 鞋子页面
@@ -43,10 +50,15 @@ class ShoeFragment : Fragment() {
 
     // 动画集合，用来控制动画的有序播放
     private var animatorSet: AnimatorSet? = null
+
     // 圆的半径
     private var radius: Int = 0
+
     // FloatingActionButton宽度和高度，宽高一样
     private var width: Int = 0
+
+    private var job: Job? = null
+    private var flow: Flow<PagingData<Shoe>>? = null
 
 
     // by viewModels 需要依赖 "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
@@ -72,11 +84,14 @@ class ShoeFragment : Fragment() {
      */
     private fun onSubscribeUi(adapter: ShoeAdapter, binding: ShoeFragmentBinding) {
         binding.lifecycleOwner = this
-        viewModel.shoes.observe(viewLifecycleOwner, Observer {
-            if (it != null) {
-                adapter.submitList(it)
+        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
+            viewModel.shoes.collect() {
+                adapter.submitData(it)
             }
-        })
+        }
+        adapter.addLoadStateListener { state ->
+            state.refresh.endOfPaginationReached
+        }
 
         mShoe = binding.fabShoe
         mNike = binding.fabNike
@@ -88,21 +103,33 @@ class ShoeFragment : Fragment() {
 
         mNike.setOnClickListener {
             viewModel.setBrand(ShoeModel.NIKE)
+            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         mAdi.setOnClickListener {
             viewModel.setBrand(ShoeModel.ADIDAS)
+            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         mOther.setOnClickListener {
             viewModel.setBrand(ShoeModel.OTHER)
+            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         initListener()
         setViewVisible(false)
+    }
+
+    private fun reInitSubscribe(adapter: ShoeAdapter) {
+        job?.cancel()
+        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
+            viewModel.shoes.collect() {
+                adapter.submitData(it)
+            }
+        }
     }
 
     override fun onResume() {

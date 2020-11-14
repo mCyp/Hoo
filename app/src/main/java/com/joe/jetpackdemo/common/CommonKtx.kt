@@ -1,16 +1,11 @@
 package com.joe.jetpackdemo.common
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
-import com.joe.jetpackdemo.db.data.Shoe
+import androidx.paging.*
 
-fun <T : Any> DataSource.Factory<Int, T>.createPagerList(pageSize:Int, defaultSize:Int): LiveData<PagedList<T>> {
-    return LivePagedListBuilder<Int, T>(
-        this, PagedList.Config.Builder()
-            .setPageSize(2)
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(2).build()
-    ).build()
+fun <T : Any> PagingSource<Int, T>.createPager(pageSize:Int, defaultSize:Int): Pager<Int,T> {
+    return Pager<Int, T>(
+        config = PagingConfig(pageSize = pageSize,prefetchDistance = 10,enablePlaceholders = false,initialLoadSize = defaultSize),
+        pagingSourceFactory = {this}
+    )
 }

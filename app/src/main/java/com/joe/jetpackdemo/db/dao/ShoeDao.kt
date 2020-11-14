@@ -3,6 +3,7 @@ package com.joe.jetpackdemo.db.dao
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.db.data.User
@@ -35,7 +36,7 @@ interface ShoeDao {
 
     // 配合LiveData 返回所有的鞋子
     @Query("SELECT * FROM shoe")
-    fun getAllShoesLD(): DataSource.Factory<Int, Shoe>
+    fun getAllShoesLD(): PagingSource<Int, Shoe>
     //fun getAllShoesLD(): LiveData<List<Shoe>>
 
     // 配合LiveData 通过Id查询单款鞋子
@@ -47,7 +48,7 @@ interface ShoeDao {
      * 通过品牌查询鞋子
      */
     @Query("SELECT * FROM shoe WHERE shoe_brand IN (:brand)")
-    fun findShoesByBrandLD(brand: Array<String>): DataSource.Factory<Int, Shoe>
+    fun findShoesByBrandLD(brand: Array<String>): PagingSource<Int, Shoe>
     //fun findShoesByBrandLD(brand: String): LiveData<List<Shoe>>
 
     // 根据收藏结合 查询用户喜欢的鞋的集合
