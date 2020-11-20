@@ -6,4 +6,13 @@
         <attr name="comEmptyDrawable" format="integer" />
         <attr name="comErrorDrawable" format="integer" />
     </declare-styleable>
+
+    <declare-styleable name="DropBoxHeader">
+        <attr name="dhDrawable1" format="reference" />
+        <attr name="dhDrawable2" format="reference" />
+        <attr name="dhDrawable3" format="reference" />
+        <attr name="srlDrawable1" format="reference" />
+        <attr name="srlDrawable2" format="reference" />
+        <attr name="srlDrawable3" format="reference" />
+    </declare-styleable>
 </resources>

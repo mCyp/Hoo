@@ -38,7 +38,7 @@ class ShoeWorker(
 
                     val shoeDao = RepositoryProvider.providerShoeRepository(applicationContext)
                     shoeDao.insertShoes(shoeList)
-                    for (i in 0..2) {
+                    for (i in 0..6) {
                         for (shoe in shoeList) {
                             shoe.id += shoeList.size
                         }

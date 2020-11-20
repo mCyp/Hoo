@@ -1,17 +1,28 @@
 package com.joe.jetpackdemo.viewmodel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.liveData
 import com.joe.jetpackdemo.common.createPager
 import com.joe.jetpackdemo.db.datasource.CustomPageDataSource
 import com.joe.jetpackdemo.db.repository.ShoeRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.observeOn
 
-class ShoeModel constructor(val shoeRepository: ShoeRepository) : ViewModel() {
+class ShoeModel constructor(private val shoeRepository: ShoeRepository) : ViewModel() {
 
+    /**
+     * @param config 分页的参数
+     * @param pagingSourceFactory 单一数据源的工厂，在闭包中提供一个PageSource即可
+     * @param remoteMediator 同时支持网络请求和数据库请求的数据源
+     * @param initialKey 初始化使用的key
+     */
     var shoes = Pager(config = PagingConfig(
         pageSize = 20
-        , prefetchDistance = 10
         , enablePlaceholders = false
         , initialLoadSize = 20
     ), pagingSourceFactory = { CustomPageDataSource(shoeRepository) }).flow
@@ -20,7 +31,6 @@ class ShoeModel constructor(val shoeRepository: ShoeRepository) : ViewModel() {
         if (br == ALL) {
             shoes = Pager(config = PagingConfig(
                 pageSize = 20
-                , prefetchDistance = 10
                 , enablePlaceholders = false
                 , initialLoadSize = 20
             ), pagingSourceFactory = { CustomPageDataSource(shoeRepository) }).flow
@@ -37,10 +47,6 @@ class ShoeModel constructor(val shoeRepository: ShoeRepository) : ViewModel() {
             shoes = shoeRepository.getShoesByBrand(array).createPager(20, 20).flow
         }
     }
-
-    /*fun clearBrand() {
-        this.brand.value = ALL
-    }*/
 
     companion object {
         const val ALL = "所有"

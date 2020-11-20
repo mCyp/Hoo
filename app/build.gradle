@@ -83,5 +83,10 @@ dependencies {
     // Lottie
     implementation "com.airbnb.android:lottie:${lottieVersion}"
 
+    // SmartRefreshLayout
+    implementation  "com.scwang.smart:refresh-layout-kernel:${smartVersion}"
+    implementation  "com.scwang.smart:refresh-header-classics:${smartVersion}"
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
 }

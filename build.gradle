@@ -12,7 +12,7 @@ buildscript {
     ext.workVersion = '2.1.0-alpha02'
     ext.pagingVersion = '3.0.0-alpha08'
     //ext.pagingVersion = '2.1.0-alpha01'
-
+    ext.smartVersion = '2.0.1'
     ext.workVersion = "2.0.1"
     ext.camerax_version = "1.0.0-alpha03"
     ext.startupVersion = '1.0.0-alpha03'

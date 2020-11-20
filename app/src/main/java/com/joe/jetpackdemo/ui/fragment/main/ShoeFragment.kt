@@ -15,8 +15,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.viewModelScope
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.joe.jetpackdemo.common.listener.SimpleAnimation
 import com.joe.jetpackdemo.databinding.ShoeFragmentBinding
@@ -25,10 +31,16 @@ import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.utils.UiUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.ShoeModel
+import com.joe.jetpackdemo.widget.smartrefresh.DropBoxHeader
+import com.scwang.smart.refresh.footer.ClassicsFooter
+import com.scwang.smart.refresh.layout.wrapper.RefreshFooterWrapper
+import kotlinx.android.synthetic.main.shoe_fragment.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.delayEach
 import kotlinx.coroutines.launch
 
 /**
@@ -59,6 +71,7 @@ class ShoeFragment : Fragment() {
 
     private var job: Job? = null
     private var flow: Flow<PagingData<Shoe>>? = null
+    private var currentStates: LoadStates? = null
 
 
     // by viewModels 需要依赖 "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
@@ -72,25 +85,61 @@ class ShoeFragment : Fragment() {
     ): View? {
         val binding: ShoeFragmentBinding = ShoeFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        val adapter = ShoeAdapter(context!!)
-        binding.recycler.adapter = adapter
-        onSubscribeUi(adapter, binding)
 
+        onSubscribeUi(binding)
         return binding.root
+    }
+
+    private fun stateToStr(state: LoadState): String {
+        return when (state) {
+            is LoadState.NotLoading -> "NotLoading"
+            is LoadState.Loading -> "Loading"
+            else -> "Error"
+        }
     }
 
     /**
      * 鞋子数据更新的通知
      */
-    private fun onSubscribeUi(adapter: ShoeAdapter, binding: ShoeFragmentBinding) {
+    private fun onSubscribeUi(binding: ShoeFragmentBinding) {
         binding.lifecycleOwner = this
+
+        // 初始化RecyclerView部分
+        val adapter = ShoeAdapter(context!!)
+        // 数据加载状态的回调
+        adapter.addLoadStateListener { state:CombinedLoadStates ->
+            currentStates = state.source
+            // 如果append没有处于加载状态，但是refreshLayout出于加载状态，refreshLayout停止加载状态
+            if (state.append is LoadState.NotLoading && binding.refreshLayout.isLoading) {
+                refreshLayout.finishLoadMore()
+            }
+            // 如果refresh没有出于加载状态，但是refreshLayout出于刷新状态，refreshLayout停止刷新
+            if (state.source.refresh is LoadState.NotLoading && binding.refreshLayout.isRefreshing) {
+                refreshLayout.finishRefresh()
+            }
+        }
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastPos = getLastVisiblePosition(binding.recyclerView)
+                if (!(lastPos == adapter.itemCount - 1 && currentStates?.append is LoadState.Loading)) {
+                    binding.refreshLayout.finishLoadMore()
+                }
+            }
+        })
         job = viewModel.viewModelScope.launch(Dispatchers.IO) {
-            viewModel.shoes.collect() {
+            viewModel.shoes.collect {
                 adapter.submitData(it)
             }
         }
-        adapter.addLoadStateListener { state ->
-            state.refresh.endOfPaginationReached
+        binding.refreshLayout.setRefreshHeader(DropBoxHeader(context))
+        binding.refreshLayout.setRefreshFooter(ClassicsFooter(context))
+        binding.refreshLayout.setOnLoadMoreListener {
+            // 如果当前数据已经全部加载完，就不再加载
+            if(currentStates?.append?.endOfPaginationReached == true)
+                binding.refreshLayout.finishLoadMoreWithNoMoreData()
         }
 
         mShoe = binding.fabShoe
@@ -125,11 +174,25 @@ class ShoeFragment : Fragment() {
 
     private fun reInitSubscribe(adapter: ShoeAdapter) {
         job?.cancel()
-        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
-            viewModel.shoes.collect() {
+        /*job = viewModel.viewModelScope.launch(Dispatchers.IO) {
+            viewModel.shoes.delayEach(3000).collect() {
                 adapter.submitData(it)
             }
-        }
+        }*/
+    }
+
+    fun getFirstVisiblePosition(recyclerView: RecyclerView): Int {
+        val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
+        return if (layoutManager is LinearLayoutManager) {
+            layoutManager.findFirstVisibleItemPosition()
+        } else -1
+    }
+
+    fun getLastVisiblePosition(recyclerView: RecyclerView): Int {
+        val layoutManager: RecyclerView.LayoutManager? = recyclerView.layoutManager
+        return if (layoutManager is LinearLayoutManager) {
+            layoutManager.findLastVisibleItemPosition()
+        } else -1
     }
 
     override fun onResume() {
