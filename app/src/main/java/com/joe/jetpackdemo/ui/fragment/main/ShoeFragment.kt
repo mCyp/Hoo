@@ -174,11 +174,11 @@ class ShoeFragment : Fragment() {
 
     private fun reInitSubscribe(adapter: ShoeAdapter) {
         job?.cancel()
-        /*job = viewModel.viewModelScope.launch(Dispatchers.IO) {
-            viewModel.shoes.delayEach(3000).collect() {
+        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
+            viewModel.shoes.collect() {
                 adapter.submitData(it)
             }
-        }*/
+        }
     }
 
     fun getFirstVisiblePosition(recyclerView: RecyclerView): Int {
