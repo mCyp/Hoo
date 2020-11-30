@@ -59,6 +59,20 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`WorkManager`的版本。
 
+### StartUp 20-8-26
+
+文章地址：
+
+> [《即学即用Android Jetpack - WorkManger》](https://www.jianshu.com/p/f22eb24f33b7)
+
+### Paging 3 2020
+
+文章地址：
+
+> [《即学即用Android Jetpack - Paging 3》](https://juejin.cn/post/6898133386218045453)
+
+将 Paging 2 升级到了 Paging 3
+
 ## 二、关于Hoo
 
 ### 1. 项目架构
@@ -79,14 +93,11 @@
 或多或少参考或者使用了以下的库：
 
 - [**android-sunflower**](https://github.com/googlesamples/android-sunflower)
-
 - [**Glide**](https://github.com/bumptech/glide)
-
 - [**glide-transformations**](https://github.com/wasabeef/glide-transformations)
-
 - [**SweetAlertDialog**](https://github.com/pedant/sweet-alert-dialog)
-
 - [**Lottie-Android**](https://github.com/airbnb/lottie-android)
+- [**SmartRefreshLayout**](https://github.com/scwang90/SmartRefreshLayout)
 
 ## 三、写在最后
 
