@@ -18,9 +18,6 @@ interface ShoeDao {
      @Query("SELECT * FROM shoe WHERE id=:id")
      fun findShoeById(id: Long): Shoe?
 
-     // 查询多个 通过品牌查询多款鞋
-     @Query("SELECT * FROM shoe WHERE shoe_brand=:brand")
-     fun findShoesByBrand(brand: String): List<Shoe>
 
      // 模糊查询 排序 同名鞋名查询鞋
      @Query("SELECT * FROM shoe WHERE shoe_name LIKE :name ORDER BY shoe_brand ASC")
@@ -29,6 +26,10 @@ interface ShoeDao {
      // 配合RxJava 通过Id查询单款鞋子
      @Query("SELECT * FROM shoe WHERE id=:id")
      fun findShoeByIdRx(id: Long): Flowable<Shoe>*/
+
+    // 查询多个 通过品牌查询多款鞋
+    @Query("SELECT * FROM shoe WHERE shoe_brand IN (:brand)")
+    fun findShoesByBrand(brand: Array<String>): List<Shoe>
 
     // 通过鞋子的范围寻找Index
     @Query("SELECT * FROM shoe WHERE id between :startIndex AND :endIndex ORDER BY id ASC")
