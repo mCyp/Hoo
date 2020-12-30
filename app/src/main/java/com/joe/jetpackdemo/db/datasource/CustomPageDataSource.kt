@@ -11,28 +11,25 @@ import java.lang.Exception
  */
 private const val SHOE_START_INDEX = 0;
 
-class CustomPageDataSource(
-    private val shoeRepository: ShoeRepository,
-    private val brands: Array<String>?
-) : PagingSource<Int, Shoe>() {
+class CustomPageDataSource(private val shoeRepository: ShoeRepository) : PagingSource<Int, Shoe>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Shoe> {
         val pos = params.key ?: SHOE_START_INDEX
         val startIndex = pos * params.loadSize + 1
         val endIndex = (pos + 1) * params.loadSize
         return try {
-            // 从数据库拉取数据
-            val shoes = brands
-                ?.let { shoeRepository.getShoesByBrand(it) }
-                ?: shoeRepository.getPageShoes(startIndex.toLong(), endIndex.toLong())
+            Thread.sleep(5000)
+            // 从数据库拉去数据
+            val shoes = shoeRepository.getPageShoes(startIndex.toLong(), endIndex.toLong())
             // 返回你的分页结果，并填入前一页的 key 和后一页的 key
             LoadResult.Page(
                 shoes,
                 if (pos <= SHOE_START_INDEX) null else pos - 1,
                 if (shoes.isNullOrEmpty()) null else pos + 1
             )
-        } catch (e: Exception) {
+        }catch (e:Exception){
             LoadResult.Error(e)
         }
+
     }
 }

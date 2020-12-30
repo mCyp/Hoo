@@ -18,7 +18,7 @@ class ShoeRepository private constructor(private val shoeDao: ShoeDao) {
     /**
      * 通过品牌查询鞋子
      */
-    fun getShoesByBrand(brand: Array<String>) = shoeDao.findShoesByBrand(brand)
+    fun getShoesByBrand(brand: Array<String>) = shoeDao.findShoesByBrandLD(brand)
 
     /**
      * 通过Id查询一双鞋
