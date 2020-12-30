@@ -3,13 +3,12 @@ package com.joe.jetpackdemo.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.joe.jetpackdemo.db.datasource.CustomPageDataSource
 import com.joe.jetpackdemo.db.repository.ShoeRepository
 import kotlinx.coroutines.flow.*
 
 class ShoeModel constructor(private val shoeRepository: ShoeRepository) : ViewModel() {
 
-    private val brand = MutableStateFlow(ALL)
+    private val selectedBrand = MutableStateFlow(ALL)
 
     /**
      * @param config 分页的参数
@@ -17,22 +16,26 @@ class ShoeModel constructor(private val shoeRepository: ShoeRepository) : ViewMo
      * @param remoteMediator 同时支持网络请求和数据库请求的数据源
      * @param initialKey 初始化使用的key
      */
-    val shoes = brand.flatMapLatest {
-        val array: Array<String>? = when (it) {
+    val shoes = selectedBrand.flatMapLatest { selected ->
+        val brand: Array<String>? = when (selected) {
             ALL -> null
             NIKE -> arrayOf("Nike", "Air Jordan")
             ADIDAS -> arrayOf("Adidas")
             else -> arrayOf("Converse", "UA", "ANTA")
         }
+
         Pager(config = PagingConfig(
             pageSize = 20,
             enablePlaceholders = false,
             initialLoadSize = 20
-        ), pagingSourceFactory = { CustomPageDataSource(shoeRepository, array) }).flow
+        ), pagingSourceFactory = {
+            brand?.let { shoeRepository.getShoesByBrandPagingSource(it) }
+                ?: shoeRepository.getAllShoesPagingSource()
+        }).flow
     }
 
     fun setBrand(br: String) {
-        brand.value = br
+        selectedBrand.value = br
     }
 
     companion object {
