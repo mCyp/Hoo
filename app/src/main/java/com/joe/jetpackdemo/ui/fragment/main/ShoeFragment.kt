@@ -15,32 +15,23 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.LoadStates
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.joe.jetpackdemo.common.listener.SimpleAnimation
 import com.joe.jetpackdemo.databinding.ShoeFragmentBinding
-import com.joe.jetpackdemo.db.data.Shoe
 import com.joe.jetpackdemo.ui.adapter.ShoeAdapter
 import com.joe.jetpackdemo.utils.UiUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.ShoeModel
 import com.joe.jetpackdemo.widget.smartrefresh.DropBoxHeader
 import com.scwang.smart.refresh.footer.ClassicsFooter
-import com.scwang.smart.refresh.layout.wrapper.RefreshFooterWrapper
 import kotlinx.android.synthetic.main.shoe_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.delayEach
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 /**
@@ -69,8 +60,6 @@ class ShoeFragment : Fragment() {
     // FloatingActionButton宽度和高度，宽高一样
     private var width: Int = 0
 
-    private var job: Job? = null
-    private var flow: Flow<PagingData<Shoe>>? = null
     private var currentStates: LoadStates? = null
 
 
@@ -107,7 +96,7 @@ class ShoeFragment : Fragment() {
         // 初始化RecyclerView部分
         val adapter = ShoeAdapter(context!!)
         // 数据加载状态的回调
-        adapter.addLoadStateListener { state:CombinedLoadStates ->
+        adapter.addLoadStateListener { state: CombinedLoadStates ->
             currentStates = state.source
             // 如果append没有处于加载状态，但是refreshLayout出于加载状态，refreshLayout停止加载状态
             if (state.append is LoadState.NotLoading && binding.refreshLayout.isLoading) {
@@ -129,8 +118,9 @@ class ShoeFragment : Fragment() {
                 }
             }
         })
-        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
-            viewModel.shoes.collect {
+        lifecycleScope.launch {
+            // 注意：这里需要用 collectLatest，只用 collect 的话筛选会不生效
+            viewModel.shoes.collectLatest {
                 adapter.submitData(it)
             }
         }
@@ -138,7 +128,7 @@ class ShoeFragment : Fragment() {
         binding.refreshLayout.setRefreshFooter(ClassicsFooter(context))
         binding.refreshLayout.setOnLoadMoreListener {
             // 如果当前数据已经全部加载完，就不再加载
-            if(currentStates?.append?.endOfPaginationReached == true)
+            if (currentStates?.append?.endOfPaginationReached == true)
                 binding.refreshLayout.finishLoadMoreWithNoMoreData()
         }
 
@@ -152,33 +142,21 @@ class ShoeFragment : Fragment() {
 
         mNike.setOnClickListener {
             viewModel.setBrand(ShoeModel.NIKE)
-            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         mAdi.setOnClickListener {
             viewModel.setBrand(ShoeModel.ADIDAS)
-            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         mOther.setOnClickListener {
             viewModel.setBrand(ShoeModel.OTHER)
-            reInitSubscribe(adapter)
             shoeAnimation()
         }
 
         initListener()
         setViewVisible(false)
-    }
-
-    private fun reInitSubscribe(adapter: ShoeAdapter) {
-        job?.cancel()
-        job = viewModel.viewModelScope.launch(Dispatchers.IO) {
-            viewModel.shoes.collect() {
-                adapter.submitData(it)
-            }
-        }
     }
 
     fun getFirstVisiblePosition(recyclerView: RecyclerView): Int {
