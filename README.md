@@ -11,7 +11,7 @@
 
 🚀 本系列文章会教您如何使用`Android Jetpack`从零到一构建一个简单`MVVM模式`的App。随着Demo的完善，代码会发生变更，如果想查看Blog里面的代码，记得使用版本控制，最新文章的Demo不需要回退版本。**如有新的`Android Jetpack`组件，本项目也会及时更新。**
 
-### Navigation 19-5-21
+### Navigation 2019/5/21
 
 文章地址：
 
@@ -19,7 +19,7 @@
 
 代码若与Blog中不同，记得将代码库回退到`Tag`为`navigation`的版本。
 
-### Data Binding 19-5-29
+### Data Binding 2019/5/29
 
 文章地址：
 
@@ -27,7 +27,7 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`Data Binding`的版本。
 
-### ViewModel & LiveData 19-6-18
+### ViewModel & LiveData 2019/6/18
 
 文章地址：
 
@@ -35,7 +35,7 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`ViewModel`的版本。
 
-### Room 19-6-25
+### Room 2019/6/25
 
 文章地址：
 
@@ -43,7 +43,7 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`Room`的版本。
 
-### Paging 19-7-1
+### Paging 2019/7/1
 
 文章地址：
 
@@ -51,7 +51,7 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`Paging`的版本。
 
-### WorkManager 19-7-8
+### WorkManager 2019/7/8
 
 文章地址：
 
@@ -59,7 +59,7 @@
 
 代码若与Blog中不同，记得将代码会退到`Tag`为`WorkManager`的版本。
 
-### StartUp 20-8-26
+### StartUp 2020/8/26
 
 文章地址：
 
@@ -99,8 +99,42 @@
 - [**Lottie-Android**](https://github.com/airbnb/lottie-android)
 - [**SmartRefreshLayout**](https://github.com/scwang90/SmartRefreshLayout)
 
-## 三、写在最后
+## 三、其他文章安利
+
+Android Jetpack 进阶文章：
+
+### Paging3 源码分析
+
+文章地址：
+
+> [《花式Kotlin协程用法 - Paging 3源码进阶》](https://juejin.cn/post/6918885579602165768)
+
+如何使用协程：
+
+### 协程入门 2020/7/20
+
+文章地址：
+
+> [《即学即用Kotlin - 协程》](https://juejin.cn/post/6854573211418361864)
+
+### 协程进阶 
+
+文章地址：
+
+> [《抽丝剥茧Kotlin - 协程》](https://juejin.cn/post/6862548590092140558)
+>
+> [《抽丝剥茧Kotlin - 协程中绕不过的Flow》](https://juejin.cn/post/6914802148614242312)
 
 分享不易，如果本项目对您有帮助，麻烦点个**Star**，您的**Star**将是我继续创作和写博客的动力！
+
+## 四、联系我
+
+欢迎关注我的公众号，接收我的最新文章：
+
+![系统架构设计](https://github.com/mCyp/Hoo/blob/master/pic/微信二维码.png)
+
+或者添加我的微信  **JiuXinDev**，标注加群，进入我的学习群，与我在 Android 之路上一同进阶。
+
+如您有任何问题，也可以添加我的微信，进行学习上的交流。
 
 感谢您的阅读~
