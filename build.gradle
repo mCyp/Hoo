@@ -19,6 +19,8 @@ buildscript {
     ext.trasnVersion = "4.0.1"
     ext.sweetVersion = "1.5.1"
     ext.lottieVersion = '2.7.0'
+    ext.dataStoreVersion = '1.0.0-alpha06'
+    ext.mmkvVersion = '1.2.7'
     repositories {
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
         maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }

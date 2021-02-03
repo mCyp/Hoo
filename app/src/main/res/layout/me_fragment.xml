@@ -83,6 +83,54 @@
 			android:orientation="horizontal"
 			app:layout_constraintGuide_percent="0.2"/>
 
+		<View
+			android:id="@+id/divide_line"
+			android:layout_width="match_parent"
+			android:layout_height="20dp"
+			app:layout_constraintTop_toBottomOf="@+id/guide1"
+			android:background="@color/norm_grey"/>
+
+		<LinearLayout
+			android:id="@+id/lay_check_data"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			app:layout_constraintLeft_toLeftOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/divide_line"
+			android:layout_height="48dp">
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:padding="12dp"
+				android:tint="@color/textSecond"
+				android:src="@drawable/ic_me_check_data"
+				/>
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_weight="1"
+				android:layout_height="48dp"
+				android:gravity="start|center_vertical"
+				android:paddingStart="16dp"
+				app:layout_constraintRight_toRightOf="parent"
+				android:text="@string/me_check_data"
+				android:textColor="@color/textPrimary"
+				/>
+
+			<ImageView
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:padding="12dp"
+				android:tint="@color/textSecond"
+				android:src="@drawable/ic_right"
+				/>
+
+		</LinearLayout>
+
+
+
+
+
 	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

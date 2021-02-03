@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storeType">
+        <item>SharedPreferences</item>
+        <item>MMKV</item>
+        <item>DataStore</item>
+        <item>SQL</item>
+    </string-array>
+
+    <string-array name="writeFileSize">
+        <item>1</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+    </string-array>
+
+    <string-array name="writeDataSize">
+        <item>1</item>
+        <item>100</item>
+        <item>1000</item>
+        <item>2000</item>
+    </string-array>
+
+    <string-array name="writeDataType">
+        <item>String</item>
+        <item>int</item>
+        <item>long</item>
+        <item>float</item>
+        <item>double</item>
+        <item>boolean</item>
+    </string-array>
+
+    <string-array name="migrateType">
+        <item>MMKV</item>
+        <item>DataStore</item>
+    </string-array>
+</resources>

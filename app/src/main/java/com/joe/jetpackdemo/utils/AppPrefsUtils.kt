@@ -13,12 +13,22 @@ object AppPrefsUtils {
         ed = sp.edit()
     }
 
+    fun changeName(name: String){
+        sp = BaseApplication.context.getSharedPreferences(name, Context.MODE_PRIVATE)
+        ed = sp.edit()
+    }
+
     /*
         Boolean数据
      */
     fun putBoolean(key: String, value: Boolean) {
         ed.putBoolean(key, value)
         ed.commit()
+    }
+
+    fun putBooleanWithNotCommit(key: String, value: Boolean) {
+        ed.putBoolean(key, value)
+        // ed.commit()
     }
 
     /*
@@ -36,6 +46,11 @@ object AppPrefsUtils {
         ed.commit()
     }
 
+    fun putStringWithNotCommit(key: String, value: String) {
+        ed.putString(key, value)
+        // ed.commit()
+    }
+
     /*
         默认 ""
      */
@@ -49,6 +64,10 @@ object AppPrefsUtils {
     fun putInt(key: String, value: Int) {
         ed.putInt(key, value)
         ed.commit()
+    }
+
+    fun putIntWithNotCommit(key: String, value: Int) {
+        ed.putInt(key, value)
     }
 
     /*
@@ -66,11 +85,39 @@ object AppPrefsUtils {
         ed.commit()
     }
 
+    fun putLongWithNotCommit(key: String, value: Long) {
+        ed.putLong(key, value)
+        // ed.commit()
+    }
+
     /*
         默认 0
      */
     fun getLong(key: String): Long {
         return sp.getLong(key, 0)
+    }
+
+    /*
+        Long数据
+     */
+    fun putFloat(key: String, value: Float) {
+        ed.putFloat(key, value)
+        ed.commit()
+    }
+
+    fun putFloatWithNotCommit(key: String, value: Float) {
+        ed.putFloat(key, value)
+    }
+
+    fun commit(){
+        ed.commit()
+    }
+
+    /*
+        默认 0
+     */
+    fun getFloat(key: String): Float {
+        return sp.getFloat(key, 0f)
     }
 
     /*
@@ -96,6 +143,11 @@ object AppPrefsUtils {
      */
     fun remove(key: String) {
         ed.remove(key)
+        ed.commit()
+    }
+
+    fun clearAll(){
+        ed.clear()
         ed.commit()
     }
 }

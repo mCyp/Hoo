@@ -89,4 +89,8 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:${dataStoreVersion}"
+    implementation "com.tencent:mmkv-static:${mmkvVersion}"
+
 }

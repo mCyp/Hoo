@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.joe.jetpackdemo.common.BaseConstant.KEY_IMAGE_URI
 import com.joe.jetpackdemo.databinding.MeFragmentBinding
+import com.joe.jetpackdemo.ui.activity.StoreLocalDataActivity
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.MeModel
 
@@ -66,6 +67,11 @@ class MeFragment : Fragment() {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             )
             startActivityForResult(chooseIntent, REQUEST_CODE_IMAGE)
+        }
+
+        binding.layCheckData.setOnClickListener {
+            val intent = Intent(activity, StoreLocalDataActivity::class.java)
+            startActivity(intent)
         }
     }
 

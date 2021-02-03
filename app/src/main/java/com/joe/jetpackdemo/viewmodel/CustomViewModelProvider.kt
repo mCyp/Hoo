@@ -5,6 +5,7 @@ import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.db.RepositoryProvider
 import com.joe.jetpackdemo.db.repository.FavouriteShoeRepository
 import com.joe.jetpackdemo.db.repository.ShoeRepository
+import com.joe.jetpackdemo.db.repository.StorageDataRepository
 import com.joe.jetpackdemo.db.repository.UserRepository
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.factory.*
@@ -48,5 +49,10 @@ object CustomViewModelProvider {
         val repository: ShoeRepository = RepositoryProvider.providerShoeRepository(context)
         val favShoeRepository: FavouriteShoeRepository = RepositoryProvider.providerFavouriteShoeRepository(context)
         return FavouriteShoeModelFactory(repository, favShoeRepository, shoeId, userId)
+    }
+
+    fun provideStorageDataModel(context: Context):StorageModelFactory{
+        val repository:StorageDataRepository = RepositoryProvider.providerStorageDataRepository(context)
+        return StorageModelFactory(repository)
     }
 }

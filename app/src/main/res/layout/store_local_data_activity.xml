@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.StoreLocalDataActivity">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/common_ic_back"
+        android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="100dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:gravity="start|center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/iv_back"
+        android:text="@string/me_check_data"
+        />
+
+    <TextView
+        android:id="@+id/tv_storage_data_type"
+        style="@style/StorageTVStyle"
+        android:text="@string/storage_data_type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        />
+    
+    <Spinner
+        android:id="@+id/sp_storage_data_type"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_storage_data_type"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_storage_data_type"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/storeType"
+        />
+
+    <TextView
+        android:id="@+id/tv_file_size"
+        style="@style/StorageTVStyle"
+        android:text="@string/storage_data_file_count"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_storage_data_type"
+        />
+
+    <Spinner
+        android:id="@+id/sp_file_size"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_file_size"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_file_size"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/writeFileSize"
+        />
+
+    <TextView
+        android:id="@+id/tv_data_size"
+        style="@style/StorageTVStyle"
+        android:text="@string/storage_data_object_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_file_size"
+        />
+
+    <Spinner
+        android:id="@+id/sp_data_size"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_data_size"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_size"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/writeDataSize"
+        />
+
+    <TextView
+        android:id="@+id/tv_data_type"
+        style="@style/StorageTVStyle"
+        android:text="@string/storage_data_type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_data_size"
+        />
+
+    <Spinner
+        android:id="@+id/sp_data_type"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_data_type"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_data_type"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/writeDataType"
+        />
+
+    <Button
+        android:id="@+id/btn_write_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/storage_data_write"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_data_type"/>
+
+    <TextView
+        android:id="@+id/tv_clear_data_type"
+        style="@style/StorageTVStyle"
+        android:text="@string/storage_data_type"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_write_data"
+        />
+
+    <Spinner
+        android:id="@+id/sp_clear_data_type"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_clear_data_type"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_clear_data_type"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/storeType"
+        />
+
+    <Button
+        android:id="@+id/btn_clear_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/storage_data_clear"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_clear_data_type"/>
+
+    <TextView
+        android:id="@+id/tv_type_sp"
+        style="@style/StorageTVStyle"
+        android:layout_width="wrap_content"
+        android:text="SharedPreferences"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/tv_divide_line"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/btn_clear_data"
+        />
+
+    <TextView
+        android:id="@+id/tv_divide_line"
+        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:text="——"
+        android:gravity="center"
+        android:textColor="@color/textSecond"
+        app:layout_constraintLeft_toRightOf="@+id/tv_type_sp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toLeftOf="@+id/sp_migrate_data_type"
+        app:layout_constraintTop_toBottomOf="@id/btn_clear_data"
+        />
+
+    <Spinner
+        android:id="@+id/sp_migrate_data_type"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        app:layout_constraintLeft_toRightOf="@+id/tv_divide_line"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_type_sp"
+        android:prompt="@string/app_name"
+        android:layout_marginEnd="16dp"
+        android:entries="@array/migrateType"
+        />
+
+    <Button
+        android:id="@+id/btn_migrate_data"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/storage_data_migrate"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_type_sp"/>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

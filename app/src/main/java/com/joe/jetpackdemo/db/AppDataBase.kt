@@ -8,9 +8,11 @@ import androidx.work.WorkManager
 import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.db.dao.FavouriteShoeDao
 import com.joe.jetpackdemo.db.dao.ShoeDao
+import com.joe.jetpackdemo.db.dao.StorageDataDao
 import com.joe.jetpackdemo.db.dao.UserDao
 import com.joe.jetpackdemo.db.data.FavouriteShoe
 import com.joe.jetpackdemo.db.data.Shoe
+import com.joe.jetpackdemo.db.data.StorageData
 import com.joe.jetpackdemo.db.data.User
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.worker.ShoeWorker
@@ -18,7 +20,7 @@ import com.joe.jetpackdemo.worker.ShoeWorker
 /**
  * 数据库文件
  */
-@Database(entities = [User::class,Shoe::class,FavouriteShoe::class],version = 1,exportSchema = false)
+@Database(entities = [User::class,Shoe::class,FavouriteShoe::class,StorageData::class],version = 2,exportSchema = false)
 @TypeConverters(Converters::class)
 abstract class AppDataBase:RoomDatabase() {
     // 得到UserDao
@@ -27,6 +29,8 @@ abstract class AppDataBase:RoomDatabase() {
     abstract fun shoeDao():ShoeDao
     // 得到FavouriteShoeDao
     abstract fun favouriteShoeDao():FavouriteShoeDao
+    // 得到StorageDataDao
+    abstract fun storageDataDao(): StorageDataDao
 
     companion object{
         @Volatile
