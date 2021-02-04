@@ -15,79 +15,40 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import java.util.logging.Logger
+import kotlin.time.ExperimentalTime
+import kotlin.time.TimeSource
 
 class StorageModel(private val storageDataRepository: StorageDataRepository) : ViewModel() {
 
     /**
      * SP 数据写入
      */
+    @ExperimentalTime
     fun writeDataOnSp(fileSize: Int, dataSize: Int, type: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val beginTime = System.currentTimeMillis()
+            val beginTime = TimeSource.Monotonic.markNow()
             when (type) {
-                "int" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "int${j}"
-                            AppPrefsUtils.putIntWithNotCommit(key, j)
-                            AppPrefsUtils.commit()
-                        }
-                    }
-                }
-                "long" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "long${j}"
-                            AppPrefsUtils.putLongWithNotCommit(key, j.toLong())
-                            AppPrefsUtils.commit()
-                        }
-                    }
-                }
-                "float" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "float${j}"
-                            AppPrefsUtils.putFloatWithNotCommit(key, j.toFloat())
-                            AppPrefsUtils.commit()
-                        }
-                    }
-                }
-                "Boolean" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "Boolean${j}"
-                            AppPrefsUtils.putBooleanWithNotCommit(key, true)
-                            AppPrefsUtils.commit()
-                        }
-                    }
-                }
-                "String" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "String${j}"
-                            AppPrefsUtils.putStringWithNotCommit(key, j.toString())
-                            AppPrefsUtils.commit()
-                        }
-                    }
-                }
+                "int" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putIntWithNotCommit("int${j}", j) } }
+                "long" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putLongWithNotCommit("long${j}", j.toLong()) } }
+                "float" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putFloatWithNotCommit("float${j}", j.toFloat()) } }
+                "Boolean" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putBooleanWithNotCommit("Boolean${j}", true) } }
+                "String" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putStringWithNotCommit("String${j}", j.toString()) } }
             }
-            val totalTime = System.currentTimeMillis() - beginTime
-            Log.e("StorageModel", "sp write time: " + totalTime)
+            Log.e("StorageModel", "sp write time: " + beginTime.elapsedNow().inMicroseconds)
+        }
+    }
+
+    private fun writeDataOnSpDetail(fileSize: Int, dataSize: Int, block: (Int) -> Unit) {
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            AppPrefsUtils.changeName(fileName)
+            for (j in 0 until dataSize) {
+                block(j)
+                AppPrefsUtils.commit()
+            }
         }
     }
 
@@ -102,137 +63,55 @@ class StorageModel(private val storageDataRepository: StorageDataRepository) : V
         }
     }
 
+    @ExperimentalTime
     fun checkDataOnSp(fileSize: Int, dataSize: Int, type: String) {
         viewModelScope.launch {
-            val beginTime = System.currentTimeMillis()
+            val beginTime = TimeSource.Monotonic.markNow()
             when (type) {
-                "int" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "int${j}"
-                            if (AppPrefsUtils.getInt(key) != j) {
-                                Log.e("StorageModel", "Sp check is false")
-                                return@launch
-                            }
-                        }
-                    }
-                }
-                "long" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "long${j}"
-                            if (AppPrefsUtils.getLong(key) != j.toLong()) {
-                                Log.e("StorageModel", "Sp check is false")
-                                return@launch
-                            }
-                        }
-                    }
-                }
-                "float" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "float${j}"
-                            if (AppPrefsUtils.getFloat(key) != j.toFloat()) {
-                                Log.e("StorageModel", "Sp check is false")
-                                return@launch
-                            }
-                        }
-                    }
-                }
-                "Boolean" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "Boolean${j}"
-                            if (!AppPrefsUtils.getBoolean(key)) {
-                                Log.e("StorageModel", "Sp check is false")
-                                return@launch
-                            }
-                        }
-                    }
-                }
-                "String" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        AppPrefsUtils.changeName(fileName)
-                        for (j in 0 until dataSize) {
-                            val key = "String${j}"
-                            if (AppPrefsUtils.getString(key) != j.toString()) {
-                                Log.e("StorageModel", "Sp check is false")
-                                return@launch
-                            }
-                        }
-                    }
-                }
+                "int" -> { checkDataOnSpDetail(fileSize, dataSize) { j -> return@checkDataOnSpDetail AppPrefsUtils.getInt("int${j}") != j } }
+                "long" -> { checkDataOnSpDetail(fileSize, dataSize) { j -> return@checkDataOnSpDetail AppPrefsUtils.getLong("long${j}") != j.toLong() } }
+                "float" -> { checkDataOnSpDetail(fileSize, dataSize) { j -> return@checkDataOnSpDetail AppPrefsUtils.getFloat("float${j}") != j.toFloat() } }
+                "Boolean" -> { checkDataOnSpDetail(fileSize, dataSize) { j -> return@checkDataOnSpDetail !AppPrefsUtils.getBoolean("Boolean${j}")} }
+                "String" -> { checkDataOnSpDetail(fileSize, dataSize) { j -> return@checkDataOnSpDetail AppPrefsUtils.getString("Boolean${j}") != j.toString()} }
             }
-            val totalTime = System.currentTimeMillis() - beginTime
-            Log.e("StorageModel", "sp checkTime: " + totalTime)
+            Log.e("StorageModel", "sp checkTime: " + beginTime.elapsedNow().inMilliseconds)
         }
     }
 
-    fun writeDataOnMMKV(fileSize: Int, dataSize: Int, type: String) {
-        val beginTime = System.currentTimeMillis()
-        when (type) {
-            "int" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "int${j}"
-                        mmkv?.encode(key, j)
-                    }
-                }
-            }
-            "long" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "long${j}"
-                        mmkv?.encode(key, j.toLong())
-                    }
-                }
-            }
-            "float" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "float${j}"
-                        mmkv?.encode(key, j.toLong())
-                    }
-                }
-            }
-            "Boolean" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "Boolean${j}"
-                        mmkv?.encode(key, true)
-                    }
-                }
-            }
-            "String" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "String${j}"
-                        mmkv?.encode(key, j.toString())
-                    }
+    private fun checkDataOnSpDetail(fileSize: Int, dataSize: Int, block: (Int) -> Boolean) {
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            AppPrefsUtils.changeName(fileName)
+            for (j in 0 until dataSize) {
+                if (block(j)) {
+                    Log.e("StorageModel", "Sp check is false")
+                    return
                 }
             }
         }
-        val totalTime = System.currentTimeMillis() - beginTime
-        Log.e("StorageModel", "MMKV write time: " + totalTime)
+    }
+
+    @ExperimentalTime
+    fun writeDataOnMMKV(fileSize: Int, dataSize: Int, type: String) {
+        val beginTime = TimeSource.Monotonic.markNow()
+        when (type) {
+            "int" -> { writeDataOnMMKVOnDetail(fileSize, dataSize) {j,mmkv-> mmkv?.encode("int${j}", j) } }
+            "long" -> { writeDataOnMMKVOnDetail(fileSize, dataSize) {j,mmkv-> mmkv?.encode("long${j}", j.toLong()) } }
+            "float" -> { writeDataOnMMKVOnDetail(fileSize, dataSize) {j,mmkv-> mmkv?.encode("float${j}", j.toLong()) } }
+            "Boolean" -> { writeDataOnMMKVOnDetail(fileSize, dataSize) {j,mmkv-> mmkv?.encode("Boolean${j}", true) } }
+            "String" -> { writeDataOnMMKVOnDetail(fileSize, dataSize) {j,mmkv-> mmkv?.encode("String${j}", j.toString()) } }
+        }
+        Log.e("StorageModel", "MMKV write time: " + beginTime.elapsedNow().inMilliseconds)
+    }
+
+    private fun writeDataOnMMKVOnDetail(fileSize: Int, dataSize: Int, block: (Int, MMKV?) -> Unit) {
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            val mmkv = MMKV.mmkvWithID(fileName)
+            for (j in 0 until dataSize) {
+                block(j, mmkv)
+            }
+        }
     }
 
     fun clearDataOnMMKV(fileSize: Int) {
@@ -243,169 +122,71 @@ class StorageModel(private val storageDataRepository: StorageDataRepository) : V
         }
     }
 
+    @ExperimentalTime
     fun checkDataOnMMKV(fileSize: Int, dataSize: Int, type: String) {
-        val beginTime = System.currentTimeMillis()
+        val beginTime = TimeSource.Monotonic.markNow()
         when (type) {
-            "int" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "int${j}"
-                        if (mmkv?.decodeInt(key) != j) {
-                            Log.e("StorageModel", "MMKV check is false")
-                            return
-                        }
-                    }
-                }
-            }
-            "long" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "long${j}"
-                        if (mmkv?.decodeLong(key) != j.toLong()) {
-                            Log.e("StorageModel", "MMKV check is false")
-                            return
-                        }
-                    }
-                }
-            }
-            "float" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "float${j}"
-                        if (mmkv?.decodeFloat(key) != j.toFloat()) {
-                            Log.e("StorageModel", "MMKV check is false")
-                            return
-                        }
-                    }
-                }
-            }
-            "Boolean" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "Boolean${j}"
-                        if (mmkv?.decodeBool(key) != true) {
-                            Log.e("StorageModel", "MMKV check is false")
-                            return
-                        }
-                    }
-                }
-            }
-            "String" -> {
-                for (i in 0 until fileSize) {
-                    val fileName = "$TEST_NAME-${i}"
-                    val mmkv = MMKV.mmkvWithID(fileName)
-                    for (j in 0 until dataSize) {
-                        val key = "String${j}"
-                        if (mmkv?.decodeString(key) != j.toString()) {
-                            Log.e("StorageModel", "MMKV check is false")
-                            return
-                        }
-                    }
+            "int" -> { checkDataOnMMKVOnDetail(fileSize, dataSize){j,mmkv-> return@checkDataOnMMKVOnDetail mmkv?.decodeInt("int${j}") != j} }
+            "long" -> { checkDataOnMMKVOnDetail(fileSize, dataSize){j,mmkv-> return@checkDataOnMMKVOnDetail mmkv?.decodeLong("long${j}") != j.toLong()} }
+            "float" -> { checkDataOnMMKVOnDetail(fileSize, dataSize){j,mmkv-> return@checkDataOnMMKVOnDetail mmkv?.decodeFloat("float${j}") != j.toFloat()} }
+            "Boolean" -> { checkDataOnMMKVOnDetail(fileSize, dataSize){j,mmkv-> return@checkDataOnMMKVOnDetail mmkv?.decodeBool("Boolean${j}") != true} }
+            "String" -> { checkDataOnMMKVOnDetail(fileSize, dataSize){j,mmkv-> return@checkDataOnMMKVOnDetail mmkv?.decodeString("String${j}") != j.toString()} }
+        }
+        Log.e("StorageModel", "MMKV check time: " + beginTime.elapsedNow().inMilliseconds)
+    }
+
+    private fun checkDataOnMMKVOnDetail(fileSize: Int, dataSize: Int, block: (Int, MMKV?) -> Boolean) {
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            val mmkv = MMKV.mmkvWithID(fileName)
+            for (j in 0 until dataSize) {
+                if (block(j, mmkv)) {
+                    Log.e("StorageModel", "MMKV check is false")
+                    return
                 }
             }
         }
-        val totalTime = System.currentTimeMillis() - beginTime
-        Log.e("StorageModel", "MMKV check time: " + totalTime)
     }
 
+    @ExperimentalTime
     fun writeDataOnDataStore(fileSize: Int, dataSize: Int, type: String, context: Context) {
         viewModelScope.launch(Dispatchers.IO) {
-            val beginTime = System.currentTimeMillis()
+            val beginTime = TimeSource.Monotonic.markNow()
             when (type) {
-                "int" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        for (j in 0 until dataSize) {
-                            dataStore.edit {
-                                val key = intPreferencesKey("int${j}")
-                                it[key] = j
-                            }
-                        }
-                    }
-                }
-                "long" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        for (j in 0 until dataSize) {
-                            dataStore.edit {
-                                val key = longPreferencesKey("long${j}")
-                                it[key] = j.toLong()
-                            }
-                        }
-                    }
-                }
-                "float" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        for (j in 0 until dataSize) {
-                            dataStore.edit {
-                                val key = floatPreferencesKey("float${j}")
-                                it[key] = j.toFloat()
-                            }
-                        }
-                    }
-                }
-                "Boolean" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        for (j in 0 until dataSize) {
-                            dataStore.edit {
-                                val key = booleanPreferencesKey("Boolean${j}")
-                                it[key] = true
-                            }
-                        }
-                    }
-                }
-                "String" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val t = System.currentTimeMillis() - beginTime;
-                        val dataStore = context.createDataStore(fileName)
-                        //Log.e("StorageModel", "DataStore begin - " + i + " -time: " + t)
-                        for (j in 0 until dataSize) {
-                            dataStore.edit {
-                                val key = stringPreferencesKey("String${j}")
-                                it[key] = j.toString()
-                            }
-                        }
-                        val t1 = System.currentTimeMillis() - beginTime;
-                        //Log.e("StorageModel", "DataStore end - " + i + " -time: " + t1)
-                    }
-                }
+                "int" -> { writeDataOnDataStoreOnDetail(fileSize, dataSize, context){j, it-> it[intPreferencesKey("int${j}")] = j } }
+                "long" -> { writeDataOnDataStoreOnDetail(fileSize, dataSize, context){j, it-> it[longPreferencesKey("long${j}")] = j.toLong() } }
+                "float" -> { writeDataOnDataStoreOnDetail(fileSize, dataSize, context){j, it-> it[floatPreferencesKey("float${j}")] = j.toFloat() } }
+                "Boolean" -> { writeDataOnDataStoreOnDetail(fileSize, dataSize, context){j, it-> it[booleanPreferencesKey("Boolean${j}")] = true } }
+                "String" -> { writeDataOnDataStoreOnDetail(fileSize, dataSize, context){j, it-> it[stringPreferencesKey("String${j}")] = j.toString() } }
             }
-            val totalTime = System.currentTimeMillis() - beginTime
-            Log.e("StorageModel", "DataStore write time: " + totalTime)
+            Log.e("StorageModel", "DataStore write time: " + beginTime.elapsedNow().inMilliseconds)
         }
     }
 
+    private suspend fun writeDataOnDataStoreOnDetail(fileSize: Int, dataSize: Int,context: Context, block: (Int, MutablePreferences) -> Unit) {
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            val dataStore = context.createDataStore(fileName)
+            for (j in 0 until dataSize) {
+                dataStore.edit { block(j, it) }
+            }
+        }
+    }
+
+    @ExperimentalTime
     @InternalCoroutinesApi
-    fun checkDataOnDataStoreOutSide(fileSize: Int, dataSize: Int, type: String, context: Context){
+    fun checkDataOnDataStoreOutSide(fileSize: Int, dataSize: Int, type: String, context: Context) {
         val dataStoreChannel = Channel<Boolean>(capacity = Channel.UNLIMITED) { }
         checkDataOnDataStore(fileSize, dataSize, type, context, dataStoreChannel)
         var count = 0
-        val beginTime = System.currentTimeMillis()
+        val beginTime = TimeSource.Monotonic.markNow()
         viewModelScope.launch {
-            dataStoreChannel.consumeAsFlow().collect(object :FlowCollector<Boolean>{
+            dataStoreChannel.consumeAsFlow().collect(object : FlowCollector<Boolean> {
                 override suspend fun emit(value: Boolean) {
-                    if(!value){
-
-                    }else{
+                    if (value) {
                         count++
-                        if(count == fileSize){
-                            val totalTime = System.currentTimeMillis() - beginTime
-                            Log.e("StorageModel", "DataStore check time: " + totalTime)
+                        if (count == fileSize) {
+                            Log.e("StorageModel", "DataStore check time: " + beginTime.elapsedNow().inMilliseconds)
                         }
                     }
                 }
@@ -413,112 +194,49 @@ class StorageModel(private val storageDataRepository: StorageDataRepository) : V
         }
     }
 
-
     @InternalCoroutinesApi
-    private fun checkDataOnDataStore(fileSize: Int, dataSize: Int, type: String, context: Context, channel: Channel<Boolean>) {
+    private fun checkDataOnDataStore(
+        fileSize: Int,
+        dataSize: Int,
+        type: String,
+        context: Context,
+        channel: Channel<Boolean>
+    ) {
         viewModelScope.launch(Dispatchers.IO) {
             when (type) {
-                "int" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        dataStore.data.map { p ->
-                            for (j in 0 until dataSize) {
-                                val key = intPreferencesKey("int${j}")
-                                if (p[key] != j) {
-                                    Log.e("StorageModel", "dataStore check is false")
-                                    return@map false
-                                }
-                            }
-                            return@map true
-                        }.collect(object : FlowCollector<Boolean> {
-                            override suspend fun emit(value: Boolean) {
-                                channel.send(value)
-                            }
-                        })
-                    }
-                }
-                "long" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        dataStore.data.map { p ->
-                            for (j in 0 until dataSize) {
-                                val key = longPreferencesKey("long${j}")
-                                if (p[key] != j.toLong()) {
-                                    Log.e("StorageModel", "dataStore check is false")
-                                    return@map false
-                                }
-                            }
-                            return@map true
-                        }.collect(object : FlowCollector<Boolean> {
-                            override suspend fun emit(value: Boolean) {
-                                channel.send(value)
-                            }
-                        })
-                    }
-                }
-                "float" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        dataStore.data.map { p ->
-                            for (j in 0 until dataSize) {
-                                val key = floatPreferencesKey("float${j}")
-                                if (p[key] != j.toFloat()) {
-                                    Log.e("StorageModel", "dataStore check is false")
-                                    return@map false
-                                }
-                            }
-                            return@map true
-                        }.collect(object : FlowCollector<Boolean> {
-                            override suspend fun emit(value: Boolean) {
-                                channel.send(value)
-                            }
-                        })
-                    }
-                }
-                "Boolean" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        dataStore.data.map { p ->
-                            for (j in 0 until dataSize) {
-                                val key = booleanPreferencesKey("Boolean${j}")
-                                if (p[key] != true) {
-                                    Log.e("StorageModel", "dataStore check is false")
-                                    return@map false
-                                }
-                            }
-                            return@map true
-                        }.collect(object : FlowCollector<Boolean> {
-                            override suspend fun emit(value: Boolean) {
-                                channel.send(value)
-                            }
-                        })
-                    }
-                }
-                "String" -> {
-                    for (i in 0 until fileSize) {
-                        val fileName = "$TEST_NAME-${i}"
-                        val dataStore = context.createDataStore(fileName)
-                        dataStore.data.map { p ->
-                            for (j in 0 until dataSize) {
-                                val key = stringPreferencesKey("String${j}")
-                                if (p[key] != j.toString()) {
-                                    Log.e("StorageModel", "dataStore check is false")
-                                    return@map false
-                                }
-                            }
-                            return@map true
-                        }.collect(object : FlowCollector<Boolean> {
-                            override suspend fun emit(value: Boolean) {
-                                channel.send(value)
-                            }
-                        })
-                    }
-                }
+                "int" -> { checkDataOnDataStoreOnDetail(fileSize, dataSize, context, channel){j,p -> return@checkDataOnDataStoreOnDetail p[intPreferencesKey("int${j}")] != j } }
+                "long" -> { checkDataOnDataStoreOnDetail(fileSize, dataSize, context, channel){j,p -> return@checkDataOnDataStoreOnDetail p[longPreferencesKey("long${j}")] != j.toLong() } }
+                "float" -> { checkDataOnDataStoreOnDetail(fileSize, dataSize, context, channel){j,p -> return@checkDataOnDataStoreOnDetail p[floatPreferencesKey("float${j}")] != j.toFloat() } }
+                "Boolean" -> { checkDataOnDataStoreOnDetail(fileSize, dataSize, context, channel){j,p -> return@checkDataOnDataStoreOnDetail p[booleanPreferencesKey("Boolean${j}")] != true } }
+                "String" -> { checkDataOnDataStoreOnDetail(fileSize, dataSize, context, channel){j,p -> return@checkDataOnDataStoreOnDetail p[stringPreferencesKey("String${j}")] != j.toString() } }
             }
+        }
+    }
+
+    @InternalCoroutinesApi
+    private suspend fun checkDataOnDataStoreOnDetail(
+        fileSize: Int,
+        dataSize: Int,
+        context: Context,
+        channel: Channel<Boolean>,
+        block: (Int, Preferences) -> Boolean
+    ){
+        for (i in 0 until fileSize) {
+            val fileName = "$TEST_NAME-${i}"
+            val dataStore = context.createDataStore(fileName)
+            dataStore.data.map { p ->
+                for (j in 0 until dataSize) {
+                    if(block(j, p)){
+                        Log.e("StorageModel", "dataStore check is false")
+                        return@map false
+                    }
+                }
+                return@map true
+            }.collect(object : FlowCollector<Boolean> {
+                override suspend fun emit(value: Boolean) {
+                    channel.send(value)
+                }
+            })
         }
     }
 
@@ -535,153 +253,77 @@ class StorageModel(private val storageDataRepository: StorageDataRepository) : V
     }
 
 
+    @ExperimentalTime
     fun writeDataOnSQL(fileSize: Int, dataSize: Int, type: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val beginTime = System.currentTimeMillis()
+            val beginTime = TimeSource.Monotonic.markNow()
             when (type) {
-                "int" -> {
-                    val list = mutableListOf<StorageData>()
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            //list.add(StorageData("int${j}",j.toString()))
-                            storageDataRepository.insertOneStorageData(
-                                StorageData(
-                                    "int${j}",
-                                    j.toString()
-                                )
-                            )
-                        }
-                    }
-                    // storageDataRepository.insertAllStorageData(list)
-                }
-                "long" -> {
-                    val list = mutableListOf<StorageData>()
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            //list.add(StorageData("long${j}",j.toString()))
-                            storageDataRepository.insertOneStorageData(
-                                StorageData(
-                                    "long${j}",
-                                    j.toString()
-                                )
-                            )
-                        }
-                    }
-                    //storageDataRepository.insertAllStorageData(list)
-                }
-                "float" -> {
-                    val list = mutableListOf<StorageData>()
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            storageDataRepository.insertOneStorageData(
-                                StorageData(
-                                    "float${j}",
-                                    j.toString()
-                                )
-                            )
-                            // list.add(StorageData("float${j}",j.toString()))
-                        }
-                    }
-                    // storageDataRepository.insertAllStorageData(list)
-                }
-                "Boolean" -> {
-                    val list = mutableListOf<StorageData>()
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            storageDataRepository.insertOneStorageData(
-                                StorageData(
-                                    "Boolean\${j}",
-                                    1.toString()
-                                )
-                            )
-                            //list.add(StorageData("Boolean${j}","1"))
-                        }
-                    }
-                    // storageDataRepository.insertAllStorageData(list)
-                }
-                "String" -> {
-                    val list = mutableListOf<StorageData>()
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            storageDataRepository.insertOneStorageData(
-                                StorageData(
-                                    "String${j}",
-                                    j.toString()
-                                )
-                            )
-                            // list.add(StorageData("String${j}", "1"))
-                        }
-                    }
-                    //storageDataRepository.insertAllStorageData(list)
-                }
+                "int" -> { writeDataOnSQLOnDetail(fileSize, dataSize){j-> storageDataRepository.insertOneStorageData(StorageData("int${j}", j.toString())) } }
+                "long" -> { writeDataOnSQLOnDetail(fileSize, dataSize){j-> storageDataRepository.insertOneStorageData(StorageData("long${j}", j.toString())) } }
+                "float" -> { writeDataOnSQLOnDetail(fileSize, dataSize){j-> storageDataRepository.insertOneStorageData(StorageData("float${j}", j.toString())) } }
+                "Boolean" -> { writeDataOnSQLOnDetail(fileSize, dataSize){j-> storageDataRepository.insertOneStorageData(StorageData("Boolean${j}", j.toString())) } }
+                "String" -> { writeDataOnSQLOnDetail(fileSize, dataSize){j-> storageDataRepository.insertOneStorageData(StorageData("String\$${j}", j.toString())) } }
             }
-            val totalTime = System.currentTimeMillis() - beginTime
-            Log.e("StorageModel", "SQL write time: " + totalTime)
+            Log.e("StorageModel", "SQL write time: " + beginTime.elapsedNow().inMilliseconds)
         }
     }
 
+    private fun writeDataOnSQLOnDetail(fileSize: Int, dataSize: Int, block: (Int) -> Unit){
+        for (i in 0 until fileSize) {
+            for (j in 0 until dataSize) {
+                block(j)
+            }
+        }
+    }
+
+    @ExperimentalTime
     fun checkDataOnSQL(fileSize: Int, dataSize: Int, type: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            val beginTime = System.currentTimeMillis()
+            val beginTime = TimeSource.Monotonic.markNow()
             when (type) {
                 "int" -> {
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            val data = storageDataRepository.findStorageDataById("int${j}")
-                            if (data == null || data.value != j.toString()) {
-                                Log.e("StorageModel", "SQL check is false")
-                                return@launch
-                            }
-                        }
+                    checkDataOnSQLOnDetail(fileSize, dataSize) { j ->
+                        val data = storageDataRepository.findStorageDataById("int${j}")
+                        return@checkDataOnSQLOnDetail (data == null || data.value != j.toString())
                     }
                 }
                 "long" -> {
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            val data = storageDataRepository.findStorageDataById("long${j}")
-                            if (data == null || data.value != j.toString()) {
-                                Log.e("StorageModel", "SQL check is false")
-                                return@launch
-                            }
-                        }
+                    checkDataOnSQLOnDetail(fileSize, dataSize) { j ->
+                        val data = storageDataRepository.findStorageDataById("long${j}")
+                        return@checkDataOnSQLOnDetail (data == null || data.value != j.toString())
                     }
                 }
                 "float" -> {
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            val data = storageDataRepository.findStorageDataById("float${j}")
-                            if (data == null || data.value != j.toString()) {
-                                Log.e("StorageModel", "SQL check is false")
-                                return@launch
-                            }
-                        }
+                    checkDataOnSQLOnDetail(fileSize, dataSize) { j ->
+                        val data = storageDataRepository.findStorageDataById("float${j}")
+                        return@checkDataOnSQLOnDetail (data == null || data.value != j.toString())
                     }
                 }
                 "Boolean" -> {
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            val data = storageDataRepository.findStorageDataById("Boolean${j}")
-                            if (data == null || data.value != 1.toString()) {
-                                Log.e("StorageModel", "SQL check is false")
-                                return@launch
-                            }
-                        }
+                    checkDataOnSQLOnDetail(fileSize, dataSize) { j ->
+                        val data = storageDataRepository.findStorageDataById("Boolean${j}")
+                        return@checkDataOnSQLOnDetail (data == null || data.value != j.toString())
                     }
                 }
                 "String" -> {
-                    for (i in 0 until fileSize) {
-                        for (j in 0 until dataSize) {
-                            val data = storageDataRepository.findStorageDataById("String${j}")
-                            if (data == null || data.value != j.toString()) {
-                                Log.e("StorageModel", "SQL check is false")
-                                return@launch
-                            }
-                        }
+                    checkDataOnSQLOnDetail(fileSize, dataSize) { j ->
+                        val data = storageDataRepository.findStorageDataById("String${j}")
+                        return@checkDataOnSQLOnDetail (data == null || data.value != j.toString())
                     }
                 }
             }
-            val totalTime = System.currentTimeMillis() - beginTime
-            Log.e("StorageModel", "SQL check time: " + totalTime)
+            Log.e("StorageModel", "SQL check time: " + beginTime.elapsedNow().inMilliseconds)
+        }
+    }
+
+    private fun checkDataOnSQLOnDetail(fileSize: Int, dataSize: Int, block: (Int) -> Boolean) {
+        for (i in 0 until fileSize) {
+            for (j in 0 until dataSize) {
+                if (block(j)) {
+                    Log.e("StorageModel", "SQL check is false")
+                    return
+                }
+            }
         }
     }
 

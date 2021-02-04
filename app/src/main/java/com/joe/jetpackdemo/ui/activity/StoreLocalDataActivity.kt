@@ -8,12 +8,10 @@ import android.widget.Spinner
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.joe.jetpackdemo.R
-import com.joe.jetpackdemo.common.BaseConstant
-import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
-import com.joe.jetpackdemo.viewmodel.DetailModel
 import com.joe.jetpackdemo.viewmodel.StorageModel
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlin.time.ExperimentalTime
 
 const val TEST_NAME = "store"
 class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -80,7 +78,7 @@ class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, Adapter
         btnWriteData.setOnClickListener(this)
         btnClearData.setOnClickListener(this)
         btnMigrateData.setOnClickListener(this)
-        spAddType.setOnItemSelectedListener(this)
+        spAddType.onItemSelectedListener = this
         spFileSize.onItemSelectedListener = this
         spDataSize.onItemSelectedListener = this
         spDataType.onItemSelectedListener = this
@@ -88,6 +86,7 @@ class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, Adapter
         spMigrateType.onItemSelectedListener = this
     }
 
+    @ExperimentalTime
     @InternalCoroutinesApi
     override fun onClick(v: View?) {
         when(v?.id){
@@ -127,6 +126,7 @@ class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, Adapter
         }
     }
 
+    @ExperimentalTime
     private fun writeData(){
         when(writeType){
             "SharedPreferences" -> {
@@ -176,6 +176,7 @@ class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, Adapter
     /**
      * 检查上一次输入的数据
      */
+    @ExperimentalTime
     @InternalCoroutinesApi
     private fun checkData(type: String){
         when(type){
@@ -193,7 +194,4 @@ class StoreLocalDataActivity : AppCompatActivity(),View.OnClickListener, Adapter
             }
         }
     }
-
-
-
 }
