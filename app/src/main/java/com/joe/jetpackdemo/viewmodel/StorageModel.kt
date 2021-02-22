@@ -37,7 +37,7 @@ class StorageModel(private val storageDataRepository: StorageDataRepository) : V
                 "Boolean" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putBooleanWithNotCommit("Boolean${j}", true) } }
                 "String" -> { writeDataOnSpDetail(fileSize, dataSize) { j -> AppPrefsUtils.putStringWithNotCommit("String${j}", j.toString()) } }
             }
-            Log.e("StorageModel", "sp write time: " + beginTime.elapsedNow().inMicroseconds)
+            Log.e("StorageModel", "sp write time: " + beginTime.elapsedNow().inMilliseconds)
         }
     }
 
