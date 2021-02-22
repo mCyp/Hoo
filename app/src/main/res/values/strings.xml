@@ -29,7 +29,7 @@
 	<string name="storage_data_object_type">数据类型：</string>
 	<string name="storage_data_object_size">数据数量：</string>
 	<string name="storage_data_write">写入数据</string>
-	<string name="storage_data_clear">一键清除</string>
+	<string name="storage_data_clear">一键检查</string>
 	<string name="storage_data_migrate">一键迁移</string>
 
 	<!-- Messages -->
