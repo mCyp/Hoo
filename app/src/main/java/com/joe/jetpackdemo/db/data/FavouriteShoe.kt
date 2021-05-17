@@ -10,7 +10,7 @@ import java.util.*
     tableName = "fav_shoe"
     , foreignKeys = [ForeignKey(entity = Shoe::class, parentColumns = ["id"], childColumns = ["shoe_id"])
         , ForeignKey(entity = User::class, parentColumns = ["id"], childColumns = ["user_id"])
-    ],indices = [Index("shoe_id")]
+    ],indices = [Index("shoe_id", unique = true),Index("user_id")]
 )
 data class FavouriteShoe(
     @ColumnInfo(name = "shoe_id") val shoeId: Long // 外键 鞋子的id
