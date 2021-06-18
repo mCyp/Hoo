@@ -1,13 +1,58 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
+/kotlin_hoo/*.iml
+/kotlin_hoo/.gradle
+/kotlin_hoolocal.properties
+/kotlin_hoo/.idea/caches
+/kotlin_hoo/.idea/libraries
+/kotlin_hoo/.idea/modules.xml
+/kotlin_hoo/.idea/workspace.xml
+/kotlin_hoo/.idea/navEditor.xml
+/kotlin_hoo/.idea/assetWizardSettings.xml
+/kotlin_hoo/.DS_Store
+/kotlin_hoo/build
+/kotlin_hoo/captures
+/kotlin_hoo/.externalNativeBuild
+
+# Miscellaneous
+/flutter_hoo/*.class
+/flutter_hoo/*.log
+/flutter_hoo/*.pyc
+/flutter_hoo/*.swp
+/flutter_hoo/.DS_Store
+/flutter_hoo/.atom/
+/flutter_hoo/.buildlog/
+/flutter_hoo/.history
+/flutter_hoo/.svn/
+
+# IntelliJ related
+/flutter_hoo/*.iml
+/flutter_hoo/*.ipr
+/flutter_hoo/*.iws
+/flutter_hoo/.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+/flutter_hoo/**/doc/api/
+/flutter_hoo/**/ios/Flutter/.last_build_id
+/flutter_hoo/.dart_tool/
+/flutter_hoo/.flutter-plugins
+/flutter_hoo/.flutter-plugins-dependencies
+/flutter_hoo/.packages
+/flutter_hoo/.pub-cache/
+/flutter_hoo/.pub/
+/flutter_hoo//build/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Exceptions to above rules.
+!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
