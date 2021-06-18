@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.yellowcath:YcShareElement:1.3.2.x@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/66f8b14edeab57845cfc23df1d99df87/jetified-YcShareElement-1.3.2.x/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/66f8b14edeab57845cfc23df1d99df87/jetified-YcShareElement-1.3.2.x/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/66f8b14edeab57845cfc23df1d99df87/jetified-YcShareElement-1.3.2.x/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.yellowcath/YcShareElement/1.3.2.x/209a362556d2584dbf8e325cb83321c495554bd5/YcShareElement-1.3.2.x-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

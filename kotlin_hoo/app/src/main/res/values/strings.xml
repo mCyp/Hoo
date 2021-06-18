@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Hoo</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="deeplink">Deep Link</string>
+
+    <!-- Screen strings -->
+    <string name="step_one">Step One</string>
+    <string name="step_two">Step Two</string>
+    <string name="deep_link_instructions">Type your deep link args</string>
+    <string name="settings_fragment_text">Settings Fragment</string>
+    <string name="shopping_fragment_text">Shopping Fragment</string>
+    <string name="navigate_destination_button">Navigate to destination</string>
+    <string name="navigate_action_button">Navigate with action</string>
+    <string name="next_step_button">Navigate next step</string>
+    <string name="finish_button">Finish Flow</string>
+    <string name="send_deep_link_notification_button">Send deep link notification</string>
+
+
+    <string name="prompt_empty">暂时还没有收藏记录～</string>
+    <string name="prompt_error">这边有错误发生了!</string>
+    <string name="prompt_loading">加载中…</string>
+
+    <string name="me_check_data">数据存储</string>
+    <string name="storage_data_type">存储方式：</string>
+    <string name="storage_data_file_count">写入文件数：</string>
+    <string name="storage_data_object_type">数据类型：</string>
+    <string name="storage_data_object_size">数据数量：</string>
+    <string name="storage_data_write">写入数据</string>
+    <string name="storage_data_clear">一键检查</string>
+    <string name="storage_data_migrate">一键迁移</string>
+
+    <!-- Messages -->
+    <string name="set_permissions_in_settings">Go to Settings -> Apps and Notifications ->
+        WorkManager Demo -> App Permissions and grant access to Storage.</string>
+</resources>

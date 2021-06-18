@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.scwang.smart:refresh-footer-classics:2.0.1@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cad18f9865d774910df8f4c5c2d4124/jetified-refresh-footer-classics-2.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cad18f9865d774910df8f4c5c2d4124/jetified-refresh-footer-classics-2.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8cad18f9865d774910df8f4c5c2d4124/jetified-refresh-footer-classics-2.0.1/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-footer-classics/2.0.1/259847544404a62814e443d62b18215bd93113d6/refresh-footer-classics-2.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.scwang.smart/refresh-footer-classics/2.0.1/59df76b10c018768c22d07717185b6dd5e62fe4b/refresh-footer-classics-2.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

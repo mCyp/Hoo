@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.room:room-common:2.3.0-alpha03">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-common/2.3.0-alpha03/25f88fd163d5f6ed0d3ba59b9bc7792291e3c372/room-common-2.3.0-alpha03.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.room/room-common/2.3.0-alpha03/ab8e254a6dff0560e5793a588ae947f71c0d8b79/room-common-2.3.0-alpha03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
