@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.transition.Explode
+import android.transition.TransitionManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +45,13 @@ class MeFragment : Fragment() {
                 model.cancelWork()
                 sweetAlertDialog.dismiss()
             }*/
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        enterTransition = Explode()
+        exitTransition = Explode()
     }
 
     override fun onCreateView(

@@ -2,6 +2,7 @@ package com.joe.jetpackdemo.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import android.view.Window
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -9,6 +10,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
 import com.joe.jetpackdemo.R
 
 class MainActivity : AppCompatActivity() {
@@ -18,7 +20,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var mCamera:ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
+        setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+        window.sharedElementsUseOverlay = false
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.main_activity)
 
         val host: NavHostFragment = supportFragmentManager.findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment

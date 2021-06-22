@@ -11,4 +11,6 @@
     <color name="textSecond">#8d9ca9</color>
 
     <color name="norm_grey">#eeeeee</color>
+
+    <color name="black_alpha_16">#29000000</color>
 </resources>

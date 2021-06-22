@@ -1,31 +1,49 @@
 package com.joe.jetpackdemo.ui.activity
 
 import android.animation.Animator
+import android.app.Activity
 import android.app.ActivityOptions
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Parcelable
-import android.view.View
+import android.service.autofill.ImageTransformation
+import android.transition.*
+import android.util.Log
+import android.view.Gravity
 import android.view.Window
+import android.widget.ImageView
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.google.android.material.transition.platform.MaterialContainerTransformSharedElementCallback
-import com.hw.ycshareelement.YcShareElement
-import com.hw.ycshareelement.transition.IShareElements
-import com.hw.ycshareelement.transition.ShareElementInfo
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.common.BaseConstant
 import com.joe.jetpackdemo.databinding.DetailActivityBinding
+import com.joe.jetpackdemo.ui.CusChangeOnlineImageTransition
 import com.joe.jetpackdemo.utils.AppPrefsUtils
 import com.joe.jetpackdemo.viewmodel.CustomViewModelProvider
 import com.joe.jetpackdemo.viewmodel.DetailModel
+import kotlinx.android.synthetic.main.shoe_recycler_item.*
 
 /**
  * 展示鞋子细节的界面
  */
+const val CUS_TRANSITION_NAME: String = "transition_name"
 class DetailActivity : AppCompatActivity() {
+    companion object {
+        fun start(context: Context, id: Long, imageView: ConstraintLayout, transitionName: String){
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra(BaseConstant.DETAIL_SHOE_ID, id)
+            intent.putExtra(CUS_TRANSITION_NAME, transitionName)
+            if(context is Activity){
+                context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(context, imageView, transitionName).toBundle())
+            }else {
+                context.startActivity(intent)
+            }
+        }
+    }
 
     private val detailModel: DetailModel by viewModels {
         CustomViewModelProvider.providerDetailModel(
@@ -35,20 +53,27 @@ class DetailActivity : AppCompatActivity() {
         )
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        // 1. 设置动画
         window.requestFeature(Window.FEATURE_ACTIVITY_TRANSITIONS)
-        // setExitSharedElementCallback(MaterialContainerTransformSharedElementCallback())
-        window.sharedElementsUseOverlay = true
+        setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
+
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.detail_activity)
-
-        // val detailModel: DetailModel by viewModels()
-
         val binding = DataBindingUtil.setContentView<DetailActivityBinding>(this, R.layout.detail_activity)
         binding.model = detailModel
         initListener(binding, detailModel)
+
+        // 2. 设置transitionName
+        binding.mainContent.transitionName = intent.getStringExtra(CUS_TRANSITION_NAME)
+        // 3. 设置具体的动画
+        window.sharedElementEnterTransition = MaterialContainerTransform().apply {
+            addTarget(binding.mainContent)
+            duration = 300L
+        }
+        window.sharedElementExitTransition = MaterialContainerTransform().apply {
+            addTarget(binding.mainContent)
+            duration = 300L
+        }
     }
 
     private fun initListener(binding: DetailActivityBinding, detailModel: DetailModel) {

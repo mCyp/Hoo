@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.transition.ChangeBounds
+import android.transition.ChangeImageTransform
 import android.transition.ChangeTransform
 import android.transition.TransitionSet
 import android.util.Log
@@ -13,15 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.OnViewDragListener
-import com.hw.ycshareelement.transition.ChangeOnlineImageTransition
-import com.hw.ycshareelement.transition.IShareElements
-import com.hw.ycshareelement.transition.ShareElementInfo
 import com.joe.jetpackdemo.R
 import com.joe.jetpackdemo.ui.CusChangeOnlineImageTransition
 
 const val GALLERY_URL = "GALLERY_URL"
 const val TRANSITION_NAME = "TRANSITION_NAME"
-class ImageGalleryActivity : AppCompatActivity(), IShareElements {
+class ImageGalleryActivity : AppCompatActivity() {
 
     private lateinit var mPhotoView: com.joe.jetpackdemo.widget.PhotoView
     private lateinit var mContainer: ConstraintLayout
@@ -43,7 +41,7 @@ class ImageGalleryActivity : AppCompatActivity(), IShareElements {
         postponeEnterTransition()
         val transitionSet = TransitionSet()
         transitionSet.addTransition(ChangeBounds())
-        transitionSet.addTransition(ChangeTransform())
+        transitionSet.addTransition(ChangeImageTransform())
         transitionSet.addTransition(CusChangeOnlineImageTransition())
 
         /*setEnterSharedElementCallback(MaterialContainerTransformSharedElementCallback())
@@ -136,10 +134,6 @@ class ImageGalleryActivity : AppCompatActivity(), IShareElements {
                 .centerInside()
                 .into(mPhotoView)
         }
-    }
-
-    override fun getShareElements(): Array<ShareElementInfo<Parcelable>> {
-        return arrayOf(ShareElementInfo(mPhotoView))
     }
 
 }

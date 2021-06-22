@@ -6,6 +6,7 @@ import android.animation.AnimatorSet
 import android.animation.TimeInterpolator
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.transition.Explode
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -92,6 +93,7 @@ class ShoeFragment : Fragment() {
      */
     private fun onSubscribeUi(binding: ShoeFragmentBinding) {
         binding.lifecycleOwner = this
+
 
         // 初始化RecyclerView部分
         val adapter = ShoeAdapter(context!!)
