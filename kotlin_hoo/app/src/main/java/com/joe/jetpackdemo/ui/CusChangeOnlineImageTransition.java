@@ -34,6 +34,7 @@ public class CusChangeOnlineImageTransition extends Transition {
     private static final String PROPNAME_SCALE = "hw:changeImageTransform:scale";
     private static final String PROPNAME_BOUNDS = "hw:changeImageTransform:bounds";
     private static final String PROPNAME_MATRIX = "hw:changeImageTransform:matrix";
+    private static final String PROPNAME_SCROLL = "hw:changeImageTransform:scroll";
 
     public CusChangeOnlineImageTransition(){
         addTarget(ImageView.class);
@@ -74,8 +75,8 @@ public class CusChangeOnlineImageTransition extends Transition {
         }
         if(imageView instanceof PhotoView){
             values.put(PROPNAME_SCALE, ((PhotoView) imageView).getScale());
-            Log.d("wangjie","putScale: "+((PhotoView) imageView).getScale());
         }
+        values.put(PROPNAME_SCROLL, new Pair<>(imageView.getScrollX(), imageView.getScrollY()));
     }
 
     protected void calculateMatrix(TransitionValues startValues, TransitionValues endValues, int imageWidth, int imageHeight, Matrix startMatrix, Matrix endMatrix) {
@@ -83,16 +84,10 @@ public class CusChangeOnlineImageTransition extends Transition {
             return;
         }
         Rect startBounds = (Rect) startValues.values.get(PROPNAME_BOUNDS);
-        Log.d("wangjie","startBounds: "+startBounds.toString());
         Rect endBounds = (Rect) endValues.values.get(PROPNAME_BOUNDS);
-        Log.d("wangjie","endBounds: "+endBounds.toString());
 
         ImageView.ScaleType startScaleType = (ImageView.ScaleType) startValues.values.get(PROPNAME_SCALE_TYPE);
         ImageView.ScaleType endScaleType = (ImageView.ScaleType) endValues.values.get(PROPNAME_SCALE_TYPE);
-
-        if(startValues.view instanceof PhotoView){
-            Log.d("wangjie","current scale: "+((PhotoView) startValues.view).getScale());
-        }
 
         if (startScaleType == ImageView.ScaleType.MATRIX || (startValues.view instanceof PhotoView && (float)startValues.values.get(PROPNAME_SCALE) != 1f)) {
             Matrix matrix = null;
@@ -129,6 +124,8 @@ public class CusChangeOnlineImageTransition extends Transition {
 
     private ValueAnimator createMatrixAnimator(final ImageView imageView, final TransitionValues startValues, final TransitionValues endValues) {
         ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
+        // 计算偏移
+        final Pair<Integer, Integer> startScrollPair = (Pair<Integer, Integer>) startValues.values.get(PROPNAME_SCROLL);
 
         final SparseArray<Pair<Matrix, Matrix>> matrixArray = new SparseArray<>(2);
         final MatrixEvaluator evaluator = new MatrixEvaluator();
@@ -160,10 +157,10 @@ public class CusChangeOnlineImageTransition extends Transition {
                 }
                 //计算中间矩阵
                 Matrix imageMatrix = evaluator.evaluate(animation.getAnimatedFraction(), matrixPair.first, matrixPair.second);
-                Log.d("wangjie",imageMatrix.toString());
                 imageView.setScaleType(ImageView.ScaleType.MATRIX);
                 imageView.setImageMatrix(imageMatrix);
-
+                int curScrollY = (int) (startScrollPair.second * (1 - animation.getAnimatedFraction()));
+                imageView.scrollTo(0, curScrollY);
             }
         });
         animator.addListener(new Animator.AnimatorListener() {

@@ -81,6 +81,7 @@ class ImageGalleryActivity : AppCompatActivity() {
 
         mPhotoView.setExitListener(object : com.joe.jetpackdemo.widget.PhotoView.OnExitListener {
             override fun exit() {
+                // mPhotoView.scrollBy(0, -mPhotoView.scrollY)
                 this@ImageGalleryActivity.onBackPressed()
             }
 
@@ -114,7 +115,6 @@ class ImageGalleryActivity : AppCompatActivity() {
                 }
 
                 mContainer.background.mutate().alpha = intAlpha
-                Log.d("wangjie", "alpha:" + alpha)
                 /*if( alpha >= 0.6){
                     mPhotoView.scale = alpha
                 }*/
