@@ -47,6 +47,7 @@
 	<Button
 		android:id="@+id/btn_register"
 		style="@style/CommonButtonStyle"
+		android:layout_marginTop="10dp"
 		app:layout_constraintTop_toBottomOf="@+id/btn_login"
 		android:text="Join us"
 		app:layout_constraintBottom_toBottomOf="parent"
