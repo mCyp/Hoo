@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "AJ 1",
+    "description": "Air Jordan 1是耐克乔丹系列的第一款正代篮球鞋，诞生于1985年，因为这是NBA第一双黑红配色的鞋子，所以也让大家第一眼记住了它。由这双鞋子又衍生出了另一款经典复古鞋款——Nike Dunk",
+    "price": 1299.0,
+    "brand": "Air Jordan",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651081240.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "AJ 4",
+    "description": "Air Jordan 4是耐克乔丹系列的第四双正代篮球鞋，诞生于1988年，是Air Jordan 系列非常经典的一款，让这个系列拥有了灵魂，并且Air Jordan 4鞋面上篮网状的鞋带扣闻名于世。",
+    "price": 1399.0,
+    "brand": "Air Jordan",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651192702.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "AJ 6",
+    "description": "AirJordan6作为乔丹的第一双NBA冠军用鞋，鞋舌中央有一个非常耀眼漂亮的JumpmanLogo，通过将塑料鞋带松紧扣设计进行了改进，使其更为小巧，可以轻松系紧鞋带，同时还起到了很好的装饰作用。",
+    "price": 1399.0,
+    "brand": "Air Jordan",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651145177.jpeg"
+  },
+  {
+    "id": 4,
+    "name": "AJ 13",
+    "description": "air jordan 13是乔丹公司设计生产的一款AJ篮球鞋，发售于1998年。该款运动鞋的设计灵感源于割草机外壳，采用sole气垫，球场表现更好。\n乔丹本人曾在公开场合不止一次的表达过自己对13代的情有独钟。",
+    "price": 1499.0,
+    "brand": "Air Jordan",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651224456.jpeg"
+  },
+  {
+    "id": 5,
+    "name": "AIR MAX '97",
+    "description": "AIR MAX '97 男子运动鞋以流线型鞋身和卓越科技为热爱运动的你造就全方位防护，强大的功能为你的双脚带来更高境界的舒适、轻质、缓震和响应力，打造AIR MAX系列的不朽传说，更助你不断创造属于你的运动巅峰纪录。",
+    "price": 1299.0,
+    "brand": "Nike",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651318109.jpeg"
+  },
+  {
+    "id": 6,
+    "name": "KD 12",
+    "description": "搭载了全新四向飞线鞋面 + 双层 Zoom 的豪华科技配置，还有镂空中底等创新概念，堪称最具颠覆性和革新性的一代。",
+    "price": 1299.0,
+    "brand": "Nike",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651374194.jpeg"
+  },
+  {
+    "id": 7,
+    "name": "Nike Adapt BB",
+    "description": "Nike Adapt BB 专为提供量身定制的贴合感而设计，是 NIKE 首个专为篮球运动而打造的自动系带球鞋。它强韧且灵活，可随脚型而调整，带来稳固贴合的穿着体验，让你能够心无旁骛，专注于比赛。",
+    "price": 2799.0,
+    "brand": "Nike",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651446268.jpeg"
+  },
+  {
+    "id": 8,
+    "name": "Kyrie 5",
+    "description": "Kyrie 5 搭载全新研发的气垫形态 Zoom Turbo，面积几乎覆盖前掌，不仅缓震范围更全面，而且响应更灵活。上脚后最明显的感受就是无需磨合，第一时间就能踩出明显的下陷感，同时保持超强弹性。实战中无论是弯折前掌还是蹬地启动，都能明显感受到 Zoom Tubro 带来的响应!",
+    "price": 999.0,
+    "brand": "Nike",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651633720.jpeg"
+  },
+  {
+    "id": 9,
+    "name": "Converse 1970s",
+    "description": "converse 1970s系列有多款配色，都深受欢迎。这款鞋子的鞋舌更加挺直，更贴脚背，穿起来更加舒适。",
+    "price": 999.0,
+    "brand": "Converse",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651740095.jpeg"
+  },
+  {
+    "id": 10,
+    "name": "Adidas yeezy350 v2",
+    "description": "YEEZY 350V2鞋身以adidas独家的Primeknit科技打造，采用数位工程技术将全鞋身以编织科技完整包覆，贴合脚型。搭载adidas专利高动能回馈科技大底BOOST™，提升舒适度。",
+    "price": 1899.0,
+    "brand": "Adidas",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651836290.jpeg"
+  },
+  {
+    "id": 11,
+    "name": "Rose 9",
+    "description": "罗斯9的外观虽然没有太多复杂的设计感，但是简单的风格加上配色的作用，整体颜值还算不错。黑白撞色搭配加上粉色细节的点缀，不仅适合于球场实战，而且还能胜任日常穿搭。",
+    "price": 999.0,
+    "brand": "Adidas",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651919910.jpeg"
+  },
+  {
+    "id": 12,
+    "name": "Adidas NMD R1",
+    "description": "NMD结合了多款经典的设计于一身，比如Micro Pacer、The Rising Star、以及The Boston Super，慢慢演变成今日的NMD。",
+    "price": 1299.0,
+    "brand": "Adidas",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560651958690.jpeg"
+  },
+  {
+    "id": 13,
+    "name": "Harden vol 3",
+    "description": "不论从缓震性能、舒适度等穿着感受，还是细节满满的外观呈现，都是一款可以打A的实战佳品。鞋款设计重心偏向于登哥的个人喜好，这无可厚非，也难免做到面面俱到。综合各方面考虑，这还是一款非常适合突破型后卫的战靴。",
+    "price": 1299.0,
+    "brand": "Adidas",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560652035389.jpeg"
+  },
+  {
+    "id": 14,
+    "name": "Curry 4",
+    "description": "全新织物鞋身考虑到实战中的支撑与舒适，在特定部位做出了针对性的设计。大面积 TPU 与 Curry 系列一贯的上翻中底，搭配粗壮的外底纹理，在保护性和抓地力方面也有让人惊艳的表现。",
+    "price": 1299.0,
+    "brand": "UA",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560652063679.jpeg"
+  },
+  {
+    "id": 15,
+    "name": "KT 4",
+    "description": "ANTA KT4以静水流深为主题，将中国元素与球鞋文化相结合，不但能够在赛场穿着，更可以在日常进行搭配。A-FLASHFOAM科技中底的使用，更是得到汤普森本人的认可。",
+    "price": 699.0,
+    "brand": "ANTA",
+    "imageUrl": "https://raw.githubusercontent.com/mCyp/Photo/master/1560652089700.jpeg"
+  }
+]

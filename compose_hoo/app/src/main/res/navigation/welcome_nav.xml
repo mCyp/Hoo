@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/welcome_nav"
+    app:startDestination="@id/welcome">
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.composehoo.ui.fragment.LoginFragment"
+        android:label="LoginFragment"
+        />
+
+    <fragment
+        android:id="@+id/welcome"
+        android:name="com.example.composehoo.ui.fragment.WelcomeFragment"
+        android:label="LoginFragment"
+        >
+        <action
+            android:id="@+id/action_welcome_to_login"
+            app:destination="@id/login"/>
+        <action
+            android:id="@+id/action_welcome_to_register"
+            app:enterAnim="@anim/common_slide_in_right"
+            app:popExitAnim="@anim/common_slide_out_right"
+            app:destination="@id/register"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/register"
+        android:name="com.example.composehoo.ui.fragment.RegisterFragment"
+        android:label="RegisterFragment"
+        >
+
+        <action
+            android:id="@+id/action_register_to_login"
+            app:enterAnim="@anim/common_slide_in_right"
+            app:popExitAnim="@anim/common_slide_out_right"
+            app:destination="@id/login"
+            app:popUpTo="@id/login"/>
+
+        <argument
+            android:name="EMAIL"
+            android:defaultValue="2005@qq.com"
+            app:argType="string"/>
+    </fragment>
+
+</navigation>

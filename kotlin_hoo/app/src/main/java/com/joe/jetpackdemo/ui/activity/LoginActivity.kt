@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.joe.jetpackdemo.R
 import java.util.*
 
@@ -37,7 +38,6 @@ class LoginActivity : AppCompatActivity() {
         savedInstanceState?.let {
             permissionRequestCount = it.getInt(KEY_PERMISSIONS_REQUEST_COUNT, 0)
         }
-
         // 获取权限
         requestPermissionsIfNecessary()
 

@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">ComposeHoo</string>
+    <string name="app_title">Hoo</string>
+
+    <string name="welcome_login_desc">Have a account ? Login</string>
+    <string name="welcome_register_desc">Join us</string>
+
+    <string name="common_account">account</string>
+    <string name="common_pwd">password</string>
+    <string name="common_email">email</string>
+    <string name="common_loading">加载中...</string>
+    <string name="common_load_complete">哥，这回真的没了！</string>
+    <string name="common_load_error_desc">异常，重试一下？</string>
+    <string name="common_load_error_desc_one">噢，发生了一点意想不到的错误～</string>
+    <string name="common_load_empty">空空如也</string>
+    <string name="common_load_empty_desc">暂时没有数据噢～</string>
+    <string name="common_load_error">Error</string>
+    <string name="common_load_error_retry">再试一次</string>
+
+    <!-- Login -->
+    <string name="login">Login</string>
+    <string name="login_welcome_back">Welcome Back!</string>
+    <string name="login_sign_in">SIGN IN</string>
+    <string name="login_error_text">账号或者密码错误！</string>
+
+    <!-- Register -->
+    <string name="register">Register</string>
+    <string name="register_error_text">注册失败！</string>
+    <string name="register_join_us">Hey,Join us!</string>
+
+    <!-- MainPage -->
+    <string name="main_home">主页</string>
+    <string name="main_favourite">喜欢</string>
+    <string name="main_me">我</string>
+    <string name="main_light">浅色</string>
+    <string name="main_dark">深色</string>
+
+    <!-- MePage -->
+    <string name="me_data_store">数据存储</string>
+    <string name="me_follow_dark">黑夜模式跟随系统</string>
+
+</resources>

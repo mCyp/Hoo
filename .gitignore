@@ -12,6 +12,14 @@
 /kotlin_hoo/captures
 /kotlin_hoo/.externalNativeBuild
 
+/compose_hoo/.idea/
+/compose_hoo/.gradle/
+/compose_hoo/.gitignore
+/compose_hoo/build/
+/compose_hoo/app/build/
+*.iml
+/compose_hoo/local.properties
+
 # Miscellaneous
 /flutter_hoo/*.class
 /flutter_hoo/*.log
