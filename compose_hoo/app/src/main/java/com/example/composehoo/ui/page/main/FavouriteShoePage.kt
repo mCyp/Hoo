@@ -38,6 +38,7 @@ import com.example.composehoo.db.RepositoryProvider
 import com.example.composehoo.db.data.Shoe
 import com.example.composehoo.db.paging.FavPagingSource
 import com.example.composehoo.ui.activity.DetailActivity
+import com.example.composehoo.ui.common.ext.grayBackgroundColor
 import com.example.composehoo.ui.common.view.refresh.LoadingComplete
 import com.example.composehoo.ui.common.view.refresh.LoadingMore
 import com.example.composehoo.ui.theme.*
@@ -67,7 +68,7 @@ fun FavouriteShoePage() {
         },
         modifier = Modifier
             .fillMaxSize()
-            .background(color = if (MaterialTheme.colors.isLight) BgGrayColor else BgGrayColorDark)
+            .background(color = MaterialTheme.colors.grayBackgroundColor)
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             itemsIndexed(lazyPagingItems) { index, item ->

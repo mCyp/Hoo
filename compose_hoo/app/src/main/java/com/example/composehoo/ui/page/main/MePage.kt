@@ -26,6 +26,10 @@ import coil.compose.rememberImagePainter
 import com.example.composehoo.R
 import com.example.composehoo.base.BaseConstant
 import com.example.composehoo.db.RepositoryProvider
+import com.example.composehoo.ui.common.ext.gray400
+import com.example.composehoo.ui.common.ext.grayBackgroundColor
+import com.example.composehoo.ui.common.ext.textMainColor
+import com.example.composehoo.ui.common.ext.textSecondColor
 import com.example.composehoo.ui.theme.*
 import com.example.composehoo.ui.viewmodel.main.MeModel
 import com.example.composehoo.utils.AppPrefsUtils
@@ -38,10 +42,11 @@ fun MePage(followSysDark: (Boolean) -> Unit) {
     val meModel: MeModel =
         com.example.composehoo.ui.common.ext.viewModel { MeModel(userRepository, userId) }
     val user = meModel.user.observeAsState()
+
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = if (MaterialTheme.colors.isLight) BgGrayColor else BgGrayColorDark)
+            .background(color = MaterialTheme.colors.grayBackgroundColor)
     ) {
         val (portrait, topLay, tvName, tvAccount, bottomListCard) = createRefs()
         val guideLineFourPer = createGuidelineFromTop(0.3f)
@@ -86,7 +91,7 @@ fun MePage(followSysDark: (Boolean) -> Unit) {
         Text(
             text = user.value?.account ?: "",
             style = MaterialTheme.typography.body1,
-            color = if (MaterialTheme.colors.isLight) GRAY400 else GRAY400DARK,
+            color = MaterialTheme.colors.gray400,
             modifier = Modifier
                 .constrainAs(tvAccount) {
                     top.linkTo(guideLineFourPer)
@@ -114,8 +119,6 @@ fun MePage(followSysDark: (Boolean) -> Unit) {
 
 @Composable
 fun FunListCard(modifier: Modifier, dataClick: () -> Unit = {}, followSysDark: (Boolean) -> Unit) {
-    val color = if (MaterialTheme.colors.isLight) TextMainColor else TextMainColorDark
-    val secondColor = if (MaterialTheme.colors.isLight) GRAY400 else GRAY400DARK
     val followSystem = remember { mutableStateOf(false) }
     followSystem.value = AppPrefsUtils.getBoolean(BaseConstant.USE_SYSTEM_DARK, false)
     Column(modifier = modifier) {
@@ -133,13 +136,13 @@ fun FunListCard(modifier: Modifier, dataClick: () -> Unit = {}, followSysDark: (
                 modifier = Modifier
                     .height(24.dp)
                     .width(24.dp),
-                tint = color
+                tint = MaterialTheme.colors.textMainColor
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = stringResource(id = R.string.me_data_store),
                 style = MaterialTheme.typography.body1,
-                color = color,
+                color = MaterialTheme.colors.textMainColor,
                 modifier = Modifier.weight(1f)
             )
             Icon(
@@ -148,7 +151,7 @@ fun FunListCard(modifier: Modifier, dataClick: () -> Unit = {}, followSysDark: (
                 modifier = Modifier
                     .height(24.dp)
                     .width(24.dp),
-                tint = secondColor
+                tint = MaterialTheme.colors.textSecondColor
             )
         }
         Row(
@@ -165,13 +168,13 @@ fun FunListCard(modifier: Modifier, dataClick: () -> Unit = {}, followSysDark: (
                 modifier = Modifier
                     .height(24.dp)
                     .width(24.dp),
-                tint = color
+                tint = MaterialTheme.colors.textMainColor
             )
             Spacer(modifier = Modifier.width(10.dp))
             Text(
                 text = stringResource(id = R.string.me_follow_dark),
                 style = MaterialTheme.typography.body1,
-                color = color,
+                color = MaterialTheme.colors.textMainColor,
                 modifier = Modifier.weight(1f)
             )
             Switch(

@@ -2,6 +2,7 @@ package com.example.composehoo.ui.activity
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -27,6 +28,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.composehoo.R
 import com.example.composehoo.base.BaseConstant
+import com.example.composehoo.ui.common.ext.gray400
 import com.example.composehoo.ui.common.view.HooAppBar
 import com.example.composehoo.ui.common.view.refresh.HooErrorView
 import com.example.composehoo.ui.common.view.refresh.LoadingError
@@ -186,7 +188,7 @@ fun MainBottomBar(selectValue: String, onSelect: (String) -> Unit = {}) {
             selected = selectValue == MainType.Shoe.route,
             onClick = { onSelect(MainType.Shoe.route) },
             selectedContentColor = MaterialTheme.colors.primary,
-            unselectedContentColor = if (MaterialTheme.colors.isLight) GRAY400 else GRAY400DARK,
+            unselectedContentColor = MaterialTheme.colors.gray400,
             icon = {
                 Icon(
                     painter = painterResource(id = MainType.Shoe.icon),
@@ -205,7 +207,7 @@ fun MainBottomBar(selectValue: String, onSelect: (String) -> Unit = {}) {
             selected = selectValue == MainType.Favourite.route,
             onClick = { onSelect(MainType.Favourite.route) },
             selectedContentColor = MaterialTheme.colors.primary,
-            unselectedContentColor = if (MaterialTheme.colors.isLight) GRAY400 else GRAY400DARK,
+            unselectedContentColor = MaterialTheme.colors.gray400,
             icon = {
                 Icon(
                     painter = painterResource(id = MainType.Favourite.icon),
@@ -224,7 +226,7 @@ fun MainBottomBar(selectValue: String, onSelect: (String) -> Unit = {}) {
             selected = selectValue == MainType.Me.route,
             onClick = { onSelect(MainType.Me.route) },
             selectedContentColor = MaterialTheme.colors.primary,
-            unselectedContentColor = if (MaterialTheme.colors.isLight) GRAY400 else GRAY400DARK,
+            unselectedContentColor = MaterialTheme.colors.gray400,
             icon = {
                 Icon(
                     painter = painterResource(id = MainType.Me.icon),

@@ -37,6 +37,8 @@ import com.airbnb.lottie.compose.*
 import com.example.composehoo.R
 import com.example.composehoo.base.BaseConstant
 import com.example.composehoo.db.RepositoryProvider
+import com.example.composehoo.ui.common.ext.gray400
+import com.example.composehoo.ui.common.ext.unSelectedColor
 import com.example.composehoo.ui.common.ext.viewModel
 import com.example.composehoo.ui.common.view.HooLoadingView
 import com.example.composehoo.ui.theme.*
@@ -127,7 +129,7 @@ fun DetailPage(shoeId: Long, onBack: () -> Unit) {
                 text = shoe.value!!.description,
                 style = MaterialTheme.typography.body1,
                 textAlign = TextAlign.Start,
-                color = if (isLight) GRAY400 else GRAY400DARK,
+                color = MaterialTheme.colors.gray400,
                 modifier = Modifier
                     .background(color = backgroundColor)
                     .padding(horizontal = 16.dp)
@@ -194,7 +196,7 @@ fun FavFloatingIcon(favClick: () -> Unit, modifier: Modifier, isFollow: Boolean)
         animationSpec = tween(durationMillis = 500)
     )
     val color: Color by animateColorAsState(
-        targetValue = if (isFollow) MaterialTheme.colors.primaryVariant else if (MaterialTheme.colors.isLight) TextDisabled else TextDisabledDark,
+        targetValue = if (isFollow) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.unSelectedColor,
         animationSpec = tween(durationMillis = 500)
     )
     FloatingActionButton(

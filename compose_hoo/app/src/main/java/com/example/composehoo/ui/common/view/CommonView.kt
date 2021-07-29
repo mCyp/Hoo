@@ -44,7 +44,6 @@ fun HooButton(
             .fillMaxWidth()
             .height(Dp(56f))
             .padding(leftMargin, topMargin, rightMargin, bottomMargin)
-            .border(width = borderWidth, color = borderColor)
             .padding(leftPadding, topPadding, rightPadding, bottomPadding),
         shape = shape
     ) {

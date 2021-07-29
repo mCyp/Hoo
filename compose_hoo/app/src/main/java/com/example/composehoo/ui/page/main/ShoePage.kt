@@ -25,9 +25,8 @@ import com.example.composehoo.R
 import com.example.composehoo.db.RepositoryProvider
 import com.example.composehoo.db.data.Shoe
 import com.example.composehoo.db.provider.ShoeProvider
+import com.example.composehoo.ui.common.ext.grayBackgroundColor
 import com.example.composehoo.ui.common.view.list.GridPage
-import com.example.composehoo.ui.theme.BgGrayColor
-import com.example.composehoo.ui.theme.BgGrayColorDark
 import com.example.composehoo.ui.viewmodel.main.ShoeModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -47,7 +46,7 @@ fun ShoePage() {
         space = 10.dp,
         modifier = Modifier
             .fillMaxSize()
-            .background(color = if (MaterialTheme.colors.isLight) BgGrayColor else BgGrayColorDark)
+            .background(color = MaterialTheme.colors.grayBackgroundColor)
             .padding(start = 16.dp, end = 16.dp, top = 16.dp),
         headerCount = 2,
         header = { pos ->

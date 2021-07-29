@@ -26,6 +26,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.composehoo.R
+import com.example.composehoo.ui.common.ext.gray400
+import com.example.composehoo.ui.common.ext.gray50
+import com.example.composehoo.ui.common.ext.red50
 import com.example.composehoo.ui.common.view.HooCutButton
 import com.example.composehoo.ui.theme.*
 
@@ -184,8 +187,7 @@ fun RefreshEmpty() {
 
 @Composable
 fun HooErrorView() {
-    val isLight = MaterialTheme.colors.isLight
-    val outColor = if (isLight) RED50 else RED50Dark
+    val outColor = MaterialTheme.colors.red50
     val innerColor = MaterialTheme.colors.error
     HooImageView(
         outColor = outColor,
@@ -197,9 +199,8 @@ fun HooErrorView() {
 
 @Composable
 fun HooEmptyView() {
-    val isLight = MaterialTheme.colors.isLight
-    val outColor = if (isLight) GRAY50 else GRAY50DARK
-    val innerColor = if (isLight) GRAY400 else GRAY400DARK
+    val outColor = MaterialTheme.colors.gray50
+    val innerColor = MaterialTheme.colors.gray400
     HooImageView(outColor = outColor, innerColor = innerColor, imgRes = R.drawable.common_ic_empty)
 }
 
