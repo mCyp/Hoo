@@ -11,7 +11,6 @@ object RepositoryProvider {
     /**
      * 得到用户仓库
      */
-    @Composable
     fun providerUserRepository(context: Context): UserRepository {
         return UserRepository.getInstance(AppDataBase.getInstance(context).userDao())
     }

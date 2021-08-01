@@ -27,7 +27,7 @@ class ShoeProvider(val repository: ShoeRepository): BaseProvider<Shoe>() {
     }
 
     override suspend fun onLoadMore(): Boolean {
-        // delay(3000)
+        delay(3000)
         val start = index.toLong()
         val end = (index + pageSize).toLong()
         val list = repository.getPageShoes(start + 1, end)

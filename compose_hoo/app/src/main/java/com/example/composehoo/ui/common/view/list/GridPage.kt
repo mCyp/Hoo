@@ -1,6 +1,5 @@
 package com.example.composehoo.ui.common.view.list
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,6 +7,7 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -45,7 +45,7 @@ fun <T> GridPage(
     val currentDataList = remember { mutableStateListOf<T>() }
     DisposableEffect(key1 = provider.sourceLiveData, lifecycleOwner) {
         val observer = Observer<MutableList<T>> { vs ->
-            if(refreshState.isRefreshing){
+            if (refreshState.isRefreshing) {
                 refreshState.isRefreshing = false
             }
             currentDataList.addAll(vs)
@@ -93,7 +93,8 @@ fun <T> GridPage(
                 .onSizeChanged {
                     size.value = it
                 },
-            state = lazyListState
+            state = lazyListState,
+            horizontalAlignment = Alignment.Start
         ) {
             for (i in 0 until headerCount) {
                 item {
@@ -101,7 +102,7 @@ fun <T> GridPage(
                 }
             }
             items(count = len) { rowIndex ->
-                val state = rememberSaveable(rowIndex){
+                val state = rememberSaveable(rowIndex) {
                     mutableStateOf(rowIndex)
                 }
                 val contentWith =
@@ -109,8 +110,9 @@ fun <T> GridPage(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentSize()
-                        .padding(top = if (state.value == 0) 10.dp else 0.dp, bottom = 8.dp)
+                        .wrapContentHeight()
+                        .padding(top = if (state.value == 0) 10.dp else 0.dp, bottom = 8.dp),
+                    horizontalArrangement = Arrangement.Start
                 ) {
                     for (index in 0 until gridNum) {
                         val pos = state.value * gridNum + index
@@ -119,15 +121,14 @@ fun <T> GridPage(
                             dataItem(pos, data, contentWith)
                             if (index != gridNum - 1 && currentDataList.getOrNull(pos + 1) != null)
                                 Spacer(modifier = Modifier.width(space))
-                            if (pos == currentDataList.size - 1) {
-                                Log.d("wangjie", "set Loading Statee")
+                            if (pos == currentDataList.size - 1 && loadingState.value !is LoadState.Complete) {
                                 provider.setState(LoadState.Loading())
                             }
                         }
                     }
                 }
             }
-            for (i in 0 until footerCount) {
+            for(i in 0 until footerCount){
                 item {
                     footer(i)
                 }

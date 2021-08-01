@@ -12,6 +12,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -58,9 +59,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MainContent()
-            /*ComposeHooTheme() {
-                RefreshEmpty()
-            }*/
         }
     }
 
@@ -143,7 +141,7 @@ fun MainContent() {
                 navController = controller,
                 start = MainType.Shoe.route,
                 Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth().padding(bottom = it.calculateBottomPadding()),
                 followSystemChange = { isFollowSystem ->
                     darkChangeFun(isFollowSystem, userDarkInSystem)
                     AppPrefsUtils.putBoolean(BaseConstant.USE_SYSTEM_DARK, isFollowSystem)

@@ -4,7 +4,9 @@ import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +29,7 @@ import com.example.composehoo.db.data.Shoe
 import com.example.composehoo.db.provider.ShoeProvider
 import com.example.composehoo.ui.common.ext.grayBackgroundColor
 import com.example.composehoo.ui.common.view.list.GridPage
+import com.example.composehoo.ui.common.view.refresh.LoadState
 import com.example.composehoo.ui.viewmodel.main.ShoeModel
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
@@ -93,15 +96,15 @@ fun Banner() {
     val viewPagerState = rememberPagerState(pageCount = 4, infiniteLoop = true)
     val scope = rememberCoroutineScope()
     var job: Job? = null
-    if(shoeBannerList.size > 1) {
+    if (shoeBannerList.size > 1) {
         DisposableEffect(key1 = scope) {
             job = scope.launch(Dispatchers.IO) {
                 while (true) {
                     delay(5000)
                     withContext(Dispatchers.Main) {
                         if (viewPagerState.currentPage < viewPagerState.pageCount - 1) {
-                            viewPagerState.animateScrollToPage(viewPagerState.currentPage+1)
-                        }else {
+                            viewPagerState.animateScrollToPage(viewPagerState.currentPage + 1)
+                        } else {
                             viewPagerState.animateScrollToPage(0)
                         }
                     }

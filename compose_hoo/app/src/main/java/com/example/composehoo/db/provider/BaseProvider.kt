@@ -15,6 +15,9 @@ abstract class BaseProvider<T> {
     var sourceLiveData = MutableLiveData<MutableList<T>>(currentList)
 
     fun setState(state: LoadState){
+        if(stateLiveData.value != null && stateLiveData.value!!::class == state::class){
+            return
+        }
         stateLiveData.value = state
     }
 

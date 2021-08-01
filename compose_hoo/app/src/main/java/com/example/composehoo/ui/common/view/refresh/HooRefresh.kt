@@ -9,6 +9,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.shape.CutCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -32,13 +34,23 @@ import com.example.composehoo.ui.common.ext.red50
 import com.example.composehoo.ui.common.view.HooCutButton
 import com.example.composehoo.ui.theme.*
 
-@ExperimentalAnimationApi
+
 @Composable
-fun LoadStateView(state: LoadState, loadMore: () -> Unit, refreshRetry: () -> Unit, loadRetry: () -> Unit) {
+fun LoadStateView(
+    state: LoadState,
+    loadMore: () -> Unit,
+    refreshRetry: () -> Unit,
+    loadRetry: () -> Unit
+) {
+    /*if (state is LoadState.Loading) {
+        LoadingMore()
+        loadMore()
+    }*/
     when (state) {
         is LoadState.Loading -> {
-            loadMore()
             LoadingMore()
+            loadMore()
+
         }
         is LoadState.Complete -> {
             LoadingComplete()
@@ -51,9 +63,6 @@ fun LoadStateView(state: LoadState, loadMore: () -> Unit, refreshRetry: () -> Un
         }
         is LoadState.Empty -> {
             RefreshEmpty()
-        }
-        else -> {
-            Spacer(modifier = Modifier.height(52.dp))
         }
     }
 }
