@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Window
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
@@ -16,7 +17,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,24 +55,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalComposeUiApi
     @ExperimentalAnimationApi
     @ExperimentalFoundationApi
     @ExperimentalPagerApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val window = window
         setContent {
-            MainContent()
+            MainContent(window)
         }
     }
 
 }
 
 
+@ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
 @ExperimentalPagerApi
 @Composable
-fun MainContent() {
+fun MainContent(window: Window) {
     var currentSelect by remember { mutableStateOf(MainType.Shoe.route) }
     val controller = rememberNavController()
     // 控制黑夜模式
@@ -85,6 +91,7 @@ fun MainContent() {
     val userDarkInSystem = isSystemInDarkTheme()
     darkChangeFun(isUserSystem, userDarkInSystem)
     ComposeHooTheme(useDark.value) {
+        window?.statusBarColor = MaterialTheme.colors.onBackground.toArgb()
         Scaffold(
             topBar = {
                 Row(
@@ -152,6 +159,7 @@ fun MainContent() {
 }
 
 
+@ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @ExperimentalFoundationApi
 @ExperimentalPagerApi

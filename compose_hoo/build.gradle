@@ -5,17 +5,20 @@ buildscript {
         navigationVersion = '2.3.5'
         roomVersion = '2.3.0'
         lottieVersion = '1.0.0-rc02-1'
+        glideVersion = '4.9.0'
+        photoVersion = '2.3.0'
     }
     repositories {
+        maven { url "https://www.jitpack.io" }
         maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/nexus/content/repositories/jcenter' }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/google' }
         maven { url 'https://maven.aliyun.com/nexus/content/repositories/gradle-plugin' }
-        maven { url "https://www.jitpack.io" }
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.0-beta04'
+        classpath 'com.android.tools.build:gradle:7.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.10"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 

@@ -28,6 +28,7 @@ import com.example.composehoo.R
 import com.example.composehoo.base.BaseConstant
 import com.example.composehoo.db.data.Shoe
 import com.example.composehoo.ui.activity.DetailActivity
+import com.example.composehoo.ui.common.ext.gray400
 import com.example.composehoo.ui.theme.*
 
 @Composable
@@ -63,20 +64,17 @@ fun ShoePageItem(shoe: Shoe, widthDp: Dp, heightDp: Dp) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = BlackAlpha10)
-        ) {}
-        Text(
-            text = "¥${shoe.id}",
-            style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.onBackground),
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .background(Brush.verticalGradient(listOf(BlackAlpha32, Color.Transparent)))
-                .padding(0.dp)
-                .padding(vertical = 4.dp)
-        )
-
+                .background(Brush.verticalGradient(listOf(BlackAlpha32, Color.Transparent))),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = shoe.name,
+                style = MaterialTheme.typography.body1.copy(color = MaterialTheme.colors.gray400),
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(0.dp)
+                    .padding(vertical = 4.dp)
+            )
+        }
     }
-
-
 }

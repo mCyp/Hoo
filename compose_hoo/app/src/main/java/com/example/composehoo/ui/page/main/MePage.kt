@@ -1,19 +1,29 @@
 package com.example.composehoo.ui.page.main
 
+import android.util.Log
+import android.view.MotionEvent
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.input.pointer.pointerInteropFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -34,6 +44,7 @@ import com.example.composehoo.ui.theme.*
 import com.example.composehoo.ui.viewmodel.main.MeModel
 import com.example.composehoo.utils.AppPrefsUtils
 
+@ExperimentalComposeUiApi
 @Composable
 fun MePage(followSysDark: (Boolean) -> Unit) {
     val userId = AppPrefsUtils.getLong(BaseConstant.USER_ID)
@@ -42,6 +53,28 @@ fun MePage(followSysDark: (Boolean) -> Unit) {
     val meModel: MeModel =
         com.example.composehoo.ui.common.ext.viewModel { MeModel(userRepository, userId) }
     val user = meModel.user.observeAsState()
+    val infiniteTransition = rememberInfiniteTransition()
+    val rotation =  infiniteTransition.animateFloat(
+        initialValue = 0f,
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(2000, easing = LinearEasing),
+            repeatMode = RepeatMode.Restart
+        )
+    )
+
+    /*val rotation: Float by animateFloatAsState(
+        targetValue = 360f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 500),
+            repeatMode = RepeatMode.Restart
+        )
+    )*/
+    var useRotation = remember {
+        mutableStateOf(false)
+    }
+
+
 
     ConstraintLayout(
         modifier = Modifier
@@ -73,9 +106,26 @@ fun MePage(followSysDark: (Boolean) -> Unit) {
                     start.linkTo(guideLine16DP)
                     linkTo(top = guideLineFourPer, bottom = guideLineFourPer)
                 }
+                .rotate(if(useRotation.value) rotation.value else 0f)
                 .height(100.dp)
                 .width(100.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(CircleShape)
+                .pointerInteropFilter {
+                    when (it.action) {
+                        MotionEvent.ACTION_UP -> {
+                            Log.d("wangjie","ACTION_UP")
+                            useRotation.value = false
+                        }
+                        MotionEvent.ACTION_DOWN -> {
+                            Log.d("wangjie","ACTION_DOWN")
+                            useRotation.value = true
+                        }
+                        else -> {
+
+                        }
+                    }
+                    true
+                }
         )
         Text(
             text = user.value?.name ?: "",
@@ -159,7 +209,7 @@ fun FunListCard(modifier: Modifier, dataClick: () -> Unit = {}, followSysDark: (
                 .fillMaxWidth()
                 .height(52.dp)
                 .padding(horizontal = 16.dp)
-                .clickable {  },
+                .clickable { },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(

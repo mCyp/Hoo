@@ -1,13 +1,12 @@
 package com.example.composehoo.ui.page.login
 
-import android.util.Log
-import androidx.compose.animation.*
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -19,6 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.example.composehoo.R
 import com.example.composehoo.ui.common.view.HooCutButton
+import com.example.composehoo.ui.theme.ComposeHooTheme
 
 
 @ExperimentalAnimationApi
@@ -77,5 +77,7 @@ fun WelcomePage(
 @Preview
 @Composable
 fun showWelCome() {
-    WelcomePage()
+    ComposeHooTheme() {
+        WelcomePage()
+    }
 }

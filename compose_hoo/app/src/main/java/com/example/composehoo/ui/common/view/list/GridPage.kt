@@ -60,13 +60,8 @@ fun <T> GridPage(
     // 刷新数据
     val scope = rememberCoroutineScope()
     var job: Job? = null
-    DisposableEffect(key1 = scope, lifecycleOwner) {
-        job = scope.launch {
-            provider.refresh()
-        }
-        onDispose {
-            job?.cancel()
-        }
+    LaunchedEffect(key1 = scope){
+        provider.refresh()
     }
     val size = remember {
         mutableStateOf<IntSize>(IntSize(0, 0))

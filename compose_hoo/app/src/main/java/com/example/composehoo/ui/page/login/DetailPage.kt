@@ -1,39 +1,40 @@
 package com.example.composehoo.ui.page.login
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.FloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import coil.ImageLoader
 import coil.compose.rememberImagePainter
-import coil.imageLoader
 import coil.size.Precision
-import com.airbnb.lottie.compose.*
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.example.composehoo.R
 import com.example.composehoo.base.BaseConstant
 import com.example.composehoo.db.RepositoryProvider
@@ -41,13 +42,12 @@ import com.example.composehoo.ui.common.ext.gray400
 import com.example.composehoo.ui.common.ext.unSelectedColor
 import com.example.composehoo.ui.common.ext.viewModel
 import com.example.composehoo.ui.common.view.HooLoadingView
-import com.example.composehoo.ui.theme.*
+import com.example.composehoo.ui.theme.BgColorDark
 import com.example.composehoo.ui.viewmodel.detail.DetailModel
 import com.example.composehoo.utils.AppPrefsUtils
-import kotlinx.coroutines.Job
 
 @Composable
-fun DetailPage(shoeId: Long, onBack: () -> Unit) {
+fun DetailPage(shoeId: Long, onBack: () -> Unit, onImageClick: (String) -> Unit) {
     val context = LocalContext.current
     val shoeRepo = RepositoryProvider.providerShoeRepository(context)
     val favRepo = RepositoryProvider.providerFavouriteShoeRepository(context)
@@ -82,7 +82,10 @@ fun DetailPage(shoeId: Long, onBack: () -> Unit) {
                         linkTo(top = parent.top, bottom = guideLineHalf)
                         width = Dimension.fillToConstraints
                         height = Dimension.fillToConstraints
-                    },
+                    }
+                    .clickable(onClick = {
+                        onImageClick(shoe.value?.imageUrl ?: "")
+                    }),
                 contentScale = ContentScale.Crop
             )
             Row(
